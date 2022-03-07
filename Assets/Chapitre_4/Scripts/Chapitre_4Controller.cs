@@ -45,6 +45,12 @@ public class Chapitre_4Controller : CommonController
     [SerializeField] private float fMaxY;
     [SerializeField] private float fSpeed;
 
+    private GameObject TutoHoldArrowDown;
+    private GameObject TutoHoldArrowUp;
+    private GameObject TutoHoldArrowLeft;
+    private GameObject TutoHoldArrowRight;
+
+
     protected override void ChildStart()
     {
         currentState = ChapitreState.Couloir;
@@ -68,12 +74,16 @@ public class Chapitre_4Controller : CommonController
         }
         else if(currentState == ChapitreState.Banc_Araignee)
         {
+            bool bClick = false;
+
             if (Input.GetMouseButton(1))
             {
                 if (fil_groupe.transform.position.y < fMaxY)
                 {
                     fil_groupe.transform.position = new Vector3(fil_groupe.transform.position.x, fil_groupe.transform.position.y + (fSpeed * Time.deltaTime), fil_groupe.transform.position.z);
                 }
+
+                bClick = true;
             }
             else if (Input.GetMouseButton(0))
             {
@@ -81,6 +91,14 @@ public class Chapitre_4Controller : CommonController
                 {
                     fil_groupe.transform.position = new Vector3(fil_groupe.transform.position.x, fil_groupe.transform.position.y - (fSpeed * Time.deltaTime), fil_groupe.transform.position.z);
                 }
+
+                bClick = true;
+            }
+
+            if (bClick && (TutoHoldArrowDown != null || TutoHoldArrowUp != null))
+            {
+                StopTuto(TutoHoldArrowDown);
+                StopTuto(TutoHoldArrowUp);
             }
 
             if (fil_groupe.transform.position.y < fMinY + 0.5f)
@@ -89,19 +107,32 @@ public class Chapitre_4Controller : CommonController
 
                 fil_araignee.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+                TutoHoldArrowRight = PlayTuto(Tutoriel.Hold_Arrow_Right, new Vector3(14.85f, -1.48f, -0.91f));
+                TutoHoldArrowLeft = PlayTuto(Tutoriel.Hold_Arrow_Left, new Vector3(9.51f, -1.48f, -0.91f));
             }
         }
         else if(currentState == ChapitreState.Banc_Fil)
         {
+            bool bHasMoved = false;
+
             banc_araigneeRoot.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
             if (Input.GetMouseButton(0))
             {
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 0), ForceMode2D.Force);
+                bHasMoved = true;
             }
             else if (Input.GetMouseButton(1))
             {
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 0), ForceMode2D.Force);
+                bHasMoved = true;
+            }
+
+            if(bHasMoved && (TutoHoldArrowRight != null || TutoHoldArrowLeft != null))
+            {
+                StopTuto(TutoHoldArrowLeft);
+                StopTuto(TutoHoldArrowRight);
             }
 
             if(fil_araignee.transform.eulerAngles.z < 335f && fil_araignee.transform.eulerAngles.z > 300f && currentState == ChapitreState.Banc_Fil)
@@ -330,6 +361,9 @@ public class Chapitre_4Controller : CommonController
             yield return null;
         }
 
+        TutoHoldArrowDown = PlayTuto(Tutoriel.Hold_Arrow_Down, new Vector3(10.64f, 7.59f, -0.91f));
+        TutoHoldArrowUp = PlayTuto(Tutoriel.Hold_Arrow_Up, new Vector3(14.85f, 7.59f, -0.91f));
+
         //---//
         StopCinematiqueRencontre();
     }
@@ -466,7 +500,7 @@ public class Chapitre_4Controller : CommonController
 
     private void StopCinematiqueBancFin()
     {
-        ChangeScene(Scenes.Chapitre5);
+        SmoothChangeScene(Scenes.Chapitre5);
     }
 
     #endregion

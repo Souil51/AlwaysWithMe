@@ -149,7 +149,7 @@ public class Chapitre_5Controller : CommonController
 
     private void StopCinematiqueBus()
     {
-        ChangeScene(Scenes.Chapitre6);
+        SmoothChangeScene(Scenes.Chapitre6);
     }
 
     #endregion

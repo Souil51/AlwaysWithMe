@@ -61,6 +61,26 @@ public class TutorielController : MonoBehaviour
                     animator.Play("tuto_check");
                 }
                 break;
+            case Tutoriel.Hold_Arrow_Down:
+                {
+                    animator.Play("tuto_hold_arrow_down");
+                }
+                break;
+            case Tutoriel.Hold_Arrow_Up:
+                {
+                    animator.Play("tuto_hold_arrow_up");
+                }
+                break;
+            case Tutoriel.Hold_Arrow_Left:
+                {
+                    animator.Play("tuto_hold_arrow_left");
+                }
+                break;
+            case Tutoriel.Hold_Arrow_Right:
+                {
+                    animator.Play("tuto_hold_arrow_right");
+                }
+                break;
         }
     }
 

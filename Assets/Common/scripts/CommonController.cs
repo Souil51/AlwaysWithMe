@@ -84,7 +84,11 @@ public enum Tutoriel
     Launch,
     Move,
     Drag,
-    Check
+    Check,
+    Hold_Arrow_Down,
+    Hold_Arrow_Up,
+    Hold_Arrow_Right,
+    Hold_Arrow_Left
 }
 
 public class CommonController : MonoBehaviour
@@ -117,6 +121,9 @@ public class CommonController : MonoBehaviour
 
     //Tuto
     protected List<GameObject> lstPlayingTuto = new List<GameObject>();
+
+    //Scene
+    private bool IsChangingScene = false;
 
     void Start()
     {
@@ -324,12 +331,21 @@ public class CommonController : MonoBehaviour
 
     #region Scene Manager
 
-    protected void ChangeScene(Scenes sceneIndex)
+    protected void SmoothChangeScene(Scenes sceneIndex)
+    {
+        if (IsChangingScene) return;
+
+        IsChangingScene = true;
+
+        StartCoroutine(coroutine_SmoothChangeScene(sceneIndex));
+    }
+
+    private void ChangeScene(Scenes sceneIndex)
     {
         SceneManager.LoadScene((int)sceneIndex);
     }
 
-    protected IEnumerator SmoothChangeScene(Scenes sceneIndex)
+    protected IEnumerator coroutine_SmoothChangeScene(Scenes sceneIndex)
     {
         //On lance l'animation de FadeIn
         animatorFadePanel.SetTrigger("FadeIn");

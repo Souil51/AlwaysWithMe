@@ -23,16 +23,18 @@ public class Chapter_6Controller : CommonController
     private float XMinCamera =  -20.46f;
     private float XMaxCamera = -0.27f;
 
+    private GameObject TutoLaunch;
+
     protected override void ChildStart()
     {
-        //StartCinematique(Cinematiques.Chapitre6_Debut);
+        StartCinematique(Cinematiques.Chapitre6_Debut);
 
         //TEST
-        currentState = ChapitreState.Araignee;
+        /*currentState = ChapitreState.Araignee;
         araignee.ToggleAnimator(false);
         araignee.InitDynamicBody();
 
-        StartCoroutine(coroutine_TEST_Tuto());
+        StartCoroutine(coroutine_TEST_Tuto());*/
     }
 
     protected override void ChildUpdate()
@@ -133,6 +135,11 @@ public class Chapter_6Controller : CommonController
 
         araignee.AddForce(vDifferrence, fDistance);
 
+        if(fDistance > 1 && TutoLaunch != null)
+        {
+            StopTuto(TutoLaunch);
+        }
+
         ClickStartingPosition = Vector3.zero;
     }
 
@@ -165,6 +172,8 @@ public class Chapter_6Controller : CommonController
         Vector3 vPosCamera = new Vector3(araignee.transform.position.x, -2.99f, araignee.transform.position.z);
 
         //MoveCamera(vPosCamera, 2f);
+
+        TutoLaunch = PlayTuto(Tutoriel.Launch, new Vector3(0.97f, -2.66f, -8.61f));
 
         StopCinematiqueInitiale();
     }
