@@ -53,7 +53,9 @@ public class Chapitre_4Controller : CommonController
 
     protected override void ChildStart()
     {
-        currentState = ChapitreState.Couloir;
+        //currentState = ChapitreState.Couloir;
+
+        currentState = ChapitreState.Banc;
     }
 
     protected override void ChildUpdate()
@@ -177,8 +179,6 @@ public class Chapitre_4Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre4_FuiteCouloir:
@@ -207,8 +207,6 @@ public class Chapitre_4Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
     }
 
     #region Cinématique Araignee Fuite Couloir
@@ -318,9 +316,9 @@ public class Chapitre_4Controller : CommonController
         goPerso_Animation_Maxine.SetActive(true);
 
         Perso_Animation_1_Controller ctrl_maxine = goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>();
-        ctrl_maxine.animation_MainReverse();
+        ctrl_maxine.animation_MaxineChapitre4();
 
-        while (!ctrl_maxine.animation_MainReverseIsFinished())
+        while (!ctrl_maxine.animation_MaxineChapitre4Finished())
             yield return null;
 
         yield return new WaitForSeconds(1f);
@@ -337,9 +335,9 @@ public class Chapitre_4Controller : CommonController
         coroutineBoucleSpeak = StartCoroutine(coroutine_BoucleSpeak());//Pendant la pahse avec l'araigné, les persos vont parler en boucle
 
         Perso_Animation_1_Controller ctrl = goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>();
-        ctrl.animation_MainReverse();
+        ctrl.animation_PersoChapitre4();
 
-        while(!ctrl.animation_MainReverseIsFinished())
+        while(!ctrl.animation_PersoChapitre4Finished())
             yield return null;
 
         //Apparition de l'araignée
@@ -373,12 +371,12 @@ public class Chapitre_4Controller : CommonController
         while (true)
         {
             int nIndex = Random.Range(0, SpeakingBody.lstSprites.Count);
-            goPerso_Animation_Maxine_SpeakingBody.Speak((Emote)nIndex, -1f, 3f, BodyDirection.Droite);
+            goPerso_Animation_Maxine_SpeakingBody.Speak((Emote)nIndex, 1.5f, 7.5f, BodyDirection.Droite);
 
             yield return new WaitForSeconds(0.5f);
 
             nIndex = Random.Range(0, SpeakingBody.lstSprites.Count);
-            goPerso_Animation_1_SpeakingBody.Speak((Emote)nIndex, 0, 3f, BodyDirection.Gauche);
+            goPerso_Animation_1_SpeakingBody.Speak((Emote)nIndex, 2.5f, 7.5f, BodyDirection.Gauche);
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -415,9 +413,10 @@ public class Chapitre_4Controller : CommonController
         float fElapsedTime = 0;
 
         Vector3 currentPosition = araignee.transform.position;
-        Vector3 vDestination = new Vector3(3.88f, -2.7f, currentPosition.z);
+        Vector3 vDestination = new Vector3(4.38f, -2.5f, currentPosition.z);
 
         Vector3 currentRotation = araignee.transform.eulerAngles;
+        Vector3 currentRootRotation = banc_araigneeRoot.transform.eulerAngles;
 
         araignee.GetComponent<AraigneeController>().animation_SautFil();
 
@@ -426,8 +425,11 @@ public class Chapitre_4Controller : CommonController
             Vector3 vNewPos = Vector3.Lerp(currentPosition, vDestination, (fElapsedTime / fDuration));
             araignee.transform.position = vNewPos;
 
-            Vector3 vNewEulerAngles = Vector3.Lerp(currentRotation, new Vector3(0, 0, 2), (fElapsedTime / fDuration));
+            Vector3 vNewEulerAngles = Vector3.Lerp(currentRotation, new Vector3(0, 0, 0), (fElapsedTime / fDuration));
             araignee.transform.eulerAngles = vNewEulerAngles;
+
+            Vector3 vNewRootEulerAngles = Vector3.Lerp(currentRotation, new Vector3(0, 0, 90), (fElapsedTime / fDuration));
+            banc_araigneeRoot.transform.eulerAngles = vNewRootEulerAngles;
 
             fElapsedTime += Time.deltaTime;
 
@@ -467,16 +469,16 @@ public class Chapitre_4Controller : CommonController
 
         carte_maxine.SetActive(false);
 
-        goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_Main();
-        goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_Main();
-
-        yield return new WaitForSeconds(0.5f);
-
         //Fuite de l'araignee
         araignee.GetComponent<AraigneeController>().animation_chapitre_3_SortieEcran();
 
-        while (!goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_MainIsFinished()
-            || !goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MainIsFinished())
+        yield return new WaitForSeconds(1f);
+
+        goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_PersoReverseChapitre4();
+        goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MaxineReverseChapitre4();
+
+        while (!goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_PersoReverseChapitre4Finished()
+            || !goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MaxineReverseChapitre4Finished())
             yield return null;
 
         movingBody_Maxine.gameObject.SetActive(true);

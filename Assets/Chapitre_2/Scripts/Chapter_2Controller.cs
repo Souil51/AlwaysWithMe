@@ -352,7 +352,7 @@ public class Chapter_2Controller : CommonController
         currentState = ChapitreState.FinBoucle;
         goBoucle.SetActive(false);
 
-        StartCoroutine(SmoothChangeScene(Scenes.Chapitre1));
+        SmoothChangeScene(Scenes.Chapitre1);
     }
 
     #endregion

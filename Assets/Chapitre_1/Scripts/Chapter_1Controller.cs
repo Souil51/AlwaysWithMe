@@ -99,7 +99,7 @@ public class Chapter_1Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
                     MenuLeave.SetActive(false);
-                    StartCoroutine(SmoothChangeScene(Scenes.Chapitre2));
+                    SmoothChangeScene(Scenes.Chapitre2);
                 }
                 break;
             case InteractionType.Ecran_Toggle:
