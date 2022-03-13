@@ -245,9 +245,9 @@ public class Chapter_2Controller : CommonController
         goPorteInteractable.SetActive(true);
         goPorteSprite.SetActive(false);
 
-        persoCtrl.animation_Main();
+        persoCtrl.animation_Main_Chapitre_2();
 
-        while (!persoCtrl.animation_MainIsFinished())
+        while (!persoCtrl.animation_MainChapitre2IsFinished())
             yield return null;
 
         movingBody.gameObject.SetActive(true);

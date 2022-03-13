@@ -25,6 +25,8 @@ public class Chapitre_4Controller : CommonController
     [SerializeField] private GameObject couloir_groupe;
     [SerializeField] private GameObject banc_groupe;
     [SerializeField] private AraigneeController araignee_couloir;
+    //[SerializeField] private GameObject goSacADos;
+    //private Vector3 vDifferenceSacPerso;
 
     //Banc rencontre
     [SerializeField] private GameObject goPerso_Animation_1;
@@ -53,19 +55,27 @@ public class Chapitre_4Controller : CommonController
 
     protected override void ChildStart()
     {
-        //currentState = ChapitreState.Couloir;
+        //vDifferenceSacPerso = movingBody.gameObject.transform.position - goSacADos.transform.position;
 
-        currentState = ChapitreState.Banc;
+        currentState = ChapitreState.Couloir;
+
+        //currentState = ChapitreState.Banc;
     }
 
     protected override void ChildUpdate()
     {
         if(currentState == ChapitreState.Couloir)
         {
+            //goSacADos.transform.position = movingBody.gameObject.transform.position - vDifferenceSacPerso;
+
             if (movingBody.transform.position.x > -0.91f)
             {
                 StartCinematique(Cinematiques.Chapitre4_FuiteCouloir);
             }
+        }
+        else if(currentState == ChapitreState.Couloir_Apres_Fuite)
+        {
+            //goSacADos.transform.position = movingBody.gameObject.transform.position - vDifferenceSacPerso;
         }
         else if(currentState == ChapitreState.Banc)
         {
@@ -110,8 +120,8 @@ public class Chapitre_4Controller : CommonController
                 fil_araignee.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-                TutoHoldArrowRight = PlayTuto(Tutoriel.Hold_Arrow_Right, new Vector3(14.85f, -1.48f, -0.91f));
-                TutoHoldArrowLeft = PlayTuto(Tutoriel.Hold_Arrow_Left, new Vector3(9.51f, -1.48f, -0.91f));
+                TutoHoldArrowRight = PlayTuto(Tutoriel.Hold_Arrow_Right, new Vector3(9.51f, -1.48f, -0.91f));
+                TutoHoldArrowLeft = PlayTuto(Tutoriel.Hold_Arrow_Left, new Vector3(14.85f, -1.48f, -0.91f));
             }
         }
         else if(currentState == ChapitreState.Banc_Fil)
@@ -324,7 +334,7 @@ public class Chapitre_4Controller : CommonController
         yield return new WaitForSeconds(1f);
 
         //Perso principal
-        movingBody.GoToPosition(new Vector3(-4.96f, -11.14f, 256.9276f));
+        movingBody.GoToPosition(new Vector3(-1.56f, -11.14f, 256.9276f));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
@@ -480,6 +490,8 @@ public class Chapitre_4Controller : CommonController
         while (!goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_PersoReverseChapitre4Finished()
             || !goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MaxineReverseChapitre4Finished())
             yield return null;
+
+        yield return new WaitForSeconds(1f);
 
         movingBody_Maxine.gameObject.SetActive(true);
         goPerso_Animation_Maxine.SetActive(false);

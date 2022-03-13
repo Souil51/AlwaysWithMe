@@ -88,7 +88,8 @@ public enum Tutoriel
     Hold_Arrow_Down,
     Hold_Arrow_Up,
     Hold_Arrow_Right,
-    Hold_Arrow_Left
+    Hold_Arrow_Left,
+    Tuto_Clic_Droit_Back
 }
 
 public class CommonController : MonoBehaviour
@@ -311,6 +312,11 @@ public class CommonController : MonoBehaviour
         }
 
         StartChapterCinematique(cinematique);
+    }
+
+    protected void StopCinematique()
+    {
+        movingBody.SetActive(true);
     }
 
     #region Empty Virtual Methods

@@ -136,6 +136,16 @@ public class Chapter_1Controller : CommonController
             }
 
             lstTutosZoom.Clear();
+
+            //Affichage du tuto pour dézoom
+            GameObject goTuto1 = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(10.59f, 8.22f, 0));
+            goTuto1.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+
+            GameObject goTuto2 = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(-0.89f, 8.43f, 0));
+            goTuto2.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+
+            lstTutosZoom.Add(goTuto1);
+            lstTutosZoom.Add(goTuto2);
         }
 
         switch (interactionObject.GetObjectType())
@@ -163,6 +173,16 @@ public class Chapter_1Controller : CommonController
     protected override void ChapterLeaveZoomOnObject(InteractableObject interactionObject)
     {
         interactionObject.LeaveZoom();
+
+        if (lstTutosZoom.Count > 0)//Si on affiche les tuto Clic, on les enlève à la première interaction
+        {
+            foreach (GameObject go in lstTutosZoom)
+            {
+                go.GetComponent<TutorielController>().StopTutoriel();
+            }
+
+            lstTutosZoom.Clear();
+        }
 
         switch (interactionObject.GetObjectType())
         {
@@ -206,7 +226,7 @@ public class Chapter_1Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueDebut()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5f);
 
         Perso_Animation_1.animation_Main();
 
@@ -223,7 +243,7 @@ public class Chapter_1Controller : CommonController
 
     private void StopCinematiqueDebut()
     {
-        
+        StopCinematique();
     }
 
     #endregion

@@ -17,7 +17,7 @@ public class AraigneeController : MonoBehaviour
     private bool bChapitre3FuiteCouloir = false;
     private bool bChapitre6SautBus = false;
     private bool bChapitre8Arrivee = false;
-
+    private bool bChapitre3Placard = false;
     void Start()
     {
     }
@@ -207,8 +207,27 @@ public class AraigneeController : MonoBehaviour
 
     #endregion
 
+    #region Chapitre 3 Placard
+
+    public void animation_araignee_chapitre_3_placard()
+    {
+        holderAnimator.SetTrigger("chapitre_3_placard");
+    }
+
+    public void animation_araignee_chapitre_3_placard_Finished()
+    {
+        bChapitre3Placard = true;
+    }
+
+    public bool animation_araignee_chapitre_3_placard_IsFinished()
+    {
+        return bChapitre3Placard;
+    }
+
+    #endregion
+
     #region Fade Out du sprite
-    
+
     public void FadeOut()
     {
         StartCoroutine(coroutine_FadeOut());

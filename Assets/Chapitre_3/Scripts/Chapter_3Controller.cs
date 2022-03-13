@@ -62,10 +62,11 @@ public class Chapter_3Controller : CommonController
     [SerializeField] private GameObject goRoot;
 
     private Coroutine coroutineSpeak;
+    private Coroutine coroutineSpeakPlacard;
 
     private GameObject goDragTuto;
     private GameObject goCheckTuto;
-    private GameObject goCheckTutoFollow;
+    private GameObject goCheckTutoFollow;//Object suivi par le goCheckTuto
     private bool bTutoCheckPlayed = false;
 
     protected override void ChildStart()
@@ -428,6 +429,11 @@ public class Chapter_3Controller : CommonController
 
     private IEnumerator coroutine_ZoomOnAraignee()
     {
+        if(goCheckTuto != null)
+        {
+            StopTuto(goCheckTuto);
+        }
+
         while (!araigneeDynamicBody.IsBodyGettingUp())
             yield return null;
 
@@ -442,7 +448,17 @@ public class Chapter_3Controller : CommonController
         while (!araigneeDynamicBody.IsBodyUp())
             yield return null;
 
-        yield return new WaitForSeconds(0.1f);
+        coroutineSpeakPlacard = StartCoroutine(coroutine_AraigneeSpeakPlacard());
+
+        araignee.RestoreDynamicBodyPosition();
+
+        araignee.ToggleAnimator(true);
+        araignee.animation_araignee_chapitre_3_placard();
+
+        while (!araignee.animation_araignee_chapitre_3_placard_IsFinished())
+            yield return null;
+
+        yield return new WaitForSeconds(2f);
 
         float fYDifference = araignee.gameObject.transform.position.y - startPosition.y;
         float fXDifference = araignee.gameObject.transform.position.x - startPosition.x;
@@ -454,6 +470,9 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(1f);
 
+        StopCoroutine(coroutineSpeakPlacard);
+        araignee.ToggleAnimator(false);
+
         StartCinematique(Cinematiques.Chapitre3_SortiePlacard);
     }
 
@@ -462,6 +481,17 @@ public class Chapter_3Controller : CommonController
         while (true)
         {
             araignee.Speak(Emote.Emote1);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private IEnumerator coroutine_AraigneeSpeakPlacard()
+    {
+        while (true)
+        {
+            araignee.Speak(Emote.Emote1);
+            yield return new WaitForSeconds(0.5f);
+            araignee.Speak(Emote.Emote2);
             yield return new WaitForSeconds(0.5f);
         }
     }

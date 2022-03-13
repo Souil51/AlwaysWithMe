@@ -8,17 +8,25 @@ public class Perso_Animation_1_Controller : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private bool bAnimationMainFinished;
+    private bool bAnimationMainFinishedChapitre2;
     private bool bAnimationMainReverseFinished;
     private bool bAnimationChapitre4Finished;
     private bool bAnimationMaxineChapitre4Finished;
     private bool bAnimationReverseChapitre4Finished;
     private bool bAnimationMaxineReverseChapitre4Finished;
+    private bool bAnimationPersoChapitre5Finished;
+    private bool bAnimationPersoReverseChapitre5Finished;
 
     #region Animation Callback
 
     public void animationCallback_MainAnimation()
     {
         bAnimationMainFinished = true;
+    }
+
+    public void animationCallback_MainChapitre2Animation()
+    {
+        bAnimationMainFinishedChapitre2 = true;
     }
 
     public void animationCallback_MainAnimationReverse()
@@ -46,6 +54,16 @@ public class Perso_Animation_1_Controller : MonoBehaviour
         bAnimationMaxineReverseChapitre4Finished = true;
     }
 
+    public void animationCallback_AnimationPersoChapitre5()
+    {
+        bAnimationPersoChapitre5Finished = true;
+    }
+
+    public void animationCallback_AnimationPersoReverseChapitre5()
+    {
+        bAnimationPersoReverseChapitre5Finished = true;
+    }
+
     #endregion
 
     #region Animation Main
@@ -58,6 +76,20 @@ public class Perso_Animation_1_Controller : MonoBehaviour
     public bool animation_MainIsFinished()
     {
         return bAnimationMainFinished;
+    }
+
+    #endregion
+
+    #region Animation Main Chapitre 2
+
+    public void animation_Main_Chapitre_2()
+    {
+        animator.SetTrigger("Perso_Animation_1_chapitre_2");
+    }
+
+    public bool animation_MainChapitre2IsFinished()
+    {
+        return bAnimationMainFinishedChapitre2;
     }
 
     #endregion
@@ -132,6 +164,34 @@ public class Perso_Animation_1_Controller : MonoBehaviour
 
     #endregion
 
+    #region Animation Perso Chapitre 5
+
+    public void animation_PersoChapitre5()
+    {
+        animator.SetTrigger("perso_animation_chapitre_5");
+    }
+
+    public bool animation_PersoChapitre5Finished()
+    {
+        return bAnimationPersoChapitre5Finished;
+    }
+
+    #endregion
+
+    #region Animation Perso Reverse Chapitre 5
+
+    public void animation_PersoReverseChapitre5()
+    {
+        animator.SetTrigger("perso_animation_reverse_chapitre_5");
+    }
+
+    public bool animation_PersoReverseChapitre5Finished()
+    {
+        return bAnimationPersoReverseChapitre5Finished;
+    }
+
+    #endregion
+
     public void ResetAnimatorTrigger()
     {
         animator.ResetTrigger("MainAnimation");
@@ -140,5 +200,8 @@ public class Perso_Animation_1_Controller : MonoBehaviour
         animator.ResetTrigger("Perso_animation_chapitre_4");
         animator.ResetTrigger("maxine_animation_reverse_chapitre_4");
         animator.ResetTrigger("Perso_animation_reverse_chapitre_4");
+        animator.ResetTrigger("Perso_Animation_1_chapitre_2");
+        animator.ResetTrigger("perso_animation_chapitre_5");
+        animator.ResetTrigger("perso_animation_reverse_chapitre_5");
     }
 }

@@ -61,8 +61,7 @@ public class Chapitre_5Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueBus()
     {
-
-        movingBody.GoToPosition(new Vector3(11.23f, -3.4f, 1));
+        movingBody.GoToPosition(new Vector3(7.17f, -3.40f, 1));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
@@ -73,9 +72,9 @@ public class Chapitre_5Controller : CommonController
         movingBody.gameObject.SetActive(false);
         Perso_Animation_1.gameObject.SetActive(true);
 
-        Perso_Animation_1.animation_MainReverse();
+        Perso_Animation_1.animation_PersoChapitre5();
 
-        while (!Perso_Animation_1.animation_MainReverseIsFinished())
+        while (!Perso_Animation_1.animation_PersoChapitre5Finished())
             yield return null;
 
         //Attente du bus
@@ -99,9 +98,9 @@ public class Chapitre_5Controller : CommonController
 
         //Mouvement vers le bus
         Perso_Animation_1.ResetAnimatorTrigger();
-        Perso_Animation_1.animation_Main();
+        Perso_Animation_1.animation_PersoReverseChapitre5();
 
-        while (!Perso_Animation_1.animation_MainIsFinished())
+        while (!Perso_Animation_1.animation_PersoReverseChapitre5Finished())
             yield return null;
 
         movingBody.gameObject.SetActive(true);
