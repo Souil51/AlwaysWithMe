@@ -16,6 +16,8 @@ public class Perso_Animation_1_Controller : MonoBehaviour
     private bool bAnimationMaxineReverseChapitre4Finished;
     private bool bAnimationPersoChapitre5Finished;
     private bool bAnimationPersoReverseChapitre5Finished;
+    private bool bAnimationPersoChapitre8Finished;
+    private bool bAnimationMaxineChapitre8Finished;
 
     #region Animation Callback
 
@@ -62,6 +64,16 @@ public class Perso_Animation_1_Controller : MonoBehaviour
     public void animationCallback_AnimationPersoReverseChapitre5()
     {
         bAnimationPersoReverseChapitre5Finished = true;
+    }
+
+    public void animationCallback_AnimationPersoChapitre8()
+    {
+        bAnimationPersoChapitre8Finished = true;
+    }
+
+    public void animationCallback_AnimationMaxineChapitre8()
+    {
+        bAnimationMaxineChapitre8Finished = true;
     }
 
     #endregion
@@ -192,6 +204,34 @@ public class Perso_Animation_1_Controller : MonoBehaviour
 
     #endregion
 
+    #region Animation Perso Chapitre 8
+
+    public void animation_PersoChapitre8()
+    {
+        animator.SetTrigger("perso_animation_chapitre_8");
+    }
+
+    public bool animation_PersoChapitre8Finished()
+    {
+        return bAnimationPersoChapitre8Finished;
+    }
+
+    #endregion
+
+    #region Animation Maxine Chapitre 8
+
+    public void animation_MaxineChapitre8()
+    {
+        animator.SetTrigger("maxine_animation_chapitre_8");
+    }
+
+    public bool animation_MaxineChapitre8Finished()
+    {
+        return bAnimationMaxineChapitre8Finished;
+    }
+
+    #endregion
+
     public void ResetAnimatorTrigger()
     {
         animator.ResetTrigger("MainAnimation");
@@ -203,5 +243,7 @@ public class Perso_Animation_1_Controller : MonoBehaviour
         animator.ResetTrigger("Perso_Animation_1_chapitre_2");
         animator.ResetTrigger("perso_animation_chapitre_5");
         animator.ResetTrigger("perso_animation_reverse_chapitre_5");
+        animator.ResetTrigger("perso_animation_chapitre_8");
+        animator.ResetTrigger("maxine_animation_chapitre_8");
     }
 }

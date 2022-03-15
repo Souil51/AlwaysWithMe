@@ -15,6 +15,8 @@ public class Chapter_8Controller : CommonController
     [SerializeField] private SpeakingBody speakingBody;
     [SerializeField] private SpeakingBody speakingBody_maxine;
 
+    [SerializeField] private GameObject spriteBodyMaxine;
+
     protected override void ChapterInteraction(InteractionType type)
     {
         switch (type)
@@ -22,6 +24,7 @@ public class Chapter_8Controller : CommonController
             case InteractionType.Maxine:
                 {
                     goMaxineInteraction.gameObject.SetActive(false);
+                    spriteBodyMaxine.gameObject.SetActive(true);
                     StartCinematique(Cinematiques.Chapitre8_Fin);
                 }
                 break;
@@ -75,13 +78,6 @@ public class Chapter_8Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        yield return new WaitForSeconds(0.5f);
-
-        Vector3 vMaxinePos = movingBodyMaxine.transform.position;
-        movingBodyMaxine.GoToPosition(new Vector3(vMaxinePos.x + 0.01f, vMaxinePos.y, 1));
-        while (movingBodyMaxine.IsGoingToPosition())
-            yield return null;
-
         List<Emote> lstEmotes = new List<Emote>();
         lstEmotes.Add(Emote.Emote1);
         lstEmotes.Add(Emote.Emote2);
@@ -103,14 +99,14 @@ public class Chapter_8Controller : CommonController
         movingBodyMaxine.gameObject.SetActive(false);
         goPerso_Animation_Maxine.SetActive(true);
         Perso_Animation_1_Controller ctrl_maxine = goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>();
-        ctrl_maxine.animation_MainReverse();
+        ctrl_maxine.animation_MaxineChapitre8();
 
         movingBody.gameObject.SetActive(false);
         goPerso_Animation.SetActive(true);
         Perso_Animation_1_Controller ctrl = goPerso_Animation.GetComponent<Perso_Animation_1_Controller>();
-        ctrl.animation_MainReverse();
+        ctrl.animation_PersoChapitre8();
 
-        while (!ctrl_maxine.animation_MainReverseIsFinished() || !ctrl.animation_MainReverseIsFinished())
+        while (!ctrl_maxine.animation_MaxineChapitre8Finished() || !ctrl.animation_PersoChapitre8Finished())
             yield return null;
 
         speakingBody.Speak(lstEmotes, -1f, 3f, BodyDirection.Gauche);

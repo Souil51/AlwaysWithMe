@@ -58,7 +58,10 @@ public class Chapter_7Controller : CommonController
 
     protected override void ChildStart()
     {
-        StartCinematique(Cinematiques.Chapitre7_Arrivee);
+        //StartCinematique(Cinematiques.Chapitre7_Arrivee);
+
+        //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
+        StartCinematique(Cinematiques.Chapitre7_EntreeJeu);
     }
 
     protected override void ChildUpdate()
@@ -175,8 +178,6 @@ public class Chapter_7Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre7_Arrivee:
@@ -210,8 +211,6 @@ public class Chapter_7Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
     }
 
     #region Cinematique Arrivee
@@ -309,6 +308,9 @@ public class Chapter_7Controller : CommonController
         movingBody.transform.position = new Vector3(-12.1f, movingBody.transform.position.y, movingBody.transform.position.z);
         movingBody.GoToPosition(new Vector3(movingBody.transform.position.x + 0.1f, movingBody.transform.position.y, movingBody.transform.position.z));
 
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
         movingBody.transform.position = new Vector3(-11.08f, -11.44f, 0);
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
@@ -323,6 +325,7 @@ public class Chapter_7Controller : CommonController
 
     private void StopCinematiqueEntreeFete()
     {
+        StopCinematique();
         currentState = ChapitreState.Fete;
     }
 

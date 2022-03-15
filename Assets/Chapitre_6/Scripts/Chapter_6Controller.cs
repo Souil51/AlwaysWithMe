@@ -19,6 +19,15 @@ public class Chapter_6Controller : CommonController
     private Vector3 ClickStartingPosition = Vector3.zero;
     private bool IsClicked = false;
 
+    //Obstacles
+    [SerializeField] private GameObject goHalo_1;
+    [SerializeField] private GameObject goHalo_2;
+    //CHangement de sprite tous les fTimePerSprite secondes
+    private SpriteRenderer sprtRenderer;
+    private float fTimePerSprite = 0.25f;
+    private float fTimeCount = 0;
+    private GameObject goCurrentHalo;
+
     private float CameraMoveSpeed = 5f;
     private float XMinCamera =  -20.46f;
     private float XMaxCamera = -0.27f;
@@ -28,18 +37,32 @@ public class Chapter_6Controller : CommonController
     protected override void ChildStart()
     {
         StartCinematique(Cinematiques.Chapitre6_Debut);
-
-        //TEST
-        /*currentState = ChapitreState.Araignee;
-        araignee.ToggleAnimator(false);
-        araignee.InitDynamicBody();
-
-        StartCoroutine(coroutine_TEST_Tuto());*/
     }
 
     protected override void ChildUpdate()
     {
-        if(currentState == ChapitreState.Araignee)
+        //Changement de sprite des obstacles
+        if (fTimeCount > fTimePerSprite)
+        {
+            if (goCurrentHalo == goHalo_1)
+            {
+                goHalo_2.SetActive(true);
+                goCurrentHalo = goHalo_2;
+                goHalo_1.SetActive(false);
+            }
+            else
+            {
+                goHalo_1.SetActive(true);
+                goCurrentHalo = goHalo_1;
+                goHalo_2.SetActive(false);
+            }
+
+            fTimeCount = 0;
+        }
+
+        fTimeCount += Time.deltaTime;
+
+        if (currentState == ChapitreState.Araignee)
         {
             Vector3 vMousePos = GetWorldMousePosition();
 
@@ -167,11 +190,7 @@ public class Chapter_6Controller : CommonController
         while(!araignee.animation_chapitre__6_SautBus_IsFinished())
             yield return null;
 
-        araignee.RestoreDynamicBodyPosition();
-
-        Vector3 vPosCamera = new Vector3(araignee.transform.position.x, -2.99f, araignee.transform.position.z);
-
-        //MoveCamera(vPosCamera, 2f);
+        //araignee.RestoreDynamicBodyPosition();
 
         TutoLaunch = PlayTuto(Tutoriel.Launch, new Vector3(0.97f, -2.66f, -8.61f));
 
@@ -180,21 +199,11 @@ public class Chapter_6Controller : CommonController
 
     private void StopCinematiqueInitiale()
     {
+        //araignee.RestoreDynamicBodyPosition();
         currentState = ChapitreState.Araignee;
         araignee.ToggleAnimator(false);
         araignee.InitDynamicBody();
     }
 
     #endregion
-
-    private IEnumerator coroutine_TEST_Tuto()
-    {
-        yield return new WaitForSeconds(2f);
-
-        GameObject goTest = PlayTuto(Tutoriel.Clic_Droit, Vector3.zero);
-
-        yield return new WaitForSeconds(6f);
-
-        StopTuto(goTest);
-    }
 }
