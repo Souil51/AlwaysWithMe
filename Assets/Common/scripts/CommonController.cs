@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -48,7 +51,22 @@ public enum ObjectType
     AttenteBus
 }
 
-public enum Emote { Emote1 = 0, Emote2 = 1 }
+public enum Emote 
+{ 
+    [Description("Croix")]Croix = 0,
+    [Description("SmileySourire")] SmileySourire = 1,
+    [Description("SmileyClinOeil")] SmileyClinOeil = 2,
+    [Description("SmileyJoueRouge")] SmileyJoueRouge = 3,
+    [Description("SmileyChoque")] SmileyChoque = 4,
+    [Description("SmileyAppeti")] SmileyAppeti = 5,
+    [Description("SmileyGene")] SmileyGene = 6,
+    [Description("SmileyGrandSourire")] SmileyGrandSourire = 7,
+    [Description("Calendrier")] Calendrier = 8,
+    [Description("Cadeau")] Cadeau = 9,
+    [Description("Chat")] Chat = 10,
+    [Description("Soleil")] Soleil = 11,
+    [Description("Crr")] Crr = 12,
+}
 
 public enum Cinematiques
 {
@@ -393,6 +411,25 @@ public class CommonController : MonoBehaviour
         tutoCtrl.StopTutoriel();
 
         lstPlayingTuto.Remove(goTuto);
+    }
+
+    #endregion
+
+
+    #region
+
+    public static string GetEnumDescription(Enum value)
+    {
+        FieldInfo fi = value.GetType().GetField(value.ToString());
+
+        DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+        if (attributes != null && attributes.Any())
+        {
+            return attributes.First().Description;
+        }
+
+        return value.ToString();
     }
 
     #endregion

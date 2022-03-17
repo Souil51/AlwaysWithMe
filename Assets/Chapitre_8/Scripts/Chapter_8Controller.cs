@@ -78,16 +78,12 @@ public class Chapter_8Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        List<Emote> lstEmotes = new List<Emote>();
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
+        movingBody.SpeakRandom(6);
+        yield return new WaitForSeconds(0.25f);
+        movingBodyMaxine.SpeakRandom(6);
 
-        movingBody.Speak(lstEmotes);
-        movingBodyMaxine.Speak(lstEmotes);
-
-        yield return new WaitForSeconds(2f);
+        while (movingBody.IsSpeaking() || movingBodyMaxine.IsSpeaking())
+            yield return null;
 
         movingBody.GoToPosition(new Vector3(-4.76f, -10.54f, 1));
         movingBodyMaxine.GoToPosition(new Vector3(-8.31f, -11f, 1));
@@ -109,8 +105,8 @@ public class Chapter_8Controller : CommonController
         while (!ctrl_maxine.animation_MaxineChapitre8Finished() || !ctrl.animation_PersoChapitre8Finished())
             yield return null;
 
-        speakingBody.Speak(lstEmotes, -1f, 3f, BodyDirection.Gauche);
-        speakingBody_maxine.Speak(lstEmotes, -1f, 3f, BodyDirection.Droite);
+        speakingBody.SpeakRandom(6, -1f, 3f, BodyDirection.Gauche);
+        speakingBody_maxine.SpeakRandom(6, -1f, 3f, BodyDirection.Droite);
 
         goAraignee.animation_araignee_chapitre_8_arrivee();
 

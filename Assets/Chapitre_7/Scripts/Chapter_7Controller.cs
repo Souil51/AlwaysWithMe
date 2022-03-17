@@ -353,19 +353,11 @@ public class Chapter_7Controller : CommonController
         while (moveingBodyMaxine.IsGoingToPosition())
             yield return null;
 
-        List<Emote> lstEmotes = new List<Emote>();
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-
-        moveingBodyMaxine.Speak(lstEmotes);
+        moveingBodyMaxine.SpeakRandom(6);
 
         yield return new WaitForSeconds(1f);
 
-        movingBody.Speak(lstEmotes);
+        movingBody.SpeakRandom(6);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -487,9 +479,9 @@ public class Chapter_7Controller : CommonController
         }
 
         List<Emote> lstEmotes = new List<Emote>();
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote1);
+        lstEmotes.Add(Emote.Croix);
+        lstEmotes.Add(Emote.Croix);
+        lstEmotes.Add(Emote.Croix);
 
         araignee.Speak(lstEmotes);
 
@@ -604,14 +596,8 @@ public class Chapter_7Controller : CommonController
 
         movingBody.UnextendedArms();
 
-        List<Emote> lstEmotes = new List<Emote>();
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-
-        moveingBodyMaxine.Speak(lstEmotes);
-        movingBody.Speak(lstEmotes);
+        moveingBodyMaxine.SpeakRandom(4);
+        movingBody.SpeakRandom(4);
 
         yield return new WaitForSeconds(2f);
 

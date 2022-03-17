@@ -1,10 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpeakingBody : MonoBehaviour
 {
     public static List<Sprite> lstSprites;//Liste des toutes les emotes
+    public static List<Emote> lstAllEmotesRandom;
+    public static List<Emote> emotesExclusSpeakRandom = new List<Emote>()
+    {
+        Emote.Croix,
+        Emote.Crr
+    };
+
     private bool bIsSpeaking = false;
 
     // Start is called before the first frame update
@@ -24,8 +33,17 @@ public class SpeakingBody : MonoBehaviour
     {
         lstSprites = new List<Sprite>();
 
-        lstSprites.Add((Sprite)Resources.Load<Sprite>("EmoteSprite/emote_1"));
-        lstSprites.Add((Sprite)Resources.Load<Sprite>("EmoteSprite/emote_2"));
+        foreach (Emote emote in (Emote[])Enum.GetValues(typeof(Emote)))
+        {
+            lstSprites.Add((Sprite)Resources.Load<Sprite>("EmoteSprite/" + CommonController.GetEnumDescription(emote)));
+        }
+
+        lstAllEmotesRandom = new List<Emote>((Emote[])Enum.GetValues(typeof(Emote)));
+
+        foreach (Emote e in SpeakingBody.emotesExclusSpeakRandom)
+        {
+            lstAllEmotesRandom.Remove(e);
+        }
     }
 
     private void SpawnEmote(Emote emote, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite)
@@ -72,6 +90,18 @@ public class SpeakingBody : MonoBehaviour
         lstEmotes.Add(emote);
 
         Speak(lstEmotes, fXOffset, fYOffset, bodyDirection);
+    }
+
+    public void SpeakRandom(int nbEmotes, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite, float fDelay = 0.5f)
+    {
+        List <Emote> lstEmotes = new List<Emote>();
+
+        for(int i = 0; i < nbEmotes; i++)
+        {
+            lstEmotes.Add(lstAllEmotesRandom[Random.Range(0, lstAllEmotesRandom.Count)]);
+        }
+
+        Speak(lstEmotes, fXOffset, fYOffset, bodyDirection, fDelay);
     }
 
     private IEnumerator coroutine_Speak(List<Emote> emotes, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite, float fDelay = 0.5f)

@@ -311,15 +311,9 @@ public class Chapitre_4Controller : CommonController
         while (movingBody_Maxine.IsGoingToPosition())
             yield return null;
 
-        List<Emote> lstEmotes = new List<Emote>();
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-        lstEmotes.Add(Emote.Emote1);
-        lstEmotes.Add(Emote.Emote2);
-
-        movingBody_Maxine.Speak(lstEmotes);
+        movingBody_Maxine.SpeakRandom(4);
         yield return new WaitForSeconds(0.5f);
-        movingBody.Speak(lstEmotes);
+        movingBody.SpeakRandom(4);
         yield return new WaitForSeconds(0.5f);
 
         movingBody_Maxine.gameObject.SetActive(false);
@@ -380,13 +374,11 @@ public class Chapitre_4Controller : CommonController
     {
         while (true)
         {
-            int nIndex = Random.Range(0, SpeakingBody.lstSprites.Count);
-            goPerso_Animation_Maxine_SpeakingBody.Speak((Emote)nIndex, 1.5f, 7.5f, BodyDirection.Droite);
+            goPerso_Animation_Maxine_SpeakingBody.SpeakRandom(1, 1.5f, 7.5f, BodyDirection.Droite);
 
             yield return new WaitForSeconds(0.5f);
 
-            nIndex = Random.Range(0, SpeakingBody.lstSprites.Count);
-            goPerso_Animation_1_SpeakingBody.Speak((Emote)nIndex, 2.5f, 7.5f, BodyDirection.Gauche);
+            goPerso_Animation_1_SpeakingBody.SpeakRandom(1, 2.5f, 7.5f, BodyDirection.Gauche);
 
             yield return new WaitForSeconds(0.5f);
         }

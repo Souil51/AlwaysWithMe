@@ -5,14 +5,6 @@ using UnityEngine;
 
 public class Chapter_2Controller : CommonController
 {
-    private static List<Emote> Discussion_1 = new List<Emote>
-    {
-        Emote.Emote1,
-        Emote.Emote2,
-        Emote.Emote2,
-        Emote.Emote1
-    };
-
     public enum ChapitreState { Initial = 0, MaxineArrive = 1, MaxineLeft = 6, AnimationJournee = 2, FinJournee = 3, AnimationBoucle = 4, FinBoucle = 5 }
 
     private ChapitreState currentState = ChapitreState.Initial;
@@ -177,10 +169,9 @@ public class Chapter_2Controller : CommonController
             yield return null;
 
         //Discussion
-        movingBody_2.Speak(Discussion_1);
-
+        movingBody_2.SpeakRandom(4);
         yield return new WaitForSeconds(1f);
-        movingBody.Speak(Discussion_1);
+        movingBody.SpeakRandom(4);
 
         while (movingBody_2.IsSpeaking() || movingBody.IsSpeaking())
             yield return null;

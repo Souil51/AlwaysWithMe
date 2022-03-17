@@ -64,6 +64,11 @@ public class AraigneeController : MonoBehaviour
         speakingCtrl.Speak(emotes, 0, 0, BodyDirection.Gauche);
     }
 
+    public void SpeakRandom(int nombreEmotes)
+    {
+        speakingCtrl.SpeakRandom(nombreEmotes, 0, 0, BodyDirection.Gauche);
+    }
+
     public bool IsSpeaking()
     {
         return speakingCtrl.IsSpeaking();

@@ -24,9 +24,6 @@ public class PlacardController : MonoBehaviour
 
     private void SpawnSprite()
     {
-        List<Emote> lst = new List<Emote>();
-        lst.Add(Emote.Emote1);
-
-        speakingCtrl.Speak(lst, 0, 0, BodyDirection.Gauche);
+        speakingCtrl.Speak(Emote.Crr, 0, 0, BodyDirection.Gauche);
     }
 }

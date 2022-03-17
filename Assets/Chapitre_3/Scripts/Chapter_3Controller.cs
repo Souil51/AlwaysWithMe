@@ -87,7 +87,7 @@ public class Chapter_3Controller : CommonController
             movableObj.MovableObjectShakedEvent += MovableObj_MovableObjectShakedEvent;
         }
 
-        StartCinematiquePlacard();
+        //StartCinematiquePlacard();
     }
 
     protected override void ChildUpdate()
@@ -373,13 +373,7 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(0.5f);
 
-        List<Emote> lstDiscussion = new List<Emote>();
-        lstDiscussion.Add(Emote.Emote1);
-        lstDiscussion.Add(Emote.Emote2);
-        lstDiscussion.Add(Emote.Emote1);
-        lstDiscussion.Add(Emote.Emote2);
-
-        araigneeApresPlacard.Speak(lstDiscussion);
+        araigneeApresPlacard.SpeakRandom(4);
 
         while(araigneeApresPlacard.IsSpeaking())
             yield return null;
@@ -480,7 +474,7 @@ public class Chapter_3Controller : CommonController
     {
         while (true)
         {
-            araignee.Speak(Emote.Emote1);
+            araignee.SpeakRandom(1);
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -489,9 +483,9 @@ public class Chapter_3Controller : CommonController
     {
         while (true)
         {
-            araignee.Speak(Emote.Emote1);
+            araignee.SpeakRandom(1);
             yield return new WaitForSeconds(0.5f);
-            araignee.Speak(Emote.Emote2);
+            araignee.SpeakRandom(1);
             yield return new WaitForSeconds(0.5f);
         }
     }
