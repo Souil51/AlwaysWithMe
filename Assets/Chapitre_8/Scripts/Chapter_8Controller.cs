@@ -95,22 +95,23 @@ public class Chapter_8Controller : CommonController
         movingBodyMaxine.gameObject.SetActive(false);
         goPerso_Animation_Maxine.SetActive(true);
         Perso_Animation_1_Controller ctrl_maxine = goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>();
-        ctrl_maxine.animation_MaxineChapitre8();
+        ctrl_maxine.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre8_MaxineAnimation);
 
         movingBody.gameObject.SetActive(false);
         goPerso_Animation.SetActive(true);
         Perso_Animation_1_Controller ctrl = goPerso_Animation.GetComponent<Perso_Animation_1_Controller>();
-        ctrl.animation_PersoChapitre8();
+        ctrl.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre8_PersoAnimation);
 
-        while (!ctrl_maxine.animation_MaxineChapitre8Finished() || !ctrl.animation_PersoChapitre8Finished())
+        while (!ctrl_maxine.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre8_MaxineAnimation) 
+            || !ctrl.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre8_PersoAnimation))
             yield return null;
 
         speakingBody.SpeakRandom(6, -1f, 3f, BodyDirection.Gauche);
         speakingBody_maxine.SpeakRandom(6, -1f, 3f, BodyDirection.Droite);
 
-        goAraignee.animation_araignee_chapitre_8_arrivee();
+        goAraignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre8_Arrivee);
 
-        while (!goAraignee.animation_araignee_chapitre_8_arrivee_IsFinished())
+        while (!goAraignee.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre8_Arrivee))
             yield return null;
 
         yield return new WaitForSeconds(2f);

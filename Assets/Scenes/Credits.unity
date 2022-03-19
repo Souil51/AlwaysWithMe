@@ -19650,7 +19650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RootBone: {fileID: 118435344}
-  m_BoneTransforms: []
+  m_BoneTransforms:
+  - {fileID: 118435344}
   m_Bounds:
     m_Center: {x: 0.061878204, y: -0.3638751, z: 0}
     m_Extent: {x: 0.3292535, y: 0.27858275, z: 0}
@@ -19696,7 +19697,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1001
-  m_Sprite: {fileID: 21300000, guid: 2d87a6f912f49ff4f8a74723801496d0, type: 3}
+  m_Sprite: {fileID: 2277264230764286418, guid: 67839cd39b1433c4ea59c38d678d81a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

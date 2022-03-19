@@ -185,9 +185,9 @@ public class Chapter_6Controller : CommonController
     {
         yield return new WaitForSeconds(0f);
 
-        araignee.animation_chapitre_6_SautBus();
+        araignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre6_SautBus);
 
-        while(!araignee.animation_chapitre__6_SautBus_IsFinished())
+        while (!araignee.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre6_SautBus))
             yield return null;
 
         //araignee.RestoreDynamicBodyPosition();

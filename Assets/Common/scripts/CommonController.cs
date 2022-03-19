@@ -90,7 +90,8 @@ public enum Cinematiques
     Chapitre7_VictoireJeu,
     Chapitre7_FinJeu,
     Chapitre8_Fin,
-    Credits_Credits
+    Credits_Credits,
+    Titre_Titre
 }
 
 public enum Tutoriel

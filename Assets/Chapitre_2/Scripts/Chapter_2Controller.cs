@@ -214,9 +214,9 @@ public class Chapter_2Controller : CommonController
         Perso_Animation_1_Controller persoCtrl = goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>();
         movingBody.gameObject.SetActive(false);
         goPerso_Animation_1.SetActive(true);
-        persoCtrl.animation_MainReverse();
+        persoCtrl.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.MainAnimation_Reverse);
 
-        while (!persoCtrl.animation_MainReverseIsFinished())
+        while (!persoCtrl.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.MainAnimation_Reverse))
             yield return null;
 
         //Mise en place de la vue de l'animation
@@ -236,9 +236,9 @@ public class Chapter_2Controller : CommonController
         goPorteInteractable.SetActive(true);
         goPorteSprite.SetActive(false);
 
-        persoCtrl.animation_Main_Chapitre_2();
+        persoCtrl.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre2_PersoAnimation);
 
-        while (!persoCtrl.animation_MainChapitre2IsFinished())
+        while (!persoCtrl.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre2_PersoAnimation))
             yield return null;
 
         movingBody.gameObject.SetActive(true);

@@ -228,9 +228,9 @@ public class Chapter_1Controller : CommonController
     {
         yield return new WaitForSeconds(5f);
 
-        Perso_Animation_1.animation_Main();
+        Perso_Animation_1.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.MainAnimation);
 
-        while (!Perso_Animation_1.animation_MainIsFinished())
+        while (!Perso_Animation_1.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.MainAnimation))
             yield return null;
 
         movingBody.gameObject.SetActive(true);

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 //Controller permettant simplement de récupérer les évènements de l'animator de l'objet
@@ -7,230 +9,54 @@ public class Perso_Animation_1_Controller : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    private bool bAnimationMainFinished;
-    private bool bAnimationMainFinishedChapitre2;
-    private bool bAnimationMainReverseFinished;
-    private bool bAnimationChapitre4Finished;
-    private bool bAnimationMaxineChapitre4Finished;
-    private bool bAnimationReverseChapitre4Finished;
-    private bool bAnimationMaxineReverseChapitre4Finished;
-    private bool bAnimationPersoChapitre5Finished;
-    private bool bAnimationPersoReverseChapitre5Finished;
-    private bool bAnimationPersoChapitre8Finished;
-    private bool bAnimationMaxineChapitre8Finished;
-
-    #region Animation Callback
-
-    public void animationCallback_MainAnimation()
+    public enum AnimationsPerso
     {
-        bAnimationMainFinished = true;
+        [Description("MainAnimation")] MainAnimation,
+        [Description("MainAnimationReverse")] MainAnimation_Reverse,
+        [Description("maxine_animation_chapitre_4")] Chapitre4_MaxineAnimation,
+        [Description("Perso_animation_chapitre_4")] Chapitre4_PersoAnimation,
+        [Description("maxine_animation_reverse_chapitre_4")] Chapitre4_MaxineAnimationReverse,
+        [Description("Perso_animation_reverse_chapitre_4")] Chapitre4_PersoAnimationReverse,
+        [Description("Perso_Animation_1_chapitre_2")] Chapitre2_PersoAnimation,
+        [Description("perso_animation_chapitre_5")] Chapitre5_PersoAnimation,
+        [Description("perso_animation_reverse_chapitre_5")] Chapitre5_PersoAnimationReverse,
+        [Description("perso_animation_chapitre_8")] Chapitre8_PersoAnimation,
+        [Description("maxine_animation_chapitre_8")] Chapitre8_MaxineAnimation
     }
 
-    public void animationCallback_MainChapitre2Animation()
+    private Dictionary<AnimationsPerso, bool> dicAnimationsFinished = new Dictionary<AnimationsPerso, bool>();
+
+    private void Start()
     {
-        bAnimationMainFinishedChapitre2 = true;
+        LoadAnimations();
     }
 
-    public void animationCallback_MainAnimationReverse()
+    private void LoadAnimations()
     {
-        bAnimationMainReverseFinished = true;
+        if (dicAnimationsFinished.Count > 0) return;
+
+        foreach (AnimationsPerso anims in (AnimationsPerso[])Enum.GetValues(typeof(AnimationsPerso)))
+        {
+            dicAnimationsFinished.Add(anims, false);
+        }
     }
 
-    public void animationCallback_AnimationPersoChapitre4()
+    public void StartAnimation(AnimationsPerso anim)
     {
-        bAnimationChapitre4Finished = true;
+        LoadAnimations();
+
+        animator.SetTrigger(CommonController.GetEnumDescription(anim));
     }
 
-    public void animationCallback_AnimationMaxineChapitre4()
+    public bool IsAnimationFinished(AnimationsPerso anim)
     {
-        bAnimationMaxineChapitre4Finished = true;
+        return dicAnimationsFinished[anim];
     }
 
-    public void animationCallback_AnimationPersoReverseChapitre4()
+    public void AnimationFinished(AnimationsPerso anim)
     {
-        bAnimationReverseChapitre4Finished = true;
+        dicAnimationsFinished[anim] = true;
     }
-
-    public void animationCallback_AnimationMaxineReverseChapitre4()
-    {
-        bAnimationMaxineReverseChapitre4Finished = true;
-    }
-
-    public void animationCallback_AnimationPersoChapitre5()
-    {
-        bAnimationPersoChapitre5Finished = true;
-    }
-
-    public void animationCallback_AnimationPersoReverseChapitre5()
-    {
-        bAnimationPersoReverseChapitre5Finished = true;
-    }
-
-    public void animationCallback_AnimationPersoChapitre8()
-    {
-        bAnimationPersoChapitre8Finished = true;
-    }
-
-    public void animationCallback_AnimationMaxineChapitre8()
-    {
-        bAnimationMaxineChapitre8Finished = true;
-    }
-
-    #endregion
-
-    #region Animation Main
-
-    public void animation_Main()
-    {
-        animator.SetTrigger("MainAnimation");
-    }
-
-    public bool animation_MainIsFinished()
-    {
-        return bAnimationMainFinished;
-    }
-
-    #endregion
-
-    #region Animation Main Chapitre 2
-
-    public void animation_Main_Chapitre_2()
-    {
-        animator.SetTrigger("Perso_Animation_1_chapitre_2");
-    }
-
-    public bool animation_MainChapitre2IsFinished()
-    {
-        return bAnimationMainFinishedChapitre2;
-    }
-
-    #endregion
-
-    #region Animation MainReverse
-
-    public void animation_MainReverse()
-    {
-        animator.SetTrigger("MainAnimationReverse");
-    }
-
-    public bool animation_MainReverseIsFinished()
-    {
-        return bAnimationMainReverseFinished;
-    }
-
-    #endregion
-
-    #region Animation PersoChapitre4
-
-    public void animation_PersoChapitre4()
-    {
-        animator.SetTrigger("Perso_animation_chapitre_4");
-    }
-
-    public bool animation_PersoChapitre4Finished()
-    {
-        return bAnimationChapitre4Finished;
-    }
-
-    #endregion
-
-    #region Animation PersoReverseChapitre4
-
-    public void animation_PersoReverseChapitre4()
-    {
-        animator.SetTrigger("Perso_animation_reverse_chapitre_4");
-    }
-
-    public bool animation_PersoReverseChapitre4Finished()
-    {
-        return bAnimationReverseChapitre4Finished;
-    }
-
-    #endregion
-
-    #region Animation MaxineChapitre4
-
-    public void animation_MaxineChapitre4()
-    {
-        animator.SetTrigger("maxine_animation_chapitre_4");
-    }
-
-    public bool animation_MaxineChapitre4Finished()
-    {
-        return bAnimationMaxineChapitre4Finished;
-    }
-
-    #endregion
-
-    #region Animation MaxineReverseChapitre4
-
-    public void animation_MaxineReverseChapitre4()
-    {
-        animator.SetTrigger("maxine_animation_reverse_chapitre_4");
-    }
-
-    public bool animation_MaxineReverseChapitre4Finished()
-    {
-        return bAnimationMaxineReverseChapitre4Finished;
-    }
-
-    #endregion
-
-    #region Animation Perso Chapitre 5
-
-    public void animation_PersoChapitre5()
-    {
-        animator.SetTrigger("perso_animation_chapitre_5");
-    }
-
-    public bool animation_PersoChapitre5Finished()
-    {
-        return bAnimationPersoChapitre5Finished;
-    }
-
-    #endregion
-
-    #region Animation Perso Reverse Chapitre 5
-
-    public void animation_PersoReverseChapitre5()
-    {
-        animator.SetTrigger("perso_animation_reverse_chapitre_5");
-    }
-
-    public bool animation_PersoReverseChapitre5Finished()
-    {
-        return bAnimationPersoReverseChapitre5Finished;
-    }
-
-    #endregion
-
-    #region Animation Perso Chapitre 8
-
-    public void animation_PersoChapitre8()
-    {
-        animator.SetTrigger("perso_animation_chapitre_8");
-    }
-
-    public bool animation_PersoChapitre8Finished()
-    {
-        return bAnimationPersoChapitre8Finished;
-    }
-
-    #endregion
-
-    #region Animation Maxine Chapitre 8
-
-    public void animation_MaxineChapitre8()
-    {
-        animator.SetTrigger("maxine_animation_chapitre_8");
-    }
-
-    public bool animation_MaxineChapitre8Finished()
-    {
-        return bAnimationMaxineChapitre8Finished;
-    }
-
-    #endregion
 
     public void ResetAnimatorTrigger()
     {

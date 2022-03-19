@@ -72,9 +72,9 @@ public class Chapitre_5Controller : CommonController
         movingBody.gameObject.SetActive(false);
         Perso_Animation_1.gameObject.SetActive(true);
 
-        Perso_Animation_1.animation_PersoChapitre5();
+        Perso_Animation_1.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre5_PersoAnimation);
 
-        while (!Perso_Animation_1.animation_PersoChapitre5Finished())
+        while (!Perso_Animation_1.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre5_PersoAnimation))
             yield return null;
 
         //Attente du bus
@@ -98,9 +98,9 @@ public class Chapitre_5Controller : CommonController
 
         //Mouvement vers le bus
         Perso_Animation_1.ResetAnimatorTrigger();
-        Perso_Animation_1.animation_PersoReverseChapitre5();
+        Perso_Animation_1.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre5_PersoAnimationReverse);
 
-        while (!Perso_Animation_1.animation_PersoReverseChapitre5Finished())
+        while (!Perso_Animation_1.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre5_PersoAnimationReverse))
             yield return null;
 
         movingBody.gameObject.SetActive(true);

@@ -235,9 +235,9 @@ public class Chapitre_4Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueFuiteCouloir()
     {
-        araignee_couloir.animation_chapitre_3_FuiteCouloir();
+        araignee_couloir.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre3_FuiteCouloir);
 
-        while (!araignee_couloir.animation_chapitre_3_FuiteCouloir_IsFinished())
+        while (!araignee_couloir.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre3_FuiteCouloir))
             yield return null;
 
         StopCinematiqueFuiteCouloir();
@@ -320,9 +320,9 @@ public class Chapitre_4Controller : CommonController
         goPerso_Animation_Maxine.SetActive(true);
 
         Perso_Animation_1_Controller ctrl_maxine = goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>();
-        ctrl_maxine.animation_MaxineChapitre4();
+        ctrl_maxine.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_MaxineAnimation);
 
-        while (!ctrl_maxine.animation_MaxineChapitre4Finished())
+        while (!ctrl_maxine.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_MaxineAnimation))
             yield return null;
 
         yield return new WaitForSeconds(1f);
@@ -339,9 +339,9 @@ public class Chapitre_4Controller : CommonController
         coroutineBoucleSpeak = StartCoroutine(coroutine_BoucleSpeak());//Pendant la pahse avec l'araigné, les persos vont parler en boucle
 
         Perso_Animation_1_Controller ctrl = goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>();
-        ctrl.animation_PersoChapitre4();
+        ctrl.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_PersoAnimation);
 
-        while(!ctrl.animation_PersoChapitre4Finished())
+        while(!ctrl.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_PersoAnimation))
             yield return null;
 
         //Apparition de l'araignée
@@ -420,7 +420,7 @@ public class Chapitre_4Controller : CommonController
         Vector3 currentRotation = araignee.transform.eulerAngles;
         Vector3 currentRootRotation = banc_araigneeRoot.transform.eulerAngles;
 
-        araignee.GetComponent<AraigneeController>().animation_SautFil();
+        araignee.GetComponent<AraigneeController>().StartAnimation(AraigneeController.AnimationsAraignee.SautFil);
 
         while (fElapsedTime < fDuration)
         {
@@ -438,7 +438,7 @@ public class Chapitre_4Controller : CommonController
             yield return null;
         }
 
-        while (!araignee.GetComponent<AraigneeController>().animation_SautFil_IsFinished())
+        while (!araignee.GetComponent<AraigneeController>().IsAnimationFinished(AraigneeController.AnimationsAraignee.SautFil))
             yield return null;
 
         StopCinematiqueAraigneeSaut();
@@ -472,15 +472,15 @@ public class Chapitre_4Controller : CommonController
         carte_maxine.SetActive(false);
 
         //Fuite de l'araignee
-        araignee.GetComponent<AraigneeController>().animation_chapitre_3_SortieEcran();
+        araignee.GetComponent<AraigneeController>().StartAnimation(AraigneeController.AnimationsAraignee.Chapitre3_SortieEcran);
 
         yield return new WaitForSeconds(1f);
 
-        goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_PersoReverseChapitre4();
-        goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MaxineReverseChapitre4();
+        goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_PersoAnimationReverse);
+        goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_MaxineAnimationReverse);
 
-        while (!goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().animation_PersoReverseChapitre4Finished()
-            || !goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().animation_MaxineReverseChapitre4Finished())
+        while (!goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_PersoAnimationReverse)
+            || !goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_MaxineAnimationReverse))
             yield return null;
 
         yield return new WaitForSeconds(1f);

@@ -390,9 +390,9 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(0.5f);
 
-        araigneeApresPlacard.animation_SautDansSac();
+        araigneeApresPlacard.StartAnimation(AraigneeController.AnimationsAraignee.SautDansSac);
 
-        while(!araigneeApresPlacard.animation_SautDansSac_IsFinished())
+        while(!araigneeApresPlacard.IsAnimationFinished(AraigneeController.AnimationsAraignee.SautDansSac))
             yield return null;
 
         araigneeApresPlacard.gameObject.SetActive(false);
@@ -447,9 +447,9 @@ public class Chapter_3Controller : CommonController
         araignee.RestoreDynamicBodyPosition();
 
         araignee.ToggleAnimator(true);
-        araignee.animation_araignee_chapitre_3_placard();
+        araignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre3_Placard);
 
-        while (!araignee.animation_araignee_chapitre_3_placard_IsFinished())
+        while (!araignee.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre3_Placard))
             yield return null;
 
         yield return new WaitForSeconds(2f);

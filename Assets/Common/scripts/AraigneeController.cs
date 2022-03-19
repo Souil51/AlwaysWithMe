@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class AraigneeController : MonoBehaviour
@@ -10,21 +12,38 @@ public class AraigneeController : MonoBehaviour
     [SerializeField] private SpeakingBody speakingCtrl;
     [SerializeField] private Animator holderAnimator;//Animator de l'objet parent
 
-    //Variables permettant de savoir si une animation est terminée
-    private bool bSautDansSacFinished = false;
-    private bool bSautFilFinished = false;
-    private bool bChapitre3SortieEcran = false;
-    private bool bChapitre3FuiteCouloir = false;
-    private bool bChapitre6SautBus = false;
-    private bool bChapitre8Arrivee = false;
-    private bool bChapitre3Placard = false;
+    public enum AnimationsAraignee
+    {
+        [Description("SautDansSac")] SautDansSac,
+        [Description("SautFil")] SautFil,
+        [Description("chapitre_3_SoriteEcran")] Chapitre3_SortieEcran,
+        [Description("chapitre_3_FuiteCouloir")] Chapitre3_FuiteCouloir,
+        [Description("chapitre_6_SautBus")] Chapitre6_SautBus,
+        [Description("araignee_chapitre_8_arrivee")] Chapitre8_Arrivee,
+        [Description("chapitre_3_placard")] Chapitre3_Placard,
+        [Description("SautsTitre")] SautsTitre
+    }
+
+    private Dictionary<AnimationsAraignee, bool> dicAnimationsFinished = new Dictionary<AnimationsAraignee, bool>();
+
     void Start()
     {
+        LoadAnimations();
     }
 
     void Update()
     {
         
+    }
+
+    private void LoadAnimations()
+    {
+        if (dicAnimationsFinished.Count > 0) return;
+
+        foreach (AnimationsAraignee anims in (AnimationsAraignee[])Enum.GetValues(typeof(AnimationsAraignee)))
+        {
+            dicAnimationsFinished.Add(anims, false);
+        }
     }
 
     public void AddForce(Vector3 vDirection, float fCoefficien = 1f)
@@ -98,138 +117,22 @@ public class AraigneeController : MonoBehaviour
         dynamicBodyController.MoveAllTargets(difference, differenceX);
     }
 
-    #region animation SautDansSac
-
-    public void animation_SautDansSac()
+    public void StartAnimation(AnimationsAraignee anim)
     {
-        holderAnimator.SetTrigger("SautDansSac");
+        LoadAnimations();
+
+        holderAnimator.SetTrigger(CommonController.GetEnumDescription(anim));
     }
 
-    public void animation_SautDansSec_Finished()
+    public bool IsAnimationFinished(AnimationsAraignee anim)
     {
-        bSautDansSacFinished = true;
+        return dicAnimationsFinished[anim];
     }
 
-    public bool animation_SautDansSac_IsFinished()
+    public void AnimationFinished(AnimationsAraignee anim)
     {
-        return bSautDansSacFinished;
+        dicAnimationsFinished[anim] = true;
     }
-
-    #endregion
-
-    #region SautFil
-
-    public void animation_SautFil()
-    {
-        holderAnimator.SetTrigger("SautFil");
-    }
-
-    public void animation_SautFil_Finished()
-    {
-        bSautFilFinished = true;
-    }
-
-    public bool animation_SautFil_IsFinished()
-    {
-        return bSautFilFinished;
-    }
-
-    #endregion
-
-    #region chapitre_3_SortieEcran
-
-    public void animation_chapitre_3_SortieEcran()
-    {
-        holderAnimator.SetTrigger("chapitre_3_SoriteEcran");
-    }
-
-    public void animation_chapitre_3_SortieEcran_Finished()
-    {
-        bChapitre3SortieEcran = true;
-    }
-
-    public bool animation_chapitre_3_SortieEcran_IsFinished()
-    {
-        return bChapitre3SortieEcran;
-    }
-
-    #endregion
-
-    #region chapitre_3_FuiteCouloir
-
-    public void animation_chapitre_3_FuiteCouloir()
-    {
-        holderAnimator.SetTrigger("chapitre_3_FuiteCouloir");
-    }
-
-    public void animation_chapitre_3_FuiteCouloir_Finished()
-    {
-        bChapitre3FuiteCouloir = true;
-    }
-
-    public bool animation_chapitre_3_FuiteCouloir_IsFinished()
-    {
-        return bChapitre3FuiteCouloir;
-    }
-
-    #endregion
-
-    #region chapitre_6_SautBus
-
-    public void animation_chapitre_6_SautBus()
-    {
-        holderAnimator.SetTrigger("chapitre_6_SautBus");
-    }
-
-    public void animation_chapitre__6_SautBus_Finished()
-    {
-        bChapitre6SautBus = true;
-    }
-
-    public bool animation_chapitre__6_SautBus_IsFinished()
-    {
-        return bChapitre6SautBus;
-    }
-
-    #endregion
-
-    #region chapitre_8
-
-    public void animation_araignee_chapitre_8_arrivee()
-    {
-        holderAnimator.SetTrigger("araignee_chapitre_8_arrivee");
-    }
-
-    public void animation_araignee_chapitre_8_arrivee_Finished()
-    {
-        bChapitre8Arrivee = true;
-    }
-
-    public bool animation_araignee_chapitre_8_arrivee_IsFinished()
-    {
-        return bChapitre8Arrivee;
-    }
-
-    #endregion
-
-    #region Chapitre 3 Placard
-
-    public void animation_araignee_chapitre_3_placard()
-    {
-        holderAnimator.SetTrigger("chapitre_3_placard");
-    }
-
-    public void animation_araignee_chapitre_3_placard_Finished()
-    {
-        bChapitre3Placard = true;
-    }
-
-    public bool animation_araignee_chapitre_3_placard_IsFinished()
-    {
-        return bChapitre3Placard;
-    }
-
-    #endregion
 
     #region Fade Out du sprite
 
