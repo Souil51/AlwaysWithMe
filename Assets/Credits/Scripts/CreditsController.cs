@@ -23,6 +23,8 @@ public class CreditsController : CommonController
 
     protected override void ChildStart()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Credits);
+
         StartCinematique(Cinematiques.Credits_Credits);
     }
 
@@ -181,7 +183,7 @@ public class CreditsController : CommonController
 
     private void StopCinematiqueCredits()
     {
-        //Change scene chapitre 8
+        
     }
 
     #endregion

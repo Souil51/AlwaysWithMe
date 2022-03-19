@@ -17,6 +17,11 @@ public class Chapter_8Controller : CommonController
 
     [SerializeField] private GameObject spriteBodyMaxine;
 
+    protected override void ChildStart()
+    {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+    }
+
     protected override void ChapterInteraction(InteractionType type)
     {
         switch (type)
@@ -68,6 +73,8 @@ public class Chapter_8Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueFin()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         movingBody.SetActive(false);
 
         movingBody.GoToPosition(new Vector3(10.4f, -5.86f, 1));
@@ -130,7 +137,7 @@ public class Chapter_8Controller : CommonController
 
     private void StopCinematiqueFin()
     {
-        
+        SmoothChangeScene(Scenes.Credits);
     }
 
     #endregion

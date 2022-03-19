@@ -105,7 +105,7 @@ public class Chapter_6Controller : CommonController
             Vector3 vRootPosition = araignee.GetRootPosition();
             if (vRootPosition.x < -26.27f && vRootPosition.y > -2.58f)
             {
-                Debug.Log("FIN DU CHAPITRE");
+                SmoothChangeScene(Scenes.Chapitre7);
             }
         }
     }
@@ -184,6 +184,8 @@ public class Chapter_6Controller : CommonController
     private IEnumerator coroutine_CinematiqueInitiale()
     {
         yield return new WaitForSeconds(0f);
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
 
         araignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre6_SautBus);
 

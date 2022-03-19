@@ -55,6 +55,7 @@ public class Chapitre_4Controller : CommonController
 
     protected override void ChildStart()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
         //vDifferenceSacPerso = movingBody.gameObject.transform.position - goSacADos.transform.position;
 
         currentState = ChapitreState.Couloir;
@@ -308,6 +309,8 @@ public class Chapitre_4Controller : CommonController
         movingBody_Maxine.ChangeDirection(BodyDirection.Gauche);
         movingBody_Maxine.GoToPosition(new Vector3(3.87f, -11.14f, 256.9276f));
 
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         while (movingBody_Maxine.IsGoingToPosition())
             yield return null;
 
@@ -365,6 +368,8 @@ public class Chapitre_4Controller : CommonController
 
         TutoHoldArrowDown = PlayTuto(Tutoriel.Hold_Arrow_Down, new Vector3(10.64f, 7.59f, -0.91f));
         TutoHoldArrowUp = PlayTuto(Tutoriel.Hold_Arrow_Up, new Vector3(14.85f, 7.59f, -0.91f));
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
 
         //---//
         StopCinematiqueRencontre();

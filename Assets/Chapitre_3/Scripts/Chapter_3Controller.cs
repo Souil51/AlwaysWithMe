@@ -406,6 +406,10 @@ public class Chapter_3Controller : CommonController
 
         porteStatic.SetActive(false);
         porteInteractable.SetActive(true);
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+
+        SmoothChangeScene(Scenes.Chapitre4);
     }
 
     #endregion
@@ -423,6 +427,8 @@ public class Chapter_3Controller : CommonController
 
     private IEnumerator coroutine_ZoomOnAraignee()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
+
         if(goCheckTuto != null)
         {
             StopTuto(goCheckTuto);

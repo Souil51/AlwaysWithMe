@@ -9,7 +9,7 @@ public class Chapitre_5Controller : CommonController
 
     protected override void ChildStart()
     {
-        
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
     }
 
     protected override void ChapterInteraction(InteractionType type)

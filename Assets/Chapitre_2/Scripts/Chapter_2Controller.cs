@@ -165,6 +165,8 @@ public class Chapter_2Controller : CommonController
         //movingBody.SetActive(false);
         movingBody_2.GoToPosition(new Vector3(7.2f, -3.06f, 0), 1.5f);
 
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         while (movingBody_2.IsGoingToPosition())
             yield return null;
 
@@ -182,6 +184,8 @@ public class Chapter_2Controller : CommonController
         //On attend qu'elle sorte de l'écran
         while (movingBody_2.IsGoingToPosition())
             yield return null;
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
         //On réactive le joueur
         movingBody.SetActive(true);
@@ -343,7 +347,7 @@ public class Chapter_2Controller : CommonController
         currentState = ChapitreState.FinBoucle;
         goBoucle.SetActive(false);
 
-        SmoothChangeScene(Scenes.Chapitre1);
+        SmoothChangeScene(Scenes.Chapitre3);
     }
 
     #endregion

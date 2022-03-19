@@ -134,6 +134,18 @@ public class AraigneeController : MonoBehaviour
         dicAnimationsFinished[anim] = true;
     }
 
+    public void ResetAllTriggers()
+    {
+        holderAnimator.ResetTrigger("SautDansSac");
+        holderAnimator.ResetTrigger("SautFil");
+        holderAnimator.ResetTrigger("chapitre_3_SoriteEcran");
+        holderAnimator.ResetTrigger("chapitre_3_FuiteCouloir");
+        holderAnimator.ResetTrigger("chapitre_6_SautBus");
+        holderAnimator.ResetTrigger("araignee_chapitre_8_arrivee");
+        holderAnimator.ResetTrigger("chapitre_3_placard");
+        holderAnimator.ResetTrigger("SautsTitre");
+    }
+
     #region Fade Out du sprite
 
     public void FadeOut()

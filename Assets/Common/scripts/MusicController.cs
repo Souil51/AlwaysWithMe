@@ -1,0 +1,101 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MusicController : MonoBehaviour
+{
+    public enum Clips
+    {
+        Perso,
+        Maxine,
+        Araignee,
+        Credits
+    }
+
+    [SerializeField] private AudioSource Source;
+
+    [SerializeField] private AudioClip Theme_Perso;
+    [SerializeField] private AudioClip Theme_Maxine;
+    [SerializeField] private AudioClip Theme_Araignee;
+    [SerializeField] private AudioClip Theme_Credits;
+
+    private static MusicController _controller;
+
+    public static MusicController GetInstance()
+    {
+        if(_controller == null)
+        {
+            GameObject goMusic = Instantiate(Resources.Load("MusicController")) as GameObject;
+            goMusic.transform.position = Vector3.zero;
+            _controller = goMusic.GetComponent<MusicController>();
+        }
+
+        return _controller;
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+
+        if (_controller == null)
+            _controller = this;
+    }
+
+    public void ChangeClip(Clips clip)
+    {
+        StartCoroutine(coroutine_SmoothChangeAudioClip(clip));
+    }
+
+    public void ChangeVolume(float fVolume)
+    {
+        if (fVolume < 0)
+            Source.volume = 0;
+        else if (fVolume > 1)
+            Source.volume = 1;
+        else
+            Source.volume = fVolume;
+    }
+
+    private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.1f)
+    {
+        float fElapsedTime = 0;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(1, 0, (fElapsedTime / fDuration));
+            Source.volume = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        switch (clip)
+        {
+            case Clips.Perso:
+                Source.clip = Theme_Perso;
+                break;
+            case Clips.Maxine:
+                Source.clip = Theme_Maxine;
+                break;
+            case Clips.Araignee:
+                Source.clip = Theme_Araignee;
+                break;
+            case Clips.Credits:
+                Source.clip = Theme_Credits;
+                break;
+        }
+
+        Source.Play();
+
+        fElapsedTime = 0;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(0, 1, (fElapsedTime / fDuration));
+            Source.volume = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+}

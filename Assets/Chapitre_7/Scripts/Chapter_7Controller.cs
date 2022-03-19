@@ -58,6 +58,8 @@ public class Chapter_7Controller : CommonController
 
     protected override void ChildStart()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+
         //StartCinematique(Cinematiques.Chapitre7_Arrivee);
 
         //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
@@ -350,6 +352,8 @@ public class Chapter_7Controller : CommonController
         moveingBodyMaxine.gameObject.SetActive(true);
         moveingBodyMaxine.GoToPosition(new Vector3(-0.46f, -11.44f, 1f));
 
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         while (moveingBodyMaxine.IsGoingToPosition())
             yield return null;
 
@@ -393,6 +397,8 @@ public class Chapter_7Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueDebutJeu()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+
         animatorFadePanel.SetTrigger("FadeIn");
 
         //On attend que l'animation termine
@@ -528,6 +534,8 @@ public class Chapter_7Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueFinJeu()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         //Fondu vers l'écran de fin
         animatorFadePanel.SetTrigger("FadeIn");
 
@@ -615,7 +623,7 @@ public class Chapter_7Controller : CommonController
 
     private void StopCinematiqueFinJeu()
     {
-        //Change scene chapitre 8
+        SmoothChangeScene(Scenes.Chapitre8);
     }
 
     #endregion

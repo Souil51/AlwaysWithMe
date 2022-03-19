@@ -10,12 +10,16 @@ using UnityEngine.UI;
 
 public enum Scenes 
 { 
-    Chapitre1 = 0, 
-    Chapitre2 = 1,
-    Chapitre3 = 2,
-    Chapitre4 = 3,
-    Chapitre5 = 4,
-    Chapitre6 = 5
+    Titre = 0,
+    Chapitre1 = 1, 
+    Chapitre2 = 2,
+    Chapitre3 = 3,
+    Chapitre4 = 4,
+    Chapitre5 = 5,
+    Chapitre6 = 6,
+    Chapitre7 = 7,
+    Chapitre8 = 8,
+    Credits = 9
 }
 
 public enum InteractionType 
@@ -391,11 +395,13 @@ public class CommonController : MonoBehaviour
 
     #region Tuto
 
-    protected GameObject PlayTuto(Tutoriel tuto, Vector3 vPos)
+    protected GameObject PlayTuto(Tutoriel tuto, Vector3 vPos, float fScale = 1)
     {
         GameObject goTuto = (GameObject)Instantiate(Resources.Load("tuto_holder"));
 
         lstPlayingTuto.Add(goTuto);
+
+        goTuto.transform.localScale *= fScale;
 
         goTuto.transform.position = vPos;
         TutorielController tutoCtrl = goTuto.GetComponent<TutorielController>();
@@ -415,7 +421,6 @@ public class CommonController : MonoBehaviour
     }
 
     #endregion
-
 
     #region
 
