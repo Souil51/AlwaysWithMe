@@ -70,6 +70,14 @@ public class AraigneeController : MonoBehaviour
         }
     }
 
+    public void ShowSprite()
+    {
+        foreach (GameObject go in lstSprites)
+        {
+            go.SetActive(true);
+        }
+    }
+
     public void Speak(Emote emote)
     {
         List<Emote> lst = new List<Emote>();

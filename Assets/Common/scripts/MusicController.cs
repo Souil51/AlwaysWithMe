@@ -28,6 +28,7 @@ public class MusicController : MonoBehaviour
             GameObject goMusic = Instantiate(Resources.Load("MusicController")) as GameObject;
             goMusic.transform.position = Vector3.zero;
             _controller = goMusic.GetComponent<MusicController>();
+            goMusic.GetComponent<AudioSource>().volume = CommonController.VOLUME_BASE;
         }
 
         return _controller;
@@ -59,10 +60,11 @@ public class MusicController : MonoBehaviour
     private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.1f)
     {
         float fElapsedTime = 0;
+        float fCurrentVolume = Source.volume;
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(1, 0, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(fCurrentVolume, 0, (fElapsedTime / fDuration));
             Source.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;
@@ -91,7 +93,7 @@ public class MusicController : MonoBehaviour
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(0, 1, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(0, fCurrentVolume, (fElapsedTime / fDuration));
             Source.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;

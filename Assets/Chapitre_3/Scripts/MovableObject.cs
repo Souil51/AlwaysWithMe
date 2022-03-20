@@ -18,6 +18,9 @@ public class MovableObject : MonoBehaviour
     public delegate void MovableObjectSelectedEventHandler(object sender, MovableObjectEventArg e);
     public event MovableObjectSelectedEventHandler MovableObjectSelectedEvent;
 
+    public delegate void MovableObjectReleasedEventHandler(object sender, MovableObjectEventArg e);
+    public event MovableObjectReleasedEventHandler MovableObjectReleasedEvent;
+
     public delegate void MovableObjectShakedEventHandler(object sender, MovableObjectEventArg e);
     public event MovableObjectShakedEventHandler MovableObjectShakedEvent;
 
@@ -208,6 +211,8 @@ public class MovableObject : MonoBehaviour
     private void OnMouseUp()
     {
         if (!bMouseDetection) return;
+
+        MovableObjectReleasedEvent?.Invoke(this, new MovableObjectEventArg(nIndex));
 
         bIsMoving = false;
         rgbd2D.bodyType = RigidbodyType2D.Dynamic;

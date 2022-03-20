@@ -289,6 +289,8 @@ public class Chapter_2Controller : CommonController
 
         yield return new WaitForSeconds(1f);
 
+        List<GameObject> lstGoCroix = new List<GameObject>();
+
         while(nIndexBoucle < 20 || currentState == ChapitreState.FinBoucle)
         {
             chap_1_1.transform.position = new Vector3(chap_1_1.transform.position.x - boucleSpeed * Time.deltaTime, chap_1_1.transform.position.y, chap_1_1.transform.position.z);
@@ -330,6 +332,8 @@ public class Chapter_2Controller : CommonController
                 GameObject goCroix = (GameObject)Instantiate(Resources.Load("croix calendrier"));
                 goCroix.transform.position = new Vector3(fXStart + 2f * i, fYStart - 1.5f * j, -8f);
 
+                lstGoCroix.Add(goCroix);
+
                 nIndexBoucle++;
 
                 if (boucleSpeed < 200)
@@ -339,6 +343,13 @@ public class Chapter_2Controller : CommonController
             yield return null;
         }
 
+        bFadeEnded = false;
+        animatorFadePanel.SetTrigger("FadeIn");
+
+        //On attend que l'animation termine
+        while (!bFadeEnded)
+            yield return null;
+
         StopCinematiqueBoucle();
     }
 
@@ -347,7 +358,7 @@ public class Chapter_2Controller : CommonController
         currentState = ChapitreState.FinBoucle;
         goBoucle.SetActive(false);
 
-        SmoothChangeScene(Scenes.Chapitre3);
+        ChangeScene(Scenes.Chapitre3);
     }
 
     #endregion

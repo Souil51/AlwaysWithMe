@@ -36,6 +36,8 @@ public class Chapter_6Controller : CommonController
 
     protected override void ChildStart()
     {
+        araignee.ShowHideSprite(false);
+
         StartCinematique(Cinematiques.Chapitre6_Debut);
     }
 
@@ -187,6 +189,7 @@ public class Chapter_6Controller : CommonController
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
 
+        //araignee.ShowHideSprite(true);
         araignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre6_SautBus);
 
         while (!araignee.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre6_SautBus))

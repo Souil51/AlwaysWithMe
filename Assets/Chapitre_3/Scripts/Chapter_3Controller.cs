@@ -81,10 +81,14 @@ public class Chapter_3Controller : CommonController
             movableObj.InitMovableObject();
 
             if (movableObj.GetObjectIndex() == nIndexObjectAraignee)
+            {
                 goObjectToFollowAraignee = movableObj.gameObject;
+                araignee.transform.position = goObjectToFollowAraignee.transform.position;
+            }
 
             movableObj.MovableObjectSelectedEvent += MovableObj_MovableObjectSelectedEvent;
             movableObj.MovableObjectShakedEvent += MovableObj_MovableObjectShakedEvent;
+            movableObj.MovableObjectReleasedEvent += MovableObj_MovableObjectReleasedEvent;
         }
 
         //StartCinematiquePlacard();
@@ -141,6 +145,8 @@ public class Chapter_3Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
                     MenuLeave.SetActive(false);
+
+                    SmoothChangeScene(Scenes.Chapitre4);
                 }
                 break;
             case InteractionType.Ecran_Toggle:
@@ -258,6 +264,16 @@ public class Chapter_3Controller : CommonController
         fMinDepth -= 0.01f;
     }
 
+    private void MovableObj_MovableObjectReleasedEvent(object sender, MovableObjectEventArg e)
+    {
+        if (goCheckTuto != null)
+        {
+            StopTuto(goCheckTuto);
+            goCheckTuto = null;
+            goCheckTutoFollow = null;
+        }
+    }
+
     private void MovableObj_MovableObjectShakedEvent(object sender, MovableObjectEventArg e)
     {
         if (goCheckTuto != null)
@@ -265,6 +281,7 @@ public class Chapter_3Controller : CommonController
             StopTuto(goCheckTuto);
             goCheckTuto = null;
             goCheckTutoFollow = null;
+            bTutoCheckPlayed = true;
         }
 
         if (!araignee.IsInit() && e.nIndex == nIndexObjectAraignee)
@@ -408,8 +425,6 @@ public class Chapter_3Controller : CommonController
         porteInteractable.SetActive(true);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
-
-        SmoothChangeScene(Scenes.Chapitre4);
     }
 
     #endregion

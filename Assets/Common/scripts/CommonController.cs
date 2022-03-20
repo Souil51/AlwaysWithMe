@@ -117,6 +117,8 @@ public enum Tutoriel
 
 public class CommonController : MonoBehaviour
 {
+    public readonly static float VOLUME_BASE = 0;
+
     [SerializeField] protected Camera cam;
     [SerializeField] protected float CameraMoveTime = 0.5f;
     [SerializeField] protected MovingBody movingBody;//La plupart des chapitres ont un movingBody donc il est dans le controller
@@ -369,7 +371,7 @@ public class CommonController : MonoBehaviour
         StartCoroutine(coroutine_SmoothChangeScene(sceneIndex));
     }
 
-    private void ChangeScene(Scenes sceneIndex)
+    protected void ChangeScene(Scenes sceneIndex)
     {
         SceneManager.LoadScene((int)sceneIndex);
     }

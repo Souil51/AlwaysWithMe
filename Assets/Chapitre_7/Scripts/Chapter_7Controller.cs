@@ -60,10 +60,10 @@ public class Chapter_7Controller : CommonController
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
-        //StartCinematique(Cinematiques.Chapitre7_Arrivee);
+        StartCinematique(Cinematiques.Chapitre7_Arrivee);
 
         //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
-        StartCinematique(Cinematiques.Chapitre7_EntreeJeu);
+        //StartCinematique(Cinematiques.Chapitre7_EntreeJeu);
     }
 
     protected override void ChildUpdate()
@@ -399,6 +399,7 @@ public class Chapter_7Controller : CommonController
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
+        bFadeEnded = false;
         animatorFadePanel.SetTrigger("FadeIn");
 
         //On attend que l'animation termine
@@ -569,7 +570,7 @@ public class Chapter_7Controller : CommonController
         while (moveingBodyMaxine.IsGoingToPosition())
             yield return null;
 
-        peluche.sortingOrder = 5;
+        peluche.sortingOrder = 7;
 
         moveingBodyMaxine.GoToPosition(new Vector3(3.5f, -11.27f, 1));
         movingBody.GoToPosition(new Vector3(-0.11f, -11.27f, 1));
