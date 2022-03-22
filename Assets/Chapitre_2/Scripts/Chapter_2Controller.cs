@@ -15,6 +15,8 @@ public class Chapter_2Controller : CommonController
     [SerializeField] private HorlogeController Horloge;
     [SerializeField] private GameObject goPorteInteractable;
     [SerializeField] private GameObject goPorteSprite;
+    [SerializeField] private GameObject goExitOn;
+    [SerializeField] private GameObject goExitOff;
 
     //Cinématique Boucle
     [SerializeField] private GameObject goBoucle;
@@ -230,6 +232,11 @@ public class Chapter_2Controller : CommonController
 
         MoveCamera(new Vector3(8.5f, 12f, 0), 6f, true);
         Horloge.SetSpeed(1000);
+
+        yield return new WaitForSeconds(0.5f);
+
+        goExitOff.SetActive(false);
+        goExitOn.SetActive(true);
 
         while (Horloge.GetHeureEulerAngle() <= 180 || Horloge.GetHeureEulerAngle() >= 185)
             yield return null;

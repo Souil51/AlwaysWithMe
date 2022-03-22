@@ -247,6 +247,12 @@ public class MovingBody : MonoBehaviour
         speakingCtrl.SpeakRandom(nbEmotes, fEmoteXSpawn, fEmoteYSpawn, currentDirection);
     }
 
+    public void StopSpeaking()
+    {
+
+        speakingCtrl.StopSpeaking();
+    }
+
     public bool IsSpeaking()
     {
         return speakingCtrl.IsSpeaking();

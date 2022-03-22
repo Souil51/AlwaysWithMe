@@ -80,6 +80,7 @@ public enum Cinematiques
     Chapitre2_Boucle,
     Chapitre3_EntreePlacard,
     Chapitre3_SortiePlacard,
+    Chapitre4_Initial,
     Chapitre4_FuiteCouloir,
     Chapitre4_EntreeBanc,
     Chapitre4_Rencontre,

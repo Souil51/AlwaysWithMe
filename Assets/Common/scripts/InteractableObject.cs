@@ -35,6 +35,7 @@ public class InteractableObject : MonoBehaviour
     private float fTimePerSprite = 0.25f;
     private float fTimeCount = 0;
     private Sprite currentSprite;
+    private float fCurrentOpacity;
 
     public bool IsClicked { get; private set; } = false;
     private bool bIsZoomed = false;
@@ -44,6 +45,7 @@ public class InteractableObject : MonoBehaviour
     {
         sprtRenderer = goSprite.GetComponent<SpriteRenderer>();
         currentSprite = Sprite_1;
+        fCurrentOpacity = -1;
     }
 
     void Update()
@@ -51,23 +53,27 @@ public class InteractableObject : MonoBehaviour
         //CHange le sprite de l'objet pour le mettre en évidence -> interaction possible
         if (fTimeCount > fTimePerSprite && !bIsZoomed)
         {
+            if (ChangeOpacityOnChangeSprite)
+            {
+                if (fCurrentOpacity < 0 || fCurrentOpacity == Sprite_1_Opacity)
+                {
+                    fCurrentOpacity = Sprite_2_Opacity;
+                }
+                else
+                {
+                    fCurrentOpacity = Sprite_1_Opacity;
+                }
+
+                sprtRenderer.color = new Color(1f, 1f, 1f, fCurrentOpacity / 255f);
+            }
+
             if (currentSprite == Sprite_1)
             {
                 currentSprite = Sprite_2;
-
-                if(ChangeOpacityOnChangeSprite)
-                {
-                    sprtRenderer.color = new Color(1f, 1f, 1f, Sprite_1_Opacity / 255f);
-                }
             }
             else
             {
                 currentSprite = Sprite_1;
-
-                if (ChangeOpacityOnChangeSprite)
-                {
-                    sprtRenderer.color = new Color(1f, 1f, 1f, Sprite_2_Opacity / 255f);
-                }
             }
 
             sprtRenderer.sprite = currentSprite;

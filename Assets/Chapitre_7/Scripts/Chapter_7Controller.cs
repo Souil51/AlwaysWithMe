@@ -619,6 +619,10 @@ public class Chapter_7Controller : CommonController
             yield return null;
         }
 
+        animatorFadePanel.ResetTrigger("FadeIn");
+        animatorFadePanel.ResetTrigger("FadeOut");
+        yield return new WaitForSeconds(4f);
+
         StopCinematiqueFinJeu();
     }
 

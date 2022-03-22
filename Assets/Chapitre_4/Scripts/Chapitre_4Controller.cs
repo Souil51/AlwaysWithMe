@@ -60,6 +60,8 @@ public class Chapitre_4Controller : CommonController
 
         currentState = ChapitreState.Couloir;
 
+        StartCinematique(Cinematiques.Chapitre4_Initial);
+
         //currentState = ChapitreState.Banc;
     }
 
@@ -192,6 +194,9 @@ public class Chapitre_4Controller : CommonController
     {
         switch (cinematique)
         {
+            case Cinematiques.Chapitre4_Initial:
+                StartCinematiqueInitial();
+                break;
             case Cinematiques.Chapitre4_FuiteCouloir:
                 {
                     StartCinematiqueFuiteCouloir();
@@ -219,6 +224,34 @@ public class Chapitre_4Controller : CommonController
                 break;
         }
     }
+
+    #region Cinématique Initiale
+
+    private void StartCinematiqueInitial()
+    {
+        currentState = ChapitreState.Couloir;
+
+        movingBody.SetActive(false);
+
+        StartCoroutine(coroutine_CinematiqueInitial());
+    }
+
+    private IEnumerator coroutine_CinematiqueInitial()
+    {
+        movingBody.GoToPosition(new Vector3(-7.38f, -11.14f, 256.92f));
+        
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        StopCinematiqueInitial();
+    }
+
+    private void StopCinematiqueInitial()
+    {
+        movingBody.SetActive(true);
+    }
+
+    #endregion
 
     #region Cinématique Araignee Fuite Couloir
 
@@ -495,6 +528,18 @@ public class Chapitre_4Controller : CommonController
 
         movingBody.gameObject.SetActive(true);
         goPerso_Animation_1.SetActive(false);
+
+        movingBody.StopSpeaking();
+        movingBody_Maxine.StopSpeaking();
+
+        movingBody.SpeakRandom(3);
+
+        yield return new WaitForSeconds(0.25f);
+
+        movingBody_Maxine.SpeakRandom(3);
+
+        while (movingBody.IsSpeaking() || movingBody_Maxine.IsSpeaking())
+            yield return null;
 
         //Maxine se lève
         movingBody_Maxine.GoToPosition(new Vector3(24.59f, -11.14f, movingBody_Maxine.transform.position.z)); ;

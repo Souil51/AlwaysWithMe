@@ -15,6 +15,7 @@ public class SpeakingBody : MonoBehaviour
     };
 
     private bool bIsSpeaking = false;
+    private Coroutine currentSpeakingCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +78,7 @@ public class SpeakingBody : MonoBehaviour
 
         if (bIsSpeaking) return;
 
-        StartCoroutine(coroutine_Speak(emotes, fXOffset, fYOffset, bodyDirection));
+        currentSpeakingCoroutine = StartCoroutine(coroutine_Speak(emotes, fXOffset, fYOffset, bodyDirection));
     }
 
     public void Speak(Emote emote, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite, float fDelay = 0.5f)
@@ -104,6 +105,12 @@ public class SpeakingBody : MonoBehaviour
         Speak(lstEmotes, fXOffset, fYOffset, bodyDirection, fDelay);
     }
 
+    public void StopSpeaking()
+    {
+        StopCoroutine(currentSpeakingCoroutine);
+        bIsSpeaking = false;
+    }
+
     private IEnumerator coroutine_Speak(List<Emote> emotes, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite, float fDelay = 0.5f)
     {
         bIsSpeaking = true;
@@ -115,6 +122,7 @@ public class SpeakingBody : MonoBehaviour
         }
 
         bIsSpeaking = false;
+        StopCoroutine(currentSpeakingCoroutine);
     }
 
     public bool IsSpeaking()

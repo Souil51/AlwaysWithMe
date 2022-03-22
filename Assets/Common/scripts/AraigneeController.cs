@@ -83,17 +83,17 @@ public class AraigneeController : MonoBehaviour
         List<Emote> lst = new List<Emote>();
         lst.Add(emote);
 
-        speakingCtrl.Speak(lst, 0, 0, BodyDirection.Gauche);
+        speakingCtrl.Speak(lst, 0, 0.5f, BodyDirection.Gauche);
     }
 
     public void Speak(List<Emote> emotes)
     {
-        speakingCtrl.Speak(emotes, 0, 0, BodyDirection.Gauche);
+        speakingCtrl.Speak(emotes, 0, 0.5f, BodyDirection.Gauche);
     }
 
     public void SpeakRandom(int nombreEmotes)
     {
-        speakingCtrl.SpeakRandom(nombreEmotes, 0, 0, BodyDirection.Gauche);
+        speakingCtrl.SpeakRandom(nombreEmotes, 0, 0.5f, BodyDirection.Gauche);
     }
 
     public bool IsSpeaking()
