@@ -238,6 +238,8 @@ public class Chapitre_4Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueInitial()
     {
+        yield return new WaitForSeconds(1);
+
         movingBody.GoToPosition(new Vector3(-7.38f, -11.14f, 256.92f));
         
         while (movingBody.IsGoingToPosition())

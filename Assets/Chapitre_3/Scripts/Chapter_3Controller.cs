@@ -99,7 +99,10 @@ public class Chapter_3Controller : CommonController
         if (currentState == ChapitreState.Placard)
         {
             if (bAraigneeFollowObjet)
-                araignee.transform.position = goObjectToFollowAraignee.transform.position;
+            {
+                Vector3 vPosObjToFollow = goObjectToFollowAraignee.transform.position;
+                araignee.transform.position = new Vector3(vPosObjToFollow.x, vPosObjToFollow.y, 0.2f);
+            }
         }
 
         if(goCheckTuto != null && goCheckTutoFollow != null)

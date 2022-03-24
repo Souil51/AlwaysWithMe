@@ -20,6 +20,8 @@ public class Chapter_8Controller : CommonController
     protected override void ChildStart()
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+
+        StartCinematique(Cinematiques.Chapitre8_Initial);
     }
 
     protected override void ChapterInteraction(InteractionType type)
@@ -54,6 +56,11 @@ public class Chapter_8Controller : CommonController
 
         switch (cinematique)
         {
+            case Cinematiques.Chapitre8_Initial:
+                {
+                    StartCinematiqueInitial();
+                }
+                break;
             case Cinematiques.Chapitre8_Fin:
                 {
                     StartCinematiqueFin();
@@ -63,6 +70,34 @@ public class Chapter_8Controller : CommonController
 
         movingBody.SetActive(true);
     }
+
+    #region Cinématique Initiale
+
+    private void StartCinematiqueInitial()
+    {
+        movingBody.SetActive(false);
+
+        StartCoroutine(coroutine_CinematiqueInitial());
+    }
+
+    private IEnumerator coroutine_CinematiqueInitial()
+    {
+        yield return new WaitForSeconds(1);
+
+        movingBody.GoToPosition(new Vector3(17.9f, -9.05f, 1f));
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        StopCinematiqueInitial();
+    }
+
+    private void StopCinematiqueInitial()
+    {
+        movingBody.SetActive(true);
+    }
+
+    #endregion
 
     #region Cinematique FIN
 

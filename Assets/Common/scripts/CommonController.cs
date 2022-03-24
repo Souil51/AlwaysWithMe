@@ -75,6 +75,7 @@ public enum Emote
 public enum Cinematiques
 {
     Chapitre1_Debut,
+    Chapitre2_Initial,
     Chapitre2_ArriveeMaxine,
     Chapitre2_Journee,
     Chapitre2_Boucle,
@@ -86,6 +87,7 @@ public enum Cinematiques
     Chapitre4_Rencontre,
     Chapitre4_SautAraignee,
     Chapitre4_FinBanc,
+    Chapitre5_Initial,
     Chapitre5_Bus,
     Chapitre6_Debut,
     Chapitre7_Arrivee,
@@ -94,6 +96,7 @@ public enum Cinematiques
     Chapitre7_EntreeJeu,
     Chapitre7_VictoireJeu,
     Chapitre7_FinJeu,
+    Chapitre8_Initial,
     Chapitre8_Fin,
     Credits_Credits,
     Titre_Titre

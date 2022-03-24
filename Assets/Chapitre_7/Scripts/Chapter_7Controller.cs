@@ -52,7 +52,7 @@ public class Chapter_7Controller : CommonController
 
     [SerializeField] private SpriteRenderer peluche;
 
-    private int nObjectif = 1;
+    private int nObjectif = 10;
     private int nPoints = 0;
     private Coroutine coroutineDescenteAraignee = null;
 
@@ -229,7 +229,7 @@ public class Chapter_7Controller : CommonController
     private IEnumerator coroutine_CinematiqueArrivee()
     {
         movingBody.SetActive(false);
-        movingBody.ChangeDirection(BodyDirection.Gauche);
+        movingBody.ChangeDirection(BodyDirection.Droite);
 
         float fElapsedTime = 0;
         float fDuration = 1f;
@@ -260,7 +260,7 @@ public class Chapter_7Controller : CommonController
             yield return null;
 
         vMovingBodyPosition = movingBody.gameObject.transform.position;
-        movingBody.GoToPosition(new Vector3(vMovingBodyPosition.x - 25f, vMovingBodyPosition.y, vMovingBodyPosition.z));
+        movingBody.GoToPosition(new Vector3(vMovingBodyPosition.x - 19f, vMovingBodyPosition.y, vMovingBodyPosition.z));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
@@ -307,18 +307,20 @@ public class Chapter_7Controller : CommonController
         while (!bFadeEnded)
             yield return null;
 
-        movingBody.transform.position = new Vector3(-12.1f, movingBody.transform.position.y, movingBody.transform.position.z);
-        movingBody.GoToPosition(new Vector3(movingBody.transform.position.x + 0.1f, movingBody.transform.position.y, movingBody.transform.position.z));
+        movingBody.transform.position = new Vector3(-20.39f, -11.44f, 0);
 
-        while (movingBody.IsGoingToPosition())
-            yield return null;
-
-        movingBody.transform.position = new Vector3(-11.08f, -11.44f, 0);
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
 
         entree_groupe.gameObject.SetActive(false);
         fete_groupe.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        movingBody.GoToPosition(new Vector3(-8.87f, movingBody.transform.position.y, movingBody.transform.position.z));
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
 
         yield return new WaitForSeconds(0.5f);
 

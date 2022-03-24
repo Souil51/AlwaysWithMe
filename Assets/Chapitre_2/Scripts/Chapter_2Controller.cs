@@ -5,7 +5,16 @@ using UnityEngine;
 
 public class Chapter_2Controller : CommonController
 {
-    public enum ChapitreState { Initial = 0, MaxineArrive = 1, MaxineLeft = 6, AnimationJournee = 2, FinJournee = 3, AnimationBoucle = 4, FinBoucle = 5 }
+    public enum ChapitreState 
+    { 
+        Initial = 0, 
+        MaxineArrive = 1, 
+        MaxineLeft = 6, 
+        AnimationJournee = 2, 
+        FinJournee = 3, 
+        AnimationBoucle = 4, 
+        FinBoucle = 5 
+    }
 
     private ChapitreState currentState = ChapitreState.Initial;
 
@@ -41,6 +50,8 @@ public class Chapter_2Controller : CommonController
     {
         currentState = ChapitreState.Initial;
         movingBody_2.SetActive(false);
+
+        StartCinematique(Cinematiques.Chapitre2_Initial);
     }
 
     protected override void ChildUpdate()
@@ -133,6 +144,11 @@ public class Chapter_2Controller : CommonController
     {
         switch (cinematique)
         {
+            case Cinematiques.Chapitre2_Initial:
+                {
+                    StartCinematiqueInitial();
+                }
+                break;
             case Cinematiques.Chapitre2_ArriveeMaxine:
                 {
                     StartCinematiqueMaxineArrive();
@@ -151,8 +167,38 @@ public class Chapter_2Controller : CommonController
         }
     }
 
+    #region Cinématique Initiale
+
+    private void StartCinematiqueInitial()
+    {
+        currentState = ChapitreState.Initial;
+
+        movingBody.SetActive(false);
+
+        StartCoroutine(coroutine_CinematiqueInitial());
+    }
+
+    private IEnumerator coroutine_CinematiqueInitial()
+    {
+        yield return new WaitForSeconds(1);
+
+        movingBody.GoToPosition(new Vector3(-11.08f, -3.06f, 0f));
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        StopCinematiqueInitial();
+    }
+
+    private void StopCinematiqueInitial()
+    {
+        movingBody.SetActive(true);
+    }
+
+    #endregion
+
     #region Cinématique Arrivée maxine
-    
+
     public void StartCinematiqueMaxineArrive()
     {
         currentState = ChapitreState.MaxineArrive;
