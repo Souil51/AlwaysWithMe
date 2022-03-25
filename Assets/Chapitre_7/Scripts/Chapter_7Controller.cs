@@ -25,6 +25,7 @@ public class Chapter_7Controller : CommonController
 
     [SerializeField] private MovingBody moveingBodyMaxine;
     [SerializeField] private GameObject goBus;
+    [SerializeField] private GameObject goEntreeBus;
     [SerializeField] private GameObject entree_groupe;
     [SerializeField] private GameObject fete_groupe;
     [SerializeField] private GameObject jeu_groupe;
@@ -61,9 +62,10 @@ public class Chapter_7Controller : CommonController
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
         StartCinematique(Cinematiques.Chapitre7_Arrivee);
-
+        
         //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
         //StartCinematique(Cinematiques.Chapitre7_EntreeJeu);
+        //StartChapterCinematique(Cinematiques.Chapitre7_EntreeJeu);
     }
 
     protected override void ChildUpdate()
@@ -221,7 +223,8 @@ public class Chapter_7Controller : CommonController
     {
         currentState = ChapitreState.CinematiqueArrivee;
         movingBody.transform.position = new Vector3(49.4f, -10.6f, 1);
-        goBus.transform.position = new Vector3(35.5f, -5.07f, 0);
+        goBus.transform.position = new Vector3(36.86f, -5.07f, 0);
+        goEntreeBus.transform.position = new Vector3(23.45f, -1.73f, 0);
 
         StartCoroutine(coroutine_CinematiqueArrivee());
     }
@@ -237,6 +240,9 @@ public class Chapter_7Controller : CommonController
         Vector3 vBusCurrentPos = goBus.transform.position;
         Vector3 vBusDestination = new Vector3(vBusCurrentPos.x - 33f, -5.07f, 0);
 
+        Vector3 vEntreeBusCurrentPos = goEntreeBus.transform.position;
+        Vector3 vEntreBussDestinatio = new Vector3(vEntreeBusCurrentPos.x - 33f, -1.73f, 0);
+
         Vector3 movingBodyCurrentPos = movingBody.transform.position;
         Vector3 movingBodyDestination = new Vector3(movingBodyCurrentPos.x - 33f, -10.8f, 0);
 
@@ -244,6 +250,9 @@ public class Chapter_7Controller : CommonController
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
             goBus.transform.position = vNewPos;
+
+            Vector3 vNewPosEntreBus = Vector3.Lerp(vEntreeBusCurrentPos, vEntreBussDestinatio, (fElapsedTime / fDuration));
+            goEntreeBus.transform.position = vNewPosEntreBus;
 
             vNewPos = Vector3.Lerp(movingBodyCurrentPos, movingBodyDestination, (fElapsedTime / fDuration));
             movingBody.transform.position = vNewPos;
@@ -259,22 +268,33 @@ public class Chapter_7Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
+        yield return new WaitForSeconds(0.5f);
+
         vMovingBodyPosition = movingBody.gameObject.transform.position;
         movingBody.GoToPosition(new Vector3(vMovingBodyPosition.x - 19f, vMovingBodyPosition.y, vMovingBodyPosition.z));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
 
+        goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 6;
+
         yield return new WaitForSeconds(1f);
 
         vBusCurrentPos = goBus.transform.position;
         vBusDestination = new Vector3(vBusCurrentPos.x - 40f, -5.07f, 0);
+
+        vEntreeBusCurrentPos = goEntreeBus.transform.position;
+        vEntreBussDestinatio = new Vector3(vEntreeBusCurrentPos.x - 40f, -1.73f, 0);
+
         fElapsedTime = 0;
 
         while (fElapsedTime < fDuration)
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
             goBus.transform.position = vNewPos;
+
+            Vector3 vNewPosEntreeBus = Vector3.Lerp(vEntreeBusCurrentPos, vEntreBussDestinatio, (fElapsedTime / fDuration));
+            goEntreeBus.transform.position = vNewPosEntreeBus;
 
             fElapsedTime += Time.deltaTime;
 
@@ -569,7 +589,7 @@ public class Chapter_7Controller : CommonController
         //Le fondu est terminé -> début de l'animation
         movingBody.GoToPosition(new Vector3(-0.71f, -9.34f, 1));
 
-        while (moveingBodyMaxine.IsGoingToPosition())
+        while (movingBody.IsGoingToPosition())
             yield return null;
 
         peluche.sortingOrder = 7;

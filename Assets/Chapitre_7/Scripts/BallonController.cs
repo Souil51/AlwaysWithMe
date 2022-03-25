@@ -9,8 +9,11 @@ public class BallonController : MonoBehaviour
     [SerializeField] private float fLimitY_1 = -3f;
     [SerializeField] private float fLimitY_2 = 3f;
 
-    [SerializeField] private float fXSpeed = 1f;
-    [SerializeField] private float fYSpeed = 1f;
+    [SerializeField] private float fSpeed = 1f;
+
+    private float fXSpeed = 1f;
+    private float fYSpeed = 1f;
+
 
     private bool bIsTargeted = false;
 
@@ -18,6 +21,16 @@ public class BallonController : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+        if (Random.Range(1, 3) == 1)
+            fXSpeed = 1f * fSpeed;
+        else
+            fXSpeed = -1f * fSpeed;
+
+        if (Random.Range(1, 3) == 1)
+            fYSpeed = 1f * fSpeed;
+        else
+            fYSpeed = -1f * fSpeed;
     }
 
     // Update is called once per frame

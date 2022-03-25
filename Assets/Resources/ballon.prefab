@@ -101,8 +101,7 @@ MonoBehaviour:
   fLimitX_2: 10.76
   fLimitY_1: -1.49
   fLimitY_2: 8.58
-  fXSpeed: 3
-  fYSpeed: 3
+  fSpeed: 3
 --- !u!50 &4209031442272398378
 Rigidbody2D:
   serializedVersion: 4

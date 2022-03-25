@@ -6,6 +6,7 @@ public class Chapitre_5Controller : CommonController
 {
     [SerializeField] private Perso_Animation_1_Controller Perso_Animation_1;
     [SerializeField] private GameObject goBus;
+    [SerializeField] private GameObject goEntreeBus;
 
     protected override void ChildStart()
     {
@@ -119,12 +120,18 @@ public class Chapitre_5Controller : CommonController
         float fElapsedTime = 0;
         float fDuration = 1f;
         Vector3 vBusCurrentPos = goBus.transform.position;
-        Vector3 vBusDestination = new Vector3(2.6f, -4.12f, 0);
+        Vector3 vBusDestination = new Vector3(vBusCurrentPos.x - 35.86f, -4.12f, 0);
+
+        Vector3 vEntreeBusCurrentPos = goEntreeBus.transform.position;
+        Vector3 vEntreeBusDestination = new Vector3(vEntreeBusCurrentPos.x - 35.86f, -0.75f, 0);
 
         while (fElapsedTime < fDuration)
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
             goBus.transform.position = vNewPos;
+
+            Vector3 vNewPosEntree = Vector3.Lerp(vEntreeBusCurrentPos, vEntreeBusDestination, (fElapsedTime / fDuration));
+            goEntreeBus.transform.position = vNewPosEntree;
 
             fElapsedTime += Time.deltaTime;
 
@@ -146,6 +153,12 @@ public class Chapitre_5Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
+        yield return new WaitForSeconds(0.5f);
+
+        goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+        yield return new WaitForSeconds(0.5f);
+
         movingBody.GoToPosition(new Vector3(16.09f, -8.45f, 1));
 
         while (movingBody.IsGoingToPosition())
@@ -160,6 +173,9 @@ public class Chapitre_5Controller : CommonController
         vBusCurrentPos = goBus.transform.position;
         vBusDestination = new Vector3(vBusCurrentPos.x - 40f, -4.12f, 0);
 
+        vEntreeBusCurrentPos = goEntreeBus.transform.position;
+        vEntreeBusDestination = new Vector3(vEntreeBusCurrentPos.x - 40f, -0.75f, 0);
+
         Vector3 movingBodyCurrentPos = movingBody.transform.position;
         Vector3 movingBodyDestination = new Vector3(movingBodyCurrentPos.x - 40f, -9.52f, 0);
 
@@ -167,6 +183,9 @@ public class Chapitre_5Controller : CommonController
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
             goBus.transform.position = vNewPos;
+
+            Vector3 vNewPosEntree = Vector3.Lerp(vEntreeBusCurrentPos, vEntreeBusDestination, (fElapsedTime / fDuration));
+            goEntreeBus.transform.position = vNewPosEntree;
 
             vNewPos = Vector3.Lerp(movingBodyCurrentPos, movingBodyDestination, (fElapsedTime / fDuration));
             movingBody.transform.position = vNewPos;

@@ -92,7 +92,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -642.9
+        value: -278.11
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -101,7 +101,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: -642.9
+        value: -278.11
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -120,7 +120,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 657.5
+        value: 465.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -129,25 +129,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 465
-        inSlope: 0
-        outSlope: 0
+        value: 286.8
+        inSlope: -13.333374
+        outSlope: -13.333374
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.75
-        value: 466.7
-        inSlope: 0
-        outSlope: 0
+        value: 284.3
+        inSlope: -8.399963
+        outSlope: -8.399963
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 460.8
+        value: 282.6
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -156,7 +156,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3
-        value: 460.8
+        value: 282.6
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -165,9 +165,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.25
-        value: 472.4
-        inSlope: 92.80005
-        outSlope: 92.80005
+        value: 292.8
+        inSlope: 81.59985
+        outSlope: 81.59985
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -244,7 +244,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -642.9
+        value: -278.11
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -253,7 +253,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: -642.9
+        value: -278.11
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -272,7 +272,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 657.5
+        value: 465.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -281,25 +281,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 465
-        inSlope: 0
-        outSlope: 0
+        value: 286.8
+        inSlope: -13.333374
+        outSlope: -13.333374
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.75
-        value: 466.7
-        inSlope: 0
-        outSlope: 0
+        value: 284.3
+        inSlope: -8.399963
+        outSlope: -8.399963
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 460.8
+        value: 282.6
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -308,7 +308,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3
-        value: 460.8
+        value: 282.6
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -317,9 +317,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.25
-        value: 472.4
-        inSlope: 92.80005
-        outSlope: 92.80005
+        value: 292.8
+        inSlope: 81.59985
+        outSlope: 81.59985
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
