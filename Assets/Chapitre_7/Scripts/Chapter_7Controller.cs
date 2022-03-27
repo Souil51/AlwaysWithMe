@@ -276,15 +276,15 @@ public class Chapter_7Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 6;
+        goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 5;
 
         yield return new WaitForSeconds(1f);
 
         vBusCurrentPos = goBus.transform.position;
-        vBusDestination = new Vector3(vBusCurrentPos.x - 40f, -5.07f, 0);
+        vBusDestination = new Vector3(vBusCurrentPos.x - 50f, -5.07f, 0);
 
         vEntreeBusCurrentPos = goEntreeBus.transform.position;
-        vEntreBussDestinatio = new Vector3(vEntreeBusCurrentPos.x - 40f, -1.73f, 0);
+        vEntreBussDestinatio = new Vector3(vEntreeBusCurrentPos.x - 50f, -1.73f, 0);
 
         fElapsedTime = 0;
 
@@ -416,6 +416,8 @@ public class Chapter_7Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueDebutJeu()
     {
+        yield return new WaitForSeconds(0.25f);
+
         movingBody.GoToPosition(new Vector3(-4.45f, -9.32f, 1f));
 
         while (movingBody.IsGoingToPosition())
@@ -593,15 +595,17 @@ public class Chapter_7Controller : CommonController
 
         interaction_jeu.SetActive(false);
 
+        yield return new WaitForSeconds(1f);
+
         //Le fondu est terminé -> début de l'animation
         movingBody.GoToPosition(new Vector3(-0.11f, -9.34f, 1));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        movingBody.StopMoving();
+        //movingBody.StopMoving();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         peluche.sortingOrder = 7;
 

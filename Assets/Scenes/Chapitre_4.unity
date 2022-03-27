@@ -2234,6 +2234,10 @@ PrefabInstance:
       value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: 5412685097921881528, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: persoType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412685097921881528, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: speakingCtrl
       value: 
       objectReference: {fileID: 903169526}

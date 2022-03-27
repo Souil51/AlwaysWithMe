@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BodyDirection { Gauche = 0, Droite = 1 }
+public enum PersoType { Perso = 0, Maxine = 1}
 
 public class MovingBody : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class MovingBody : MonoBehaviour
     [SerializeField] private GameObject Arm_1_Target;
     [SerializeField] private GameObject Arm_1;
     [SerializeField] private float fSpeed = 0.5f;
+    [SerializeField] private PersoType persoType = PersoType.Perso;
 
     private Vector3 vStartMovingTargetPosition;//Position de départ de la cible des bras
 
@@ -23,7 +25,8 @@ public class MovingBody : MonoBehaviour
 
     //Emotes : décalage des émotes pour partir de la tête
     private float fEmoteXSpawn = 1f;
-    private float fEmoteYSpawn = 11.5f;
+    private float fEmoteYSpawn = 15.3f;
+    private float fEmoteYSpawn_Maxine = 13.3f;
 
     //Etats
     private bool IsActive = true;
@@ -37,6 +40,9 @@ public class MovingBody : MonoBehaviour
     {
         vStartingScale = transform.localScale;
         vStartMovingTargetPosition = Arm_1_Target.transform.localPosition;
+
+        fEmoteYSpawn = fEmoteYSpawn * (gameObject.transform.localScale.x);
+        fEmoteYSpawn_Maxine = fEmoteYSpawn_Maxine * (gameObject.transform.localScale.x);
     }
 
     void Update()
@@ -239,12 +245,12 @@ public class MovingBody : MonoBehaviour
 
     public void Speak(List<Emote> lstEmotes)
     {
-        speakingCtrl.Speak(lstEmotes, fEmoteXSpawn, fEmoteYSpawn, currentDirection);
+        speakingCtrl.Speak(lstEmotes, fEmoteXSpawn, (persoType == PersoType.Perso ? fEmoteYSpawn : fEmoteYSpawn_Maxine), currentDirection);
     }
 
     public void SpeakRandom(int nbEmotes)
     {
-        speakingCtrl.SpeakRandom(nbEmotes, fEmoteXSpawn, fEmoteYSpawn, currentDirection);
+        speakingCtrl.SpeakRandom(nbEmotes, fEmoteXSpawn, (persoType == PersoType.Perso ? fEmoteYSpawn : fEmoteYSpawn_Maxine), currentDirection);
     }
 
     public void StopSpeaking()
