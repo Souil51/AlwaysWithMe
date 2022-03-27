@@ -531,6 +531,8 @@ public class Chapitre_4Controller : CommonController
         movingBody.gameObject.SetActive(true);
         goPerso_Animation_1.SetActive(false);
 
+        movingBody.SetActive(false);
+
         movingBody.StopSpeaking();
         movingBody_Maxine.StopSpeaking();
 
@@ -545,8 +547,9 @@ public class Chapitre_4Controller : CommonController
 
         //Maxine se lève
         movingBody_Maxine.GoToPosition(new Vector3(24.59f, -11.14f, movingBody_Maxine.transform.position.z)); ;
+        movingBody.SetActive(true);
 
-        while(movingBody_Maxine.IsGoingToPosition())
+        while (movingBody_Maxine.IsGoingToPosition())
             yield return null;
 
         StopCoroutine(coroutineBoucleSpeak);

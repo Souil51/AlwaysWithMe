@@ -327,7 +327,7 @@ public class Chapter_7Controller : CommonController
         while (!bFadeEnded)
             yield return null;
 
-        movingBody.transform.position = new Vector3(-20.39f, -11.44f, 0);
+        movingBody.transform.position = new Vector3(-24.39f, -11.44f, 0);
 
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
@@ -411,14 +411,21 @@ public class Chapter_7Controller : CommonController
     {
         currentState = ChapitreState.CinematiqueDebutJeu;
 
-        movingBody.gameObject.SetActive(false);
-        moveingBodyMaxine.gameObject.SetActive(false);
-
         StartCoroutine(coroutine_CinematiqueDebutJeu());
     }
 
     private IEnumerator coroutine_CinematiqueDebutJeu()
     {
+        movingBody.GoToPosition(new Vector3(-4.45f, -9.32f, 1f));
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        yield return new WaitForSeconds(0.25f);
+
+        movingBody.gameObject.SetActive(false);
+        moveingBodyMaxine.gameObject.SetActive(false);
+
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
         bFadeEnded = false;
@@ -559,6 +566,9 @@ public class Chapter_7Controller : CommonController
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 
+        movingBody.gameObject.transform.position = new Vector3(-3.72f, -8.98f, 1);
+        moveingBodyMaxine.gameObject.transform.position = new Vector3(3.83f, -9.34f, 1);
+
         //Fondu vers l'écran de fin
         animatorFadePanel.SetTrigger("FadeIn");
 
@@ -583,19 +593,20 @@ public class Chapter_7Controller : CommonController
 
         interaction_jeu.SetActive(false);
 
-        movingBody.gameObject.transform.position = new Vector3(-3.72f, -8.98f, 1);
-        moveingBodyMaxine.gameObject.transform.position = new Vector3(3.83f, -9.34f, 1);
-
         //Le fondu est terminé -> début de l'animation
-        movingBody.GoToPosition(new Vector3(-0.71f, -9.34f, 1));
+        movingBody.GoToPosition(new Vector3(-0.11f, -9.34f, 1));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
 
+        movingBody.StopMoving();
+
+        yield return new WaitForSeconds(1f);
+
         peluche.sortingOrder = 7;
 
-        moveingBodyMaxine.GoToPosition(new Vector3(3.5f, -11.27f, 1));
-        movingBody.GoToPosition(new Vector3(-0.11f, -11.27f, 1));
+        moveingBodyMaxine.GoToPosition(new Vector3(5f, -11.27f, 1));
+        movingBody.GoToPosition(new Vector3(1.39f, -11.27f, 1));
 
         while (moveingBodyMaxine.IsGoingToPosition() || movingBody.IsGoingToPosition())
         {
@@ -603,6 +614,8 @@ public class Chapter_7Controller : CommonController
             peluche.gameObject.transform.position = new Vector3(rootPosition.x, rootPosition.y + 2f, rootPosition.z);
             yield return null;
         }
+
+        yield return new WaitForSeconds(0.5f);
 
         movingBody.ExtendArms();
 

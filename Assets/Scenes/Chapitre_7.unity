@@ -780,7 +780,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9be920f0766376c47b6a9cbd7a33545c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45cb4748182b59f40a68298a45e1ab99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1326,6 +1326,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2018689033734837487, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: 0.00031483173
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018689033734837487, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: -0.000029802322
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018689033734837487, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_Bounds.m_Extent.x
+      value: 1.9696848
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018689033734837487, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_Bounds.m_Extent.y
+      value: 3.7572
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018689033734837487, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_BoneTransforms.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2121169074960205374, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_Name
       value: perso_chapitre
@@ -1414,6 +1434,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -2.4179077
       objectReference: {fileID: 0}
+    - target: {fileID: 6604297650835668707, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.06
+      objectReference: {fileID: 0}
     - target: {fileID: 7112679770935545792, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -1430,6 +1454,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.022758512
       objectReference: {fileID: 0}
+    - target: {fileID: 8541492888894815297, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b38a6d9fde8cee24c8b1c51955c64152, type: 3}
     - target: {fileID: 8541492888894815297, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_SortingOrder
       value: 3

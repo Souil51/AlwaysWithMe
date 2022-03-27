@@ -481,7 +481,7 @@ public class Chapter_3Controller : CommonController
         float fYDifference = araignee.gameObject.transform.position.y - startPosition.y;
         float fXDifference = araignee.gameObject.transform.position.x - startPosition.x;
 
-        araignee.gameObject.transform.position = new Vector3(startPosition.x + fXDifference, startPosition.y, startPosition.z);
+        araignee.gameObject.transform.position = new Vector3(startPosition.x + fXDifference, araignee.gameObject.transform.position.y, startPosition.z);
         goRoot.transform.localPosition = startPositionRoot;
 
         araignee.MoveAllTargets(fYDifference, fXDifference);
