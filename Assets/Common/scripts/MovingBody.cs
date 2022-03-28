@@ -92,11 +92,15 @@ public class MovingBody : MonoBehaviour
 
             SetBlendValue(fBlendValue);
 
-            //La vitesse dépend aussi de la distance pour que plus l'animation est proche de la course, plus il va vite
-            if(vDirection.x > 0)//Vers la droite
-                transform.position += new Vector3(fSpeed * fBlendValue * Time.deltaTime, 0, 0);
-            else//Vers la gauche
-                transform.position -= new Vector3(fSpeed * fBlendValue * Time.deltaTime, 0, 0);
+            //On modifie la position, seulement si le joueur n'est pas hore de l'écran
+            if (gameObject.transform.position.x < CommonController.LIMIT_X_ECRAN && gameObject.transform.position.x > -CommonController.LIMIT_X_ECRAN)
+            {
+                //La vitesse dépend aussi de la distance pour que plus l'animation est proche de la course, plus il va vite
+                if (vDirection.x > 0)//Vers la droite
+                    transform.position += new Vector3(fSpeed * fBlendValue * Time.deltaTime, 0, 0);
+                else//Vers la gauche
+                    transform.position -= new Vector3(fSpeed * fBlendValue * Time.deltaTime, 0, 0);
+            }
 
             fMovingTime += Time.deltaTime;
         }

@@ -86,6 +86,11 @@ public class TutorielController : MonoBehaviour
                     animator.Play("tuto_clic_droit_back");
                 }
                 break;
+            case Tutoriel.Tuto_Too_Far:
+                {
+                    animator.Play("tuto_too_far");
+                }
+                break;
         }
     }
 

@@ -1777,6 +1777,7 @@ MonoBehaviour:
   - {fileID: 1696062072}
   fadePanel: {fileID: 257291932}
   animatorFadePanel: {fileID: 257291934}
+  PlayTutoTooFar: 1
   lightBulb: {fileID: 104230190}
   lightRoom: {fileID: 1760847913}
   sprt_lightOn: {fileID: 21300000, guid: 06bc049fef6352442ae78e17570b8f58, type: 3}

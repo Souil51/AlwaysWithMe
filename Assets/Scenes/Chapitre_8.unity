@@ -758,6 +758,36 @@ CapsuleCollider2D:
   m_Offset: {x: 0.16, y: -0.03}
   m_Size: {x: 0.48, y: 0.61}
   m_Direction: 0
+--- !u!1 &437169459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437169460}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437169460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437169459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.04, y: -6.11, z: -225.43512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577459189
 GameObject:
   m_ObjectHideFlags: 0
@@ -6297,11 +6327,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527232398763159014, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.5
+      value: 25.72
       objectReference: {fileID: 0}
     - target: {fileID: 1527232398763159014, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.05
+      value: -11.45
       objectReference: {fileID: 0}
     - target: {fileID: 1527232398763159014, guid: 82f7a71888b052949aaa6bfadd020efc, type: 3}
       propertyPath: m_LocalPosition.z

@@ -116,12 +116,14 @@ public enum Tutoriel
     Hold_Arrow_Up,
     Hold_Arrow_Right,
     Hold_Arrow_Left,
-    Tuto_Clic_Droit_Back
+    Tuto_Clic_Droit_Back,
+    Tuto_Too_Far
 }
 
 public class CommonController : MonoBehaviour
 {
     public readonly static float VOLUME_BASE = 0;
+    public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;
     [SerializeField] protected float CameraMoveTime = 0.5f;
@@ -129,6 +131,9 @@ public class CommonController : MonoBehaviour
     [SerializeField] protected List<InteractableObject> lstInteractableObjects;//Liste de tous les objets interactables (si un objet n'est pas dans la liste, l'interaction ne fonctionnera pas)
     [SerializeField] protected Image fadePanel;//Panel utilisé pour les fondus
     [SerializeField] protected Animator animatorFadePanel;
+    [SerializeField] protected bool PlayTutoTooFar = false;
+
+    private bool bInteractionsActives = true;
 
     //Caméra
     private Vector3 CameraInitialPosition = new Vector3(0, 0, -10);//Position "standard" de la camera
@@ -162,6 +167,7 @@ public class CommonController : MonoBehaviour
         foreach (InteractableObject obj in lstInteractableObjects)
         {
             obj.startInteractionDelegate += InteractableObject_startInteractionDelegate;
+            obj.startTooFarInteractionDelegate += InteractableObject_startTooFarInteractionDelegate;
         }
 
         //Méthode virtuelle appelée par la classe fille du controller du chapitre
@@ -183,29 +189,32 @@ public class CommonController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && currentObject == null)
+        if (bInteractionsActives)
         {
-            bStartMoveDelay = true;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            bClickHasBeenInteraction = false;
-            bStartMoveDelay = false;
-            fCurrentClickedDelay = 0;
-            if (movingBody != null) movingBody.SetMoving(false);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (currentObject != null)
+            if (Input.GetMouseButtonDown(0) && currentObject == null)
             {
-                if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
-                {
-                    if (!bCameraIsMoving)
-                    {
-                        MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
+                bStartMoveDelay = true;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                bClickHasBeenInteraction = false;
+                bStartMoveDelay = false;
+                fCurrentClickedDelay = 0;
+                if (movingBody != null) movingBody.SetMoving(false);
+            }
 
-                        ChapterLeaveZoomOnObject(currentObject);
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (currentObject != null)
+                {
+                    if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
+                    {
+                        if (!bCameraIsMoving)
+                        {
+                            MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
+
+                            ChapterLeaveZoomOnObject(currentObject);
+                        }
                     }
                 }
             }
@@ -226,6 +235,8 @@ public class CommonController : MonoBehaviour
 
     protected void InteractableObject_startInteractionDelegate(object sender, EventArgs e)
     {
+        if (!bInteractionsActives) return;
+
         InteractableObject interObject = (InteractableObject)sender;
 
         if (bMenuDisplayed)
@@ -265,6 +276,23 @@ public class CommonController : MonoBehaviour
             ChapterInteraction(type);
             ClearInteraction(interObject);
         }
+    }
+
+    protected void InteractableObject_startTooFarInteractionDelegate(object sender, EventArgs e)
+    {
+        if (!bInteractionsActives || !PlayTutoTooFar) return;
+
+        InteractableObject interObject = (InteractableObject)sender;
+
+        bClickHasBeenInteraction = true;
+
+        GameObject goTuto = PlayTuto(Tutoriel.Tuto_Too_Far, new Vector3(interObject.transform.position.x, interObject.transform.position.y + 1f, 0));
+        StopTuto(goTuto);
+    }
+
+    protected void SetInteractionsActives(bool value)
+    {
+        bInteractionsActives = value;
     }
 
     //Lance la coroutine de mouvement de la caméra

@@ -32,6 +32,8 @@ public class Chapter_1Controller : CommonController
 
     protected override void ChildStart()
     {
+        SetInteractionsActives(false);
+
         StartCinematique(Cinematiques.Chapitre1_Debut);
     }
 
@@ -235,6 +237,8 @@ public class Chapter_1Controller : CommonController
 
         movingBody.gameObject.SetActive(true);
         Perso_Animation_1.gameObject.SetActive(false);
+
+        SetInteractionsActives(true);
 
         goTutoMove = PlayTuto(Tutoriel.Move, new Vector3(5.81f, 5.57f, 0));
 

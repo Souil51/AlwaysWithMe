@@ -9,6 +9,9 @@ public class InteractableObject : MonoBehaviour
     public delegate void OnStartInteractionDelegate(object sender, EventArgs e);
     public event OnStartInteractionDelegate startInteractionDelegate;
 
+    public delegate void OnStartTooFarInteractionDelegate(object sender, EventArgs e);
+    public event OnStartTooFarInteractionDelegate startTooFarInteractionDelegate;
+
     //La taille que la caméra doit avoir quand on zoom sur l'objet
     [SerializeField] private float SizeForObject = 3.3f;
     [SerializeField] private bool ChangeSpriteOnZoom;
@@ -102,7 +105,11 @@ public class InteractableObject : MonoBehaviour
     //Interaction avec l'objet (click gauche)
     void OnMouseDown()
     {
-        if (CanBeTooFar && bIsTooFar) return;
+        if (CanBeTooFar && bIsTooFar)
+        {
+            startTooFarInteractionDelegate?.Invoke(this, EventArgs.Empty);
+            return;
+        }
 
         if (IsClicked)
         {

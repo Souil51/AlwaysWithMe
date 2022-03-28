@@ -84,7 +84,7 @@ public class Chapter_8Controller : CommonController
     {
         yield return new WaitForSeconds(1);
 
-        movingBody.GoToPosition(new Vector3(17.9f, -9.05f, 1f));
+        movingBody.GoToPosition(new Vector3(17.9f, -11.45f, 1f));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
