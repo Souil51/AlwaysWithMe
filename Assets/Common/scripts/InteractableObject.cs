@@ -148,6 +148,11 @@ public class InteractableObject : MonoBehaviour
         return objectType;
     }
 
+    public void ChangeInteractionType(InteractionType interaction)
+    {
+        this.interactionType = interaction;
+    }
+
     public void EnterZoom()
     {
         bIsZoomed = true;

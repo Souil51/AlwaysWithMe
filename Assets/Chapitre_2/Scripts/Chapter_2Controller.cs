@@ -26,6 +26,7 @@ public class Chapter_2Controller : CommonController
     [SerializeField] private GameObject goPorteSprite;
     [SerializeField] private GameObject goExitOn;
     [SerializeField] private GameObject goExitOff;
+    [SerializeField] private InteractableObject ecranDroite;
 
     //Cinématique Boucle
     [SerializeField] private GameObject goBoucle;
@@ -98,6 +99,7 @@ public class Chapter_2Controller : CommonController
                 break;
             case InteractionType.Ecran_Interaction:
                 {
+                    ecranDroite.ChangeInteractionType(InteractionType.MoveCamera);
                     StartCinematique(Cinematiques.Chapitre2_Journee);
                 }
                 break;

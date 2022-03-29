@@ -216,10 +216,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -2.042829, y: -0.9654398}
-      - {x: 0.90486574, y: -0.8451605}
-      - {x: 0.9138789, y: 0.9838133}
-      - {x: -1.9025748, y: 0.9376279}
+    - - {x: -1.8535438, y: -0.9654398}
+      - {x: 1.1059823, y: -0.86882114}
+      - {x: 1.1268249, y: 0.9956436}
+      - {x: -1.7961018, y: 0.86664593}
 --- !u!114 &44576443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1417,8 +1417,10 @@ MonoBehaviour:
   - {fileID: 495773205}
   - {fileID: 1901040847}
   - {fileID: 88654172}
+  - {fileID: 44576443}
   fadePanel: {fileID: 977924058}
   animatorFadePanel: {fileID: 977924056}
+  PlayTutoTooFar: 0
   couloir_groupe: {fileID: 1665662140}
   banc_groupe: {fileID: 1614677363}
   araignee_couloir: {fileID: 872189200}
@@ -2838,7 +2840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1614677364
 Transform:
   m_ObjectHideFlags: 0
@@ -2875,7 +2877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1665662141
 Transform:
   m_ObjectHideFlags: 0
@@ -2921,7 +2923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720887024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.56, y: -0, z: -2}
+  m_LocalPosition: {x: -0.37, y: -0, z: -2}
   m_LocalScale: {x: 0.6828085, y: 0.6828085, z: 0.6828085}
   m_Children: []
   m_Father: {fileID: 44576441}
@@ -3552,7 +3554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041494706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 0.6, z: -3}
+  m_LocalPosition: {x: -0.35, y: 0.02, z: -3}
   m_LocalScale: {x: 0.22825202, y: 0.22825202, z: 0.22825202}
   m_Children: []
   m_Father: {fileID: 44576441}
