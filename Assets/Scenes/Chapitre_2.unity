@@ -1129,7 +1129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301353273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.116, y: 0.287, z: -4}
+  m_LocalPosition: {x: -0.116, y: 0.003, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1235687270}
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   goHighlight: {fileID: 465852965}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 465852967}
-  interactionType: 7
+  interactionType: 8
   objectType: 0
   IsInnerObject: 1
   CanBeTooFar: 1
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   goZoomedSprite: {fileID: 1383838847}
   highlightSprtRenderer: {fileID: 1338833852}
   interactionType: 1
-  objectType: 0
+  objectType: 3
   IsInnerObject: 0
   CanBeTooFar: 1
 --- !u!4 &387596218
@@ -1811,8 +1811,8 @@ MonoBehaviour:
   goHighlight: {fileID: 234770748}
   goZoomedSprite: {fileID: 767707853}
   highlightSprtRenderer: {fileID: 234770749}
-  interactionType: 9
-  objectType: 0
+  interactionType: 10
+  objectType: 3
   IsInnerObject: 0
   CanBeTooFar: 1
 --- !u!4 &459402341
@@ -3311,7 +3311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984749382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.122, y: 0.327, z: -4}
+  m_LocalPosition: {x: -0.122, y: -0.002, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 261593964}
@@ -3372,7 +3372,7 @@ MonoBehaviour:
   goHighlight: {fileID: 1410292723}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 1410292725}
-  interactionType: 7
+  interactionType: 9
   objectType: 0
   IsInnerObject: 1
   CanBeTooFar: 1
@@ -5914,6 +5914,8 @@ MonoBehaviour:
   - {fileID: 1978230132}
   - {fileID: 1739181703}
   - {fileID: 1746923933}
+  - {fileID: 301353276}
+  - {fileID: 984749385}
   fadePanel: {fileID: 1684808423}
   animatorFadePanel: {fileID: 1684808425}
   PlayTutoTooFar: 0
@@ -5926,6 +5928,19 @@ MonoBehaviour:
   goExitOn: {fileID: 387582851}
   goExitOff: {fileID: 1534663166}
   ecranDroite: {fileID: 459402340}
+  ecranGauche: {fileID: 387596217}
+  sprtRenderer_EcranGaucheZoom: {fileID: 1383838848}
+  sprtRenderer_EcranDroiteZoom: {fileID: 767707854}
+  sprt_EcranZoomOn: {fileID: 21300000, guid: f078df092a9e61a4089c8e7973c407a5, type: 3}
+  sprt_EcranZoomOff: {fileID: 21300000, guid: 3c77d2c955cb22948879babad30d029d, type: 3}
+  sprt_EcranGaucheOn: {fileID: 21300000, guid: f7b4b65f962a53546aaec81610d7f9db, type: 3}
+  sprt_EcranGaucheOff: {fileID: 21300000, guid: ec3aab8cf9cc01e42b7c741ca22853da, type: 3}
+  sprt_EcranGaucheOn_2: {fileID: 21300000, guid: 261b5b97be30e104a8ab203c7aa4eec2, type: 3}
+  sprt_EcranGaucheOff_2: {fileID: 21300000, guid: ee6f36934f0d8af41b9d234cad416f24, type: 3}
+  sprt_EcranDroitOn: {fileID: 21300000, guid: 5412a674563cda346abbec34a59c12b4, type: 3}
+  sprt_EcranDroitOff: {fileID: 21300000, guid: ec6d009d187999242a0495400a012c06, type: 3}
+  sprt_EcranDroitOn_2: {fileID: 21300000, guid: 21c0414ee85d3b94fbf8d340a8aa5bb5, type: 3}
+  sprt_EcranDroitOff_2: {fileID: 21300000, guid: e58bdbc3201417345ad041b9e337520f, type: 3}
   goBoucle: {fileID: 2142847858}
   chap_1_1: {fileID: 1009118825}
   chap_2_1: {fileID: 2017783576}

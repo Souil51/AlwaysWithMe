@@ -595,7 +595,7 @@ public class Chapter_7Controller : CommonController
 
         interaction_jeu.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         //Le fondu est terminé -> début de l'animation
         movingBody.GoToPosition(new Vector3(-0.11f, -9.34f, 1));

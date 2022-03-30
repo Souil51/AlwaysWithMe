@@ -3840,7 +3840,7 @@ MonoBehaviour:
   goHighlight: {fileID: 243151886}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 243151888}
-  interactionType: 16
+  interactionType: 17
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 0
@@ -9254,7 +9254,7 @@ MonoBehaviour:
   goHighlight: {fileID: 588681425}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 588681427}
-  interactionType: 17
+  interactionType: 18
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 0
@@ -10041,7 +10041,7 @@ MonoBehaviour:
   goHighlight: {fileID: 1279588212}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 1279588214}
-  interactionType: 14
+  interactionType: 15
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 1
@@ -10295,7 +10295,7 @@ MonoBehaviour:
   goHighlight: {fileID: 514568030}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 514568032}
-  interactionType: 11
+  interactionType: 12
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 1
@@ -10385,7 +10385,7 @@ MonoBehaviour:
   goHighlight: {fileID: 2022851252}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 2022851254}
-  interactionType: 15
+  interactionType: 16
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 0

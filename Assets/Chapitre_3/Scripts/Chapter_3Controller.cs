@@ -90,8 +90,6 @@ public class Chapter_3Controller : CommonController
             movableObj.MovableObjectShakedEvent += MovableObj_MovableObjectShakedEvent;
             movableObj.MovableObjectReleasedEvent += MovableObj_MovableObjectReleasedEvent;
         }
-
-        //StartCinematiquePlacard();
     }
 
     protected override void ChildUpdate()
@@ -351,6 +349,8 @@ public class Chapter_3Controller : CommonController
     {
         currentState = ChapitreState.CinematiqueSortiePlacard;
 
+        bInteractionsActives = false;
+
         StartCoroutine(coroutine_CinematiqueSortieBoucle());
     }
 
@@ -426,6 +426,8 @@ public class Chapter_3Controller : CommonController
 
         porteStatic.SetActive(false);
         porteInteractable.SetActive(true);
+
+        bInteractionsActives = true;
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
     }

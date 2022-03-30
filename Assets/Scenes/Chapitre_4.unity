@@ -418,7 +418,7 @@ MonoBehaviour:
   goHighlight: {fileID: 274343543}
   goZoomedSprite: {fileID: 1845963624}
   highlightSprtRenderer: {fileID: 274343545}
-  interactionType: 12
+  interactionType: 13
   objectType: 4
   IsInnerObject: 0
   CanBeTooFar: 0
@@ -2840,7 +2840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1614677364
 Transform:
   m_ObjectHideFlags: 0
@@ -2877,7 +2877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1665662141
 Transform:
   m_ObjectHideFlags: 0
@@ -3361,7 +3361,7 @@ MonoBehaviour:
   goHighlight: {fileID: 429948493}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 429948495}
-  interactionType: 11
+  interactionType: 12
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 1

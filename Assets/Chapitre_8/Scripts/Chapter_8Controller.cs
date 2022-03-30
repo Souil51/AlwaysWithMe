@@ -160,10 +160,10 @@ public class Chapter_8Controller : CommonController
 
         goPerso_AraigneeAnimation.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
 
         goAraignee.FadeOut();
-        particleSystemDisappear.gameObject.SetActive(true);
+        //particleSystemDisappear.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3f);
 

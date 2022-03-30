@@ -33,6 +33,7 @@ public enum InteractionType
     AcceptMenu, 
     CancelMenu, 
     Ecran_Toggle,
+    Ecran_Toggle_2,
     Ecran_Interaction,
     Placard_Interaction,
     Sortie,
@@ -133,7 +134,7 @@ public class CommonController : MonoBehaviour
     [SerializeField] protected Animator animatorFadePanel;
     [SerializeField] protected bool PlayTutoTooFar = false;
 
-    private bool bInteractionsActives = true;
+    protected bool bInteractionsActives = true;
 
     //Caméra
     private Vector3 CameraInitialPosition = new Vector3(0, 0, -10);//Position "standard" de la camera

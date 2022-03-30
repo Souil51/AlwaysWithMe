@@ -6065,7 +6065,7 @@ MonoBehaviour:
   goHighlight: {fileID: 691969874}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 691969875}
-  interactionType: 10
+  interactionType: 11
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 1
@@ -9394,6 +9394,7 @@ MonoBehaviour:
   - {fileID: 1383224881}
   fadePanel: {fileID: 309065638}
   animatorFadePanel: {fileID: 309065636}
+  PlayTutoTooFar: 0
   lightBulb: {fileID: 2064073821}
   lightRoom: {fileID: 1936885847}
   sprt_lightOn: {fileID: 21300000, guid: 37e07f13d8757bc46a6d39028c2ca581, type: 3}

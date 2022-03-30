@@ -550,7 +550,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 55aa357d4a3565e45b2b7168aeab64d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e679f27e2937284b8c2c12777f8f37c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -569,8 +569,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281979891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.87, y: 1.09, z: 1}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalPosition: {x: -0.62, y: -4.28, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -940,7 +940,7 @@ MonoBehaviour:
   goHighlight: {fileID: 1517239595}
   goZoomedSprite: {fileID: 0}
   highlightSprtRenderer: {fileID: 1517239596}
-  interactionType: 18
+  interactionType: 19
   objectType: 0
   IsInnerObject: 0
   CanBeTooFar: 1
@@ -6250,6 +6250,7 @@ MonoBehaviour:
   - {fileID: 617461417}
   fadePanel: {fileID: 1070794286}
   animatorFadePanel: {fileID: 1070794284}
+  PlayTutoTooFar: 0
   movingBodyMaxine: {fileID: 232256422}
   goPerso_Animation_Maxine: {fileID: 1278528463}
   goPerso_Animation: {fileID: 2141830971}

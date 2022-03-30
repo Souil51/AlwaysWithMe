@@ -27,6 +27,22 @@ public class Chapter_2Controller : CommonController
     [SerializeField] private GameObject goExitOn;
     [SerializeField] private GameObject goExitOff;
     [SerializeField] private InteractableObject ecranDroite;
+    [SerializeField] private InteractableObject ecranGauche;
+
+    [SerializeField] private SpriteRenderer sprtRenderer_EcranGaucheZoom;
+    [SerializeField] private SpriteRenderer sprtRenderer_EcranDroiteZoom;
+    [SerializeField] private Sprite sprt_EcranZoomOn;
+    [SerializeField] private Sprite sprt_EcranZoomOff;
+
+    [SerializeField] private Sprite sprt_EcranGaucheOn;
+    [SerializeField] private Sprite sprt_EcranGaucheOff;
+    [SerializeField] private Sprite sprt_EcranGaucheOn_2;
+    [SerializeField] private Sprite sprt_EcranGaucheOff_2;
+
+    [SerializeField] private Sprite sprt_EcranDroitOn;
+    [SerializeField] private Sprite sprt_EcranDroitOff;
+    [SerializeField] private Sprite sprt_EcranDroitOn_2;
+    [SerializeField] private Sprite sprt_EcranDroitOff_2;
 
     //Cinématique Boucle
     [SerializeField] private GameObject goBoucle;
@@ -38,6 +54,10 @@ public class Chapter_2Controller : CommonController
     [SerializeField] private GameObject calendrierBoucle;
     [SerializeField] private GameObject goPerso_Animation_1;
     [SerializeField] private Animator Perso_Animation_1_Animator;
+
+    private bool bEcranGauche_On = true;
+    private bool bEcranDroit_On = true;
+
     private int nIndexBoucle = 1;
     private float fXStart = -15.5f;
     private float fYStart = 13.75f;
@@ -94,7 +114,38 @@ public class Chapter_2Controller : CommonController
                 break;
             case InteractionType.Ecran_Toggle:
                 {
-
+                    if (bEcranGauche_On)
+                    {
+                        bEcranGauche_On = false;
+                        sprtRenderer_EcranGaucheZoom.sprite = sprt_EcranZoomOff;
+                        ecranGauche.ChangeSprite_1(sprt_EcranGaucheOff);
+                        ecranGauche.ChangeSprite_2(sprt_EcranGaucheOff_2);
+                    }
+                    else
+                    {
+                        bEcranGauche_On = true;
+                        sprtRenderer_EcranGaucheZoom.sprite = sprt_EcranZoomOn;
+                        ecranGauche.ChangeSprite_1(sprt_EcranGaucheOn);
+                        ecranGauche.ChangeSprite_2(sprt_EcranGaucheOn_2);
+                    }
+                }
+                break;
+            case InteractionType.Ecran_Toggle_2:
+                {
+                    if (bEcranDroit_On)
+                    {
+                        bEcranDroit_On = false;
+                        sprtRenderer_EcranDroiteZoom.sprite = sprt_EcranZoomOff;
+                        ecranDroite.ChangeSprite_1(sprt_EcranDroitOff);
+                        ecranDroite.ChangeSprite_2(sprt_EcranDroitOff_2);
+                    }
+                    else
+                    {
+                        bEcranDroit_On = true;
+                        sprtRenderer_EcranDroiteZoom.sprite = sprt_EcranZoomOn;
+                        ecranDroite.ChangeSprite_1(sprt_EcranDroitOn);
+                        ecranDroite.ChangeSprite_2(sprt_EcranDroitOn_2);
+                    }
                 }
                 break;
             case InteractionType.Ecran_Interaction:
