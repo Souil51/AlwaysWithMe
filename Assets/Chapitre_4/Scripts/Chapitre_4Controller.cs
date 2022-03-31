@@ -55,14 +55,9 @@ public class Chapitre_4Controller : CommonController
 
     protected override void ChildStart()
     {
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
-        //vDifferenceSacPerso = movingBody.gameObject.transform.position - goSacADos.transform.position;
-
         currentState = ChapitreState.Couloir;
 
         StartCinematique(Cinematiques.Chapitre4_Initial);
-
-        //currentState = ChapitreState.Banc;
     }
 
     protected override void ChildUpdate()
@@ -342,7 +337,7 @@ public class Chapitre_4Controller : CommonController
 
         //Maxine
         movingBody_Maxine.ChangeDirection(BodyDirection.Gauche);
-        movingBody_Maxine.GoToPosition(new Vector3(3.87f, -11.14f, 256.9276f));
+        movingBody_Maxine.GoToPosition(new Vector3(3.87f, -11.14f, 256.9276f), 1f);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 
@@ -516,6 +511,8 @@ public class Chapitre_4Controller : CommonController
 
         yield return new WaitForSeconds(1f);
 
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
+
         goPerso_Animation_1.GetComponent<Perso_Animation_1_Controller>().StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_PersoAnimationReverse);
         goPerso_Animation_Maxine.GetComponent<Perso_Animation_1_Controller>().StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.Chapitre4_MaxineAnimationReverse);
 
@@ -546,7 +543,7 @@ public class Chapitre_4Controller : CommonController
             yield return null;
 
         //Maxine se lève
-        movingBody_Maxine.GoToPosition(new Vector3(24.59f, -11.14f, movingBody_Maxine.transform.position.z)); ;
+        movingBody_Maxine.GoToPosition(new Vector3(24.59f, -11.14f, movingBody_Maxine.transform.position.z), 1f); ;
         movingBody.SetActive(true);
 
         while (movingBody_Maxine.IsGoingToPosition())

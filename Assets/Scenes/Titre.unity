@@ -485,6 +485,7 @@ MonoBehaviour:
   lstInteractableObjects: []
   fadePanel: {fileID: 1901291598}
   animatorFadePanel: {fileID: 1901291596}
+  PlayTutoTooFar: 0
   animatorAraigneePlafond: {fileID: 443485801}
   araigneeSaut: {fileID: 207364388}
 --- !u!4 &92491965
@@ -18706,7 +18707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 754158537923955158, guid: 4917899ee5f3edd42a645e5e8d4d79b3, type: 3}
       propertyPath: m_Volume
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 754158537923955159, guid: 4917899ee5f3edd42a645e5e8d4d79b3, type: 3}
       propertyPath: m_RootOrder

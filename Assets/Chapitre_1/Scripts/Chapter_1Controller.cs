@@ -228,7 +228,7 @@ public class Chapter_1Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueDebut()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         Perso_Animation_1.StartAnimation(Perso_Animation_1_Controller.AnimationsPerso.MainAnimation);
 

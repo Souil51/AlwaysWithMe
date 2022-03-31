@@ -19,8 +19,6 @@ public class Chapter_8Controller : CommonController
 
     protected override void ChildStart()
     {
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
-
         StartCinematique(Cinematiques.Chapitre8_Initial);
     }
 
@@ -108,8 +106,6 @@ public class Chapter_8Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueFin()
     {
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
-
         movingBody.SetActive(false);
 
         movingBody.GoToPosition(new Vector3(10.4f, -5.86f, 1));

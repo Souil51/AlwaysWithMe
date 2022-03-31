@@ -158,6 +158,11 @@ public class MovingBody : MonoBehaviour
         bIsMoving = bValue;
     }
 
+    public bool IsMoving()
+    {
+        return bIsMoving;
+    }
+
     //Arrête le mouvement en fDuration secondes et replace le bras le long du corp
     private IEnumerator coroutine_StopMoving(float fDuration = 0.5f)
     {

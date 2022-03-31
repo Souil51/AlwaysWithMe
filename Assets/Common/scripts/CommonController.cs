@@ -123,7 +123,7 @@ public enum Tutoriel
 
 public class CommonController : MonoBehaviour
 {
-    public readonly static float VOLUME_BASE = 0;
+    public readonly static float VOLUME_BASE = 0.3f;
     public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;

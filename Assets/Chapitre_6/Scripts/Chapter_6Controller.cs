@@ -187,10 +187,12 @@ public class Chapter_6Controller : CommonController
     {
         yield return new WaitForSeconds(0f);
 
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
-
         //araignee.ShowHideSprite(true);
         araignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre6_SautBus);
+
+        yield return new WaitForSeconds(0.25f);
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
 
         while (!araignee.IsAnimationFinished(AraigneeController.AnimationsAraignee.Chapitre6_SautBus))
             yield return null;

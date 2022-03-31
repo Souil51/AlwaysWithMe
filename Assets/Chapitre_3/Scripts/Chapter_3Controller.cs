@@ -53,6 +53,9 @@ public class Chapter_3Controller : CommonController
     [SerializeField] private GameObject placardStatic;
     [SerializeField] private GameObject placardInteractable;
     [SerializeField] private AraigneeController araigneeApresPlacard;
+    [SerializeField] private SpriteRenderer sprtRendererBody;
+    [SerializeField] private Sprite spriteBodySac;
+    [SerializeField] private GameObject goSac;
 
     //Mouse shake detection
     private bool bAraigneeFollowObjet = true;
@@ -416,6 +419,15 @@ public class Chapter_3Controller : CommonController
             yield return null;
 
         araigneeApresPlacard.gameObject.SetActive(false);
+
+        movingBody.GoToPosition(new Vector3(2.5f, -3.06f, 256.98f));
+        sprtRendererBody.gameObject.transform.position += new Vector3(0.8f, 0, 0);
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        goSac.SetActive(false);
+        sprtRendererBody.sprite = spriteBodySac;
 
         StopCinematiqueSortiePlacard();
     }

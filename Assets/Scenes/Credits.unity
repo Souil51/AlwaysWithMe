@@ -19577,6 +19577,7 @@ MonoBehaviour:
   lstInteractableObjects: []
   fadePanel: {fileID: 1011256314}
   animatorFadePanel: {fileID: 1011256312}
+  PlayTutoTooFar: 0
   goLettreTexte_1: {fileID: 1151792756}
   goLettreTexte_2: {fileID: 1705634333}
   goLettreTexte_3: {fileID: 1593709578}
@@ -20215,7 +20216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924640463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.42, y: 0, z: 0}
+  m_LocalPosition: {x: 9.42, y: 0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 147239182}
@@ -20261,7 +20262,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 3c4acc3893db17a4daa312be720c8f55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1bd486cd6aa9904ebd25b42965100b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0

@@ -337,7 +337,7 @@ public class Chapter_7Controller : CommonController
 
         yield return new WaitForSeconds(1f);
 
-        movingBody.GoToPosition(new Vector3(-8.87f, movingBody.transform.position.y, movingBody.transform.position.z));
+        movingBody.GoToPosition(new Vector3(-8.87f, movingBody.transform.position.y, movingBody.transform.position.z), 1f);
 
         while (movingBody.IsGoingToPosition())
             yield return null;
@@ -372,7 +372,9 @@ public class Chapter_7Controller : CommonController
         movingBody.SetActive(false);
 
         moveingBodyMaxine.gameObject.SetActive(true);
-        moveingBodyMaxine.GoToPosition(new Vector3(-0.46f, -11.44f, 1f));
+        moveingBodyMaxine.GoToPosition(new Vector3(-0.46f, -11.44f, 1f), 1.25f);
+
+        yield return new WaitForSeconds(0.25f);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 
@@ -387,7 +389,7 @@ public class Chapter_7Controller : CommonController
 
         yield return new WaitForSeconds(1.5f);
 
-        moveingBodyMaxine.GoToPosition(new Vector3(3.83f, -9.34f, 1f));
+        moveingBodyMaxine.GoToPosition(new Vector3(7f, -9.34f, 1f));
 
         while (moveingBodyMaxine.IsGoingToPosition())
             yield return null;
@@ -416,7 +418,7 @@ public class Chapter_7Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueDebutJeu()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
 
         movingBody.GoToPosition(new Vector3(-4.45f, -9.32f, 1f));
 
@@ -569,7 +571,7 @@ public class Chapter_7Controller : CommonController
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 
         movingBody.gameObject.transform.position = new Vector3(-3.72f, -8.98f, 1);
-        moveingBodyMaxine.gameObject.transform.position = new Vector3(3.83f, -9.34f, 1);
+        moveingBodyMaxine.gameObject.transform.position = new Vector3(7f, -9.34f, 1f);
 
         //Fondu vers l'écran de fin
         animatorFadePanel.SetTrigger("FadeIn");
@@ -649,7 +651,7 @@ public class Chapter_7Controller : CommonController
 
         yield return new WaitForSeconds(2f);
 
-        moveingBodyMaxine.GoToPosition(new Vector3(23.81f, -11.23f, 1));
+        moveingBodyMaxine.GoToPosition(new Vector3(23.81f, -11.23f, 1), 1.25f);
 
         while (moveingBodyMaxine.IsGoingToPosition())
         {

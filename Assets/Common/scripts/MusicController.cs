@@ -57,7 +57,7 @@ public class MusicController : MonoBehaviour
             Source.volume = fVolume;
     }
 
-    private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.1f)
+    private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.25f)
     {
         float fElapsedTime = 0;
         float fCurrentVolume = Source.volume;
@@ -70,6 +70,8 @@ public class MusicController : MonoBehaviour
             fElapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        Source.volume = 0;
 
         switch (clip)
         {
@@ -99,5 +101,7 @@ public class MusicController : MonoBehaviour
             fElapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        Source.volume = fCurrentVolume;
     }
 }
