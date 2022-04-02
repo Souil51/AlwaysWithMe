@@ -367,6 +367,8 @@ public class Chapter_2Controller : CommonController
     {
         currentState = ChapitreState.AnimationBoucle;
 
+        ResetFadeTriggers();
+
         movingBody.SetActive(true);
         SetInteractionsActives(true);
 
@@ -385,7 +387,6 @@ public class Chapter_2Controller : CommonController
         movingBody.transform.position = new Vector3(14.89f, -3.06f, 0);
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
-
 
         goBoucle.SetActive(true);
         yield return new WaitForSeconds(0.25f);
@@ -461,6 +462,8 @@ public class Chapter_2Controller : CommonController
     {
         currentState = ChapitreState.FinBoucle;
         goBoucle.SetActive(false);
+
+        ResetFadeTriggers();
 
         SmoothChangeScene(Scenes.Chapitre3);
         StopCinematique();

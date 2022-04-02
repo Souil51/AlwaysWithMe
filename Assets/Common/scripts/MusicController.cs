@@ -57,12 +57,17 @@ public class MusicController : MonoBehaviour
             Source.volume = fVolume;
     }
 
+    public void SmoothChangeVolume(float fVolume, float fDuration = 1f)
+    {
+        StartCoroutine(coroutin_SmoothChangeVolume(fVolume, fDuration));
+    }
+
     private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.25f)
     {
         float fElapsedTime = 0;
-        float fCurrentVolume = Source.volume;
+        float fCurrentVolume = Source.volume == 0 ? CommonController.VOLUME_BASE : Source.volume;
 
-        while (fElapsedTime < fDuration)
+        while (fElapsedTime < fDuration && Source.volume > 0)
         {
             float fNewVolume = Mathf.Lerp(fCurrentVolume, 0, (fElapsedTime / fDuration));
             Source.volume = fNewVolume;
@@ -103,5 +108,22 @@ public class MusicController : MonoBehaviour
         }
 
         Source.volume = fCurrentVolume;
+    }
+
+    private IEnumerator coroutin_SmoothChangeVolume(float fVolume, float fDuration)
+    {
+        float fElapsedTime = 0;
+        float fCurrentVolume = Source.volume;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(fCurrentVolume, fVolume, (fElapsedTime / fDuration));
+            Source.volume = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Source.volume = fVolume;
     }
 }

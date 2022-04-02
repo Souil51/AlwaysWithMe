@@ -427,6 +427,13 @@ public class CommonController : MonoBehaviour
         bFadeEnded = true;
     }
 
+    protected void ResetFadeTriggers()
+    {
+        animatorFadePanel.ResetTrigger("FadeIn");
+        animatorFadePanel.ResetTrigger("FadeOut");
+        bFadeEnded = false;
+    }
+
     #endregion
 
     #region Tuto

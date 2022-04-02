@@ -282,6 +282,8 @@ public class Chapitre_4Controller : CommonController
     {
         currentState = ChapitreState.CinematiqueEntreeBanc;
 
+        ResetFadeTriggers();
+
         StartCoroutine(coroutine_CinematiqueEntreeBanc());
     }
 
@@ -554,6 +556,8 @@ public class Chapitre_4Controller : CommonController
 
     private void StopCinematiqueBancFin()
     {
+        ResetFadeTriggers();
+
         SmoothChangeScene(Scenes.Chapitre5);
     }
 

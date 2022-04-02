@@ -19,6 +19,8 @@ public class Chapter_8Controller : CommonController
 
     protected override void ChildStart()
     {
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+
         StartCinematique(Cinematiques.Chapitre8_Initial);
     }
 
@@ -50,8 +52,6 @@ public class Chapter_8Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre8_Initial:
@@ -65,9 +65,6 @@ public class Chapter_8Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
-        SetInteractionsActives(true);
     }
 
     #region Cinématique Initiale
@@ -145,8 +142,11 @@ public class Chapter_8Controller : CommonController
             || !ctrl.IsAnimationFinished(Perso_Animation_1_Controller.AnimationsPerso.Chapitre8_PersoAnimation))
             yield return null;
 
-        speakingBody.SpeakRandom(6, -1f, 3f, BodyDirection.Gauche);
-        speakingBody_maxine.SpeakRandom(6, -1f, 3f, BodyDirection.Droite);
+        speakingBody.SpeakRandom(12, -1f, 3f, BodyDirection.Gauche);
+
+        yield return new WaitForSeconds(0.25f);
+
+        speakingBody_maxine.SpeakRandom(12, -1f, 3f, BodyDirection.Droite);
 
         goAraignee.StartAnimation(AraigneeController.AnimationsAraignee.Chapitre8_Arrivee);
 
@@ -159,7 +159,11 @@ public class Chapter_8Controller : CommonController
 
         goAraignee.FadeOut();
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+
+        MusicController.GetInstance().SmoothChangeVolume(0, 1f);
+
+        yield return new WaitForSeconds(1f);
 
         StopCinematiqueFin();
     }

@@ -150,6 +150,8 @@ public class Chapter_3Controller : CommonController
                     this.bMenuDisplayed = false;
                     MenuLeave.SetActive(false);
 
+                    ResetFadeTriggers();
+
                     SmoothChangeScene(Scenes.Chapitre4);
                 }
                 break;
@@ -349,6 +351,8 @@ public class Chapter_3Controller : CommonController
         currentState = ChapitreState.CinematiqueSortiePlacard;
 
         bInteractionsActives = false;
+
+        ResetFadeTriggers();
 
         StartCoroutine(coroutine_CinematiqueSortiePlacard());
     }

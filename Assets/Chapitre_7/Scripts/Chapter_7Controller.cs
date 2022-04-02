@@ -309,6 +309,9 @@ public class Chapter_7Controller : CommonController
     private void StartCinematiqueEntreeFete()
     {
         currentState = ChapitreState.CinematiqueEntreeFete;
+
+        ResetFadeTriggers();
+
         StartCoroutine(coroutine_CinematiqueEntreeFete());
     }
 
@@ -405,6 +408,8 @@ public class Chapter_7Controller : CommonController
     private void StartCinematiqueDebutJeu()
     {
         currentState = ChapitreState.CinematiqueDebutJeu;
+
+        ResetFadeTriggers();
 
         StartCoroutine(coroutine_CinematiqueDebutJeu());
     }
@@ -558,6 +563,8 @@ public class Chapter_7Controller : CommonController
     {
         currentState = ChapitreState.CinematiqueFinJeu;
 
+        ResetFadeTriggers();
+
         StartCoroutine(coroutine_CinematiqueFinJeu());
     }
 
@@ -655,8 +662,6 @@ public class Chapter_7Controller : CommonController
 
         StopCinematique();
 
-        animatorFadePanel.ResetTrigger("FadeIn");
-        animatorFadePanel.ResetTrigger("FadeOut");
         yield return new WaitForSeconds(4f);
 
         StopCinematiqueFinJeu();
@@ -664,6 +669,7 @@ public class Chapter_7Controller : CommonController
 
     private void StopCinematiqueFinJeu()
     {
+        ResetFadeTriggers();
         SmoothChangeScene(Scenes.Chapitre8);
     }
 
