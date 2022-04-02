@@ -41,8 +41,6 @@ public class Chapitre_5Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre5_Initial:
@@ -56,16 +54,12 @@ public class Chapitre_5Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
     }
 
     #region Cinématique Initiale
 
     private void StartCinematiqueInitial()
     {
-        movingBody.SetActive(false);
-
         StartCoroutine(coroutine_CinematiqueInitial());
     }
 
@@ -83,7 +77,7 @@ public class Chapitre_5Controller : CommonController
 
     private void StopCinematiqueInitial()
     {
-        movingBody.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -203,6 +197,7 @@ public class Chapitre_5Controller : CommonController
     private void StopCinematiqueBus()
     {
         SmoothChangeScene(Scenes.Chapitre6);
+        StopCinematique();
     }
 
     #endregion

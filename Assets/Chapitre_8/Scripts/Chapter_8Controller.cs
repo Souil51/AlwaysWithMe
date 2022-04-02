@@ -67,6 +67,7 @@ public class Chapter_8Controller : CommonController
         }
 
         movingBody.SetActive(true);
+        SetInteractionsActives(true);
     }
 
     #region Cinématique Initiale
@@ -92,7 +93,7 @@ public class Chapter_8Controller : CommonController
 
     private void StopCinematiqueInitial()
     {
-        movingBody.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -108,13 +109,13 @@ public class Chapter_8Controller : CommonController
     {
         movingBody.SetActive(false);
 
-        movingBody.GoToPosition(new Vector3(10.4f, -5.86f, 1));
+        yield return new WaitForSeconds(0.5f);
+
+        movingBody.GoToPosition(new Vector3(10.4f, -5.86f, 1), 0.5f, false);
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        movingBody.GoToPosition(new Vector3(10.4f - 0.01f, -5.86f, 1));
-        while (movingBody.IsGoingToPosition())
-            yield return null;
+        movingBody.ChangeDirection(BodyDirection.Droite);
 
         movingBody.SpeakRandom(6);
         yield return new WaitForSeconds(0.25f);
@@ -156,10 +157,7 @@ public class Chapter_8Controller : CommonController
 
         goPerso_AraigneeAnimation.SetActive(true);
 
-        //yield return new WaitForSeconds(2f);
-
         goAraignee.FadeOut();
-        //particleSystemDisappear.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3f);
 
@@ -169,6 +167,7 @@ public class Chapter_8Controller : CommonController
     private void StopCinematiqueFin()
     {
         SmoothChangeScene(Scenes.Credits);
+        StopCinematique();
     }
 
     #endregion

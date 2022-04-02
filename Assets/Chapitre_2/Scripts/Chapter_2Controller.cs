@@ -81,7 +81,6 @@ public class Chapter_2Controller : CommonController
         {
             if(movingBody.transform.position.x > 3f)//Condition de début de la cinématique
             {
-                //StartCinematiqueMaxineArrive();
                 StartCinematique(Cinematiques.Chapitre2_ArriveeMaxine);
             }
         }
@@ -226,8 +225,6 @@ public class Chapter_2Controller : CommonController
     {
         currentState = ChapitreState.Initial;
 
-        movingBody.SetActive(false);
-
         StartCoroutine(coroutine_CinematiqueInitial());
     }
 
@@ -245,7 +242,7 @@ public class Chapter_2Controller : CommonController
 
     private void StopCinematiqueInitial()
     {
-        movingBody.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -261,9 +258,6 @@ public class Chapter_2Controller : CommonController
 
     public IEnumerator coroutine_CinematiqueMaxineArrive()
     {
-        
-        //movingBody.StopMoving();
-        //movingBody.SetActive(false);
         movingBody_2.GoToPosition(new Vector3(7.2f, -3.06f, 0), 1.5f);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
@@ -296,6 +290,7 @@ public class Chapter_2Controller : CommonController
     private void StopCinematiqueMaxineArrived()
     {
         currentState = ChapitreState.MaxineLeft;
+        StopCinematique();
     }
 
     #endregion
@@ -337,8 +332,7 @@ public class Chapter_2Controller : CommonController
         goExitOff.SetActive(false);
         goExitOn.SetActive(true);
 
-        while (Horloge.GetHeureEulerAngle() <= 180 || Horloge.GetHeureEulerAngle() >= 185)
-            yield return null;
+        yield return new WaitForSeconds(2f);
 
         Horloge.SetSpeed(fInitialHorlogeSpeed);
         MoveCamera(vInitialCameraPosition, fInitialCameraSize, true);
@@ -362,6 +356,7 @@ public class Chapter_2Controller : CommonController
     private void StopCinematiqueJournee()
     {
         currentState = ChapitreState.FinJournee;
+        StopCinematique();
     }
 
     #endregion
@@ -371,6 +366,9 @@ public class Chapter_2Controller : CommonController
     private void StartCinematiqueBoucle()
     {
         currentState = ChapitreState.AnimationBoucle;
+
+        movingBody.SetActive(true);
+        SetInteractionsActives(true);
 
         StartCoroutine(coroutine_CinematiqueBoucle());
     }
@@ -464,7 +462,8 @@ public class Chapter_2Controller : CommonController
         currentState = ChapitreState.FinBoucle;
         goBoucle.SetActive(false);
 
-        ChangeScene(Scenes.Chapitre3);
+        SmoothChangeScene(Scenes.Chapitre3);
+        StopCinematique();
     }
 
     #endregion

@@ -25,8 +25,6 @@ public class Chapitre_4Controller : CommonController
     [SerializeField] private GameObject couloir_groupe;
     [SerializeField] private GameObject banc_groupe;
     [SerializeField] private AraigneeController araignee_couloir;
-    //[SerializeField] private GameObject goSacADos;
-    //private Vector3 vDifferenceSacPerso;
 
     //Banc rencontre
     [SerializeField] private GameObject goPerso_Animation_1;
@@ -64,16 +62,10 @@ public class Chapitre_4Controller : CommonController
     {
         if(currentState == ChapitreState.Couloir)
         {
-            //goSacADos.transform.position = movingBody.gameObject.transform.position - vDifferenceSacPerso;
-
             if (movingBody.transform.position.x > -0.91f)
             {
                 StartCinematique(Cinematiques.Chapitre4_FuiteCouloir);
             }
-        }
-        else if(currentState == ChapitreState.Couloir_Apres_Fuite)
-        {
-            //goSacADos.transform.position = movingBody.gameObject.transform.position - vDifferenceSacPerso;
         }
         else if(currentState == ChapitreState.Banc)
         {
@@ -245,7 +237,7 @@ public class Chapitre_4Controller : CommonController
 
     private void StopCinematiqueInitial()
     {
-        movingBody.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -275,8 +267,8 @@ public class Chapitre_4Controller : CommonController
     }
 
     private void StopCinematiqueFuiteCouloir()
-    { 
-        movingBody.SetActive(true);
+    {
+        StopCinematique();
         araignee_couloir.gameObject.SetActive(false);
     
         currentState = ChapitreState.Couloir_Apres_Fuite;
@@ -317,6 +309,7 @@ public class Chapitre_4Controller : CommonController
     {
         currentState = ChapitreState.Banc;
         movingBody_Maxine.gameObject.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -421,7 +414,7 @@ public class Chapitre_4Controller : CommonController
 
     private void StopCinematiqueRencontre()
     {
-        //Visibilité de l'araignee
+        StopCinematique();
         currentState = ChapitreState.Banc_Araignee;
     }
 
@@ -485,6 +478,7 @@ public class Chapitre_4Controller : CommonController
         SetDefaultCameraPosition(new Vector3(0, 0, -10));
 
         carte_maxine.SetActive(true);
+        StopCinematique();
     }
 
     #endregion
@@ -550,6 +544,8 @@ public class Chapitre_4Controller : CommonController
             yield return null;
 
         StopCoroutine(coroutineBoucleSpeak);
+
+        StopCinematique();
 
         yield return new WaitForSeconds(3f);
 

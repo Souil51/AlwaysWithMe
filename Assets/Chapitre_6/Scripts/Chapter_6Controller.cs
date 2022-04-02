@@ -126,8 +126,6 @@ public class Chapter_6Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre6_Debut:
@@ -136,8 +134,6 @@ public class Chapter_6Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
     }
 
     #region Jeu Araignee
@@ -206,10 +202,10 @@ public class Chapter_6Controller : CommonController
 
     private void StopCinematiqueInitiale()
     {
-        //araignee.RestoreDynamicBodyPosition();
         currentState = ChapitreState.Araignee;
         araignee.ToggleAnimator(false);
         araignee.InitDynamicBody();
+        StopCinematique();
     }
 
     #endregion

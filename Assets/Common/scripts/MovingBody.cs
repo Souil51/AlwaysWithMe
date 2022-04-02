@@ -139,12 +139,12 @@ public class MovingBody : MonoBehaviour
         animator.SetFloat("Blend", fValue);
     }
 
-    public void StopMoving()
+    public void StopMoving(float fDuration = 0.5f)
     {
         if (currentStopCoroutine != null || animator.GetFloat("Blend") == 0)
             return;
 
-        currentStopCoroutine = coroutine_StopMoving();
+        currentStopCoroutine = coroutine_StopMoving(fDuration);
         StartCoroutine(currentStopCoroutine);
     }
 
@@ -193,12 +193,12 @@ public class MovingBody : MonoBehaviour
         fMovingTime = 0f;
     }
 
-    public void GoToPosition(Vector3 vPos, float fDuration = 0.5f)
+    public void GoToPosition(Vector3 vPos, float fDuration = 0.5f, bool IsActiveAfterMoving = false)
     {
-        StartCoroutine(coroutine_GoToPosition(vPos, fDuration));
+        StartCoroutine(coroutine_GoToPosition(vPos, fDuration, IsActiveAfterMoving));
     }
 
-    public IEnumerator coroutine_GoToPosition(Vector3 vPos, float fDuration)
+    public IEnumerator coroutine_GoToPosition(Vector3 vPos, float fDuration, bool IsActiveAfterMoving)
     {
         bIsGoingToPosition = true;
 
@@ -242,7 +242,7 @@ public class MovingBody : MonoBehaviour
         while (bIsStopping)
             yield return null;
 
-        this.SetActive(true);
+        this.SetActive(IsActiveAfterMoving);
 
         bIsGoingToPosition = false;
     }

@@ -94,7 +94,6 @@ public class Chapter_1Controller : CommonController
                     this.bMenuDisplayed = false;
 
                     MenuLeaveAnimator.Play("LeaveDisappearAnimation");
-                    //MenuLeave.SetActive(false);
                 }
                 break;
             case InteractionType.AcceptMenu:

@@ -123,7 +123,7 @@ public enum Tutoriel
 
 public class CommonController : MonoBehaviour
 {
-    public readonly static float VOLUME_BASE = 0.3f;
+    public readonly static float VOLUME_BASE = 0.15f;
     public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;
@@ -190,32 +190,29 @@ public class CommonController : MonoBehaviour
             }
         }
 
-        if (bInteractionsActives)
+        if (Input.GetMouseButtonDown(0) && currentObject == null)
         {
-            if (Input.GetMouseButtonDown(0) && currentObject == null)
-            {
-                bStartMoveDelay = true;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                bClickHasBeenInteraction = false;
-                bStartMoveDelay = false;
-                fCurrentClickedDelay = 0;
-                if (movingBody != null) movingBody.SetMoving(false);
-            }
+            bStartMoveDelay = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            bClickHasBeenInteraction = false;
+            bStartMoveDelay = false;
+            fCurrentClickedDelay = 0;
+            if (movingBody != null) movingBody.SetMoving(false);
+        }
 
-            if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (currentObject != null)
             {
-                if (currentObject != null)
+                if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
                 {
-                    if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
+                    if (!bCameraIsMoving)
                     {
-                        if (!bCameraIsMoving)
-                        {
-                            MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
+                        MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
 
-                            ChapterLeaveZoomOnObject(currentObject);
-                        }
+                        ChapterLeaveZoomOnObject(currentObject);
                     }
                 }
             }
@@ -367,6 +364,7 @@ public class CommonController : MonoBehaviour
         {
             movingBody.StopMoving();
             movingBody.SetActive(false);
+            SetInteractionsActives(false);
         }
 
         StartChapterCinematique(cinematique);
@@ -374,7 +372,10 @@ public class CommonController : MonoBehaviour
 
     protected void StopCinematique()
     {
-        movingBody.SetActive(true);
+        if(movingBody != null)
+            movingBody.SetActive(true);
+
+        SetInteractionsActives(true);
     }
 
     #region Empty Virtual Methods

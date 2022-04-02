@@ -62,10 +62,6 @@ public class Chapter_7Controller : CommonController
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
         StartCinematique(Cinematiques.Chapitre7_Arrivee);
-        
-        //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
-        //StartCinematique(Cinematiques.Chapitre7_EntreeJeu);
-        //StartChapterCinematique(Cinematiques.Chapitre7_EntreeJeu);
     }
 
     protected override void ChildUpdate()
@@ -119,10 +115,6 @@ public class Chapter_7Controller : CommonController
                     }
                 }
             }
-        }
-        else if(currentState == ChapitreState.ChoixPrix)
-        {
-
         }
     }
 
@@ -307,6 +299,7 @@ public class Chapter_7Controller : CommonController
     private void StopCinematiqueArrivee()
     {
         currentState = ChapitreState.Arrivee;
+        StopCinematique();
     }
 
     #endregion
@@ -401,7 +394,7 @@ public class Chapter_7Controller : CommonController
 
     private void StopCinematiqueRencontre()
     {
-        movingBody.SetActive(true);
+        StopCinematique();
         currentState = ChapitreState.ApresRencontre;
     }
 
@@ -458,6 +451,7 @@ public class Chapter_7Controller : CommonController
     private void StopCinematiqueDebutJeu()
     {
         currentState = ChapitreState.Jeu;
+        StopCinematique();
     }
 
     #endregion
@@ -492,6 +486,7 @@ public class Chapter_7Controller : CommonController
         goPrix.SetActive(true);
 
         currentState = ChapitreState.ChoixPrix;
+        StopCinematique();
     }
 
     #endregion
@@ -605,8 +600,6 @@ public class Chapter_7Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
-        //movingBody.StopMoving();
-
         yield return new WaitForSeconds(0.5f);
 
         peluche.sortingOrder = 7;
@@ -659,6 +652,8 @@ public class Chapter_7Controller : CommonController
             peluche.gameObject.transform.position = new Vector3(rootPosition.x, rootPosition.y + 2f, rootPosition.z);
             yield return null;
         }
+
+        StopCinematique();
 
         animatorFadePanel.ResetTrigger("FadeIn");
         animatorFadePanel.ResetTrigger("FadeOut");

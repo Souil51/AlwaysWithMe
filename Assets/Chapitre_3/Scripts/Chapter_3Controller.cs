@@ -233,8 +233,6 @@ public class Chapter_3Controller : CommonController
 
     protected override void StartChapterCinematique(Cinematiques cinematique)
     {
-        movingBody.SetActive(false);
-
         switch (cinematique)
         {
             case Cinematiques.Chapitre3_EntreePlacard:
@@ -248,8 +246,6 @@ public class Chapter_3Controller : CommonController
                 }
                 break;
         }
-
-        movingBody.SetActive(true);
     }
 
     private void MovableObj_MovableObjectSelectedEvent(object sender, MovableObjectEventArg e)
@@ -316,7 +312,6 @@ public class Chapter_3Controller : CommonController
     private IEnumerator coroutine_CinematiquePlacard()
     {
         araignee.ShowHideSprite(false);
-        //MoveCamera(new Vector3(-3.73f, 6.29f, -10), 10.5f);
 
         animatorFadePanel.SetTrigger("FadeIn");
 
@@ -342,6 +337,7 @@ public class Chapter_3Controller : CommonController
     private void StopCinematiquePlacard()
     {
         currentState = ChapitreState.Placard;
+        StopCinematique();
     }
 
     #endregion
@@ -354,10 +350,10 @@ public class Chapter_3Controller : CommonController
 
         bInteractionsActives = false;
 
-        StartCoroutine(coroutine_CinematiqueSortieBoucle());
+        StartCoroutine(coroutine_CinematiqueSortiePlacard());
     }
 
-    private IEnumerator coroutine_CinematiqueSortieBoucle()
+    private IEnumerator coroutine_CinematiqueSortiePlacard()
     {
         MoveCamera(new Vector3(-0.2f, 8.67f, -10), 10.5f);
 
@@ -442,6 +438,7 @@ public class Chapter_3Controller : CommonController
         bInteractionsActives = true;
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+        StopCinematique();
     }
 
     #endregion
