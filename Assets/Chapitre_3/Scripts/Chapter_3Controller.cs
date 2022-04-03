@@ -68,9 +68,12 @@ public class Chapter_3Controller : CommonController
     private Coroutine coroutineSpeakPlacard;
 
     private GameObject goDragTuto;
-    private GameObject goCheckTuto;
-    private GameObject goCheckTutoFollow;//Object suivi par le goCheckTuto
-    private bool bTutoCheckPlayed = false;
+    private GameObject goShakeTuto;
+    private GameObject goShakeTutoFollow;//Object suivi par le goCheckTuto
+    private bool bTutoShakePlayed = false;
+
+    private float timeWithoutSelectInteraction = 0f;
+    private float timeWithoutShakeInteraction = 0f;
 
     protected override void ChildStart()
     {
@@ -106,11 +109,31 @@ public class Chapter_3Controller : CommonController
                 Vector3 vPosObjToFollow = goObjectToFollowAraignee.transform.position;
                 araignee.transform.position = new Vector3(vPosObjToFollow.x, vPosObjToFollow.y, 0.2f);
             }
+
+            if(goDragTuto == null)
+                timeWithoutSelectInteraction += Time.deltaTime;
+
+            if(goShakeTuto == null)
+                timeWithoutShakeInteraction += Time.deltaTime;
+
+            if (timeWithoutSelectInteraction > 10f)
+            {
+                timeWithoutSelectInteraction = 0;
+
+                goDragTuto = PlayTuto(Tutoriel.Drag, new Vector3(2.82f, 5.51f, 0f));
+            }
+
+            if (timeWithoutShakeInteraction > 10f)
+            {
+                timeWithoutShakeInteraction = 0;
+
+                bTutoShakePlayed = false;
+            }
         }
 
-        if(goCheckTuto != null && goCheckTutoFollow != null)
+        if(goShakeTuto != null && goShakeTutoFollow != null)
         {
-            goCheckTuto.transform.position = new Vector3(goCheckTutoFollow.transform.position.x, goCheckTutoFollow.transform.position.y + 3f, -1);
+            goShakeTuto.transform.position = new Vector3(goShakeTutoFollow.transform.position.x, goShakeTutoFollow.transform.position.y + 3f, -1);
         }
     }
 
@@ -254,13 +277,20 @@ public class Chapter_3Controller : CommonController
 
     private void MovableObj_MovableObjectSelectedEvent(object sender, MovableObjectEventArg e)
     {
+        timeWithoutSelectInteraction = 0;
+
         MovableObject objForeGround = lstMovableObject.Find(x => x.GetObjectIndex() == e.nIndex);
 
-        if (!bTutoCheckPlayed)
+        if (goDragTuto != null)
         {
             StopTuto(goDragTuto);
-            goCheckTuto = PlayTuto(Tutoriel.Check, objForeGround.transform.position);
-            goCheckTutoFollow = objForeGround.gameObject;
+            goDragTuto = null;
+        }
+
+        if (!bTutoShakePlayed)
+        {
+            goShakeTuto = PlayTuto(Tutoriel.Check, objForeGround.transform.position);
+            goShakeTutoFollow = objForeGround.gameObject;
         }
 
         objForeGround.gameObject.GetComponent<SpriteRenderer>().sortingOrder = nMaxOrderInLayer++;
@@ -270,22 +300,24 @@ public class Chapter_3Controller : CommonController
 
     private void MovableObj_MovableObjectReleasedEvent(object sender, MovableObjectEventArg e)
     {
-        if (goCheckTuto != null)
+        if (goShakeTuto != null)
         {
-            StopTuto(goCheckTuto);
-            goCheckTuto = null;
-            goCheckTutoFollow = null;
+            StopTuto(goShakeTuto);
+            goShakeTuto = null;
+            goShakeTutoFollow = null;
         }
     }
 
     private void MovableObj_MovableObjectShakedEvent(object sender, MovableObjectEventArg e)
     {
-        if (goCheckTuto != null)
+        timeWithoutShakeInteraction = 0;
+
+        if (goShakeTuto != null)
         {
-            StopTuto(goCheckTuto);
-            goCheckTuto = null;
-            goCheckTutoFollow = null;
-            bTutoCheckPlayed = true;
+            StopTuto(goShakeTuto);
+            goShakeTuto = null;
+            goShakeTutoFollow = null;
+            bTutoShakePlayed = true;
         }
 
         if (!araignee.IsInit() && e.nIndex == nIndexObjectAraignee)
@@ -464,10 +496,11 @@ public class Chapter_3Controller : CommonController
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Araignee);
 
-        if(goCheckTuto != null)
-        {
-            StopTuto(goCheckTuto);
-        }
+        if(goShakeTuto != null)
+            StopTuto(goShakeTuto);
+
+        if (goDragTuto != null)
+            StopTuto(goDragTuto);
 
         while (!araigneeDynamicBody.IsBodyGettingUp())
             yield return null;

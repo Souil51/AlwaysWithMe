@@ -27,8 +27,14 @@ public class Chapter_1Controller : CommonController
 
     //Tutos
     private GameObject goTutoMove = null;
-    private List<GameObject> lstTutosZoom = new List<GameObject>();
     private bool bTutoZoomedDisplayed = false;
+
+    private GameObject goTutoEcran;
+    private GameObject goTutoDezoomEcran;
+    private GameObject goTutoCalendrier;
+    private GameObject goTutoDezoomCalendrier;
+    private GameObject goTutoInterrupteur;
+    private GameObject goTutoPorte;
 
     protected override void ChildStart()
     {
@@ -44,10 +50,10 @@ public class Chapter_1Controller : CommonController
             StopTuto(goTutoMove);
 
             //Tuto sur les objets interactables
-            lstTutosZoom.Add(PlayTuto(Tutoriel.Clic_Gauche, new Vector3(6.28f, 8.17f, 0)));
-            lstTutosZoom.Add(PlayTuto(Tutoriel.Clic_Gauche, new Vector3(-6.59f, 8.93f, 0)));
-            lstTutosZoom.Add(PlayTuto(Tutoriel.Clic_Gauche, new Vector3(12.89f, 9.52f, 0)));
-            lstTutosZoom.Add(PlayTuto(Tutoriel.Clic_Gauche, new Vector3(14.77f, 11.60f, 0)));
+            goTutoCalendrier = PlayTuto(Tutoriel.Clic_Gauche, new Vector3(4.76f, 8.49f, 0));
+            goTutoEcran = PlayTuto(Tutoriel.Clic_Gauche, new Vector3(-6.59f, 8.93f, 0));
+            goTutoInterrupteur = PlayTuto(Tutoriel.Clic_Gauche, new Vector3(12.44f, 9.8f, 0));
+            goTutoPorte = PlayTuto(Tutoriel.Clic_Gauche, new Vector3(14.5f, 11.76f, 0));
 
             bTutoZoomedDisplayed = true;
         }
@@ -55,16 +61,6 @@ public class Chapter_1Controller : CommonController
 
     protected override void ChapterInteraction(InteractionType type)
     {
-        if(lstTutosZoom.Count > 0)//Si on affiche les tuto Clic, on les enlève à la première interaction
-        {
-            foreach(GameObject go in lstTutosZoom)
-            {
-                go.GetComponent<TutorielController>().StopTutoriel();
-            }
-
-            lstTutosZoom.Clear();
-        }
-
         switch (type)
         {
             case InteractionType.Room_LightToggle:
@@ -81,12 +77,24 @@ public class Chapter_1Controller : CommonController
                         lightRoom.SetActive(true);
                         bLightOn = true;
                     }
+
+                    if(goTutoInterrupteur != null)
+                    {
+                        StopTuto(goTutoInterrupteur);
+                        goTutoInterrupteur = null;
+                    }
                 }
                 break;
             case InteractionType.Door:
                 {
                     this.bMenuDisplayed = true;
                     MenuLeave.SetActive(true);
+
+                    if (goTutoPorte != null)
+                    {
+                        StopTuto(goTutoPorte);
+                        goTutoPorte = null;
+                    }
                 }
                 break;
             case InteractionType.CancelMenu:
@@ -129,26 +137,6 @@ public class Chapter_1Controller : CommonController
     {
         interactionObject.EnterZoom();
 
-        if (lstTutosZoom.Count > 0)//Si on affiche les tuto Clic, on les enlève à la première interaction
-        {
-            foreach (GameObject go in lstTutosZoom)
-            {
-                go.GetComponent<TutorielController>().StopTutoriel();
-            }
-
-            lstTutosZoom.Clear();
-
-            //Affichage du tuto pour dézoom
-            GameObject goTuto1 = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(10.59f, 8.22f, 0));
-            goTuto1.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
-
-            GameObject goTuto2 = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(-0.89f, 8.43f, 0));
-            goTuto2.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
-
-            lstTutosZoom.Add(goTuto1);
-            lstTutosZoom.Add(goTuto2);
-        }
-
         switch (interactionObject.GetObjectType())
         {
             case ObjectType.Lamp:
@@ -165,6 +153,27 @@ public class Chapter_1Controller : CommonController
 
                     GameObject goEcran_Bouton = (GameObject)interactionObject.transform.Find("Ecran_Bouton").gameObject;
                     goEcran_Bouton.SetActive(true);
+
+                    if (goTutoEcran != null)
+                    {
+                        StopTuto(goTutoEcran);
+                        goTutoEcran = null;
+
+                        goTutoDezoomEcran = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(-0.81f, 10.8f, 0));
+                        goTutoDezoomEcran.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
+                    }
+                }
+                break;
+            case ObjectType.Calendrier:
+                {
+                    if (goTutoCalendrier != null)
+                    {
+                        StopTuto(goTutoCalendrier);
+                        goTutoCalendrier = null;
+
+                        goTutoDezoomCalendrier = PlayTuto(Tutoriel.Tuto_Clic_Droit_Back, new Vector3(10.43f, 10.66f, 0));
+                        goTutoDezoomCalendrier.transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
+                    }
                 }
                 break;
         }
@@ -174,16 +183,6 @@ public class Chapter_1Controller : CommonController
     protected override void ChapterLeaveZoomOnObject(InteractableObject interactionObject)
     {
         interactionObject.LeaveZoom();
-
-        if (lstTutosZoom.Count > 0)//Si on affiche les tuto Clic, on les enlève à la première interaction
-        {
-            foreach (GameObject go in lstTutosZoom)
-            {
-                go.GetComponent<TutorielController>().StopTutoriel();
-            }
-
-            lstTutosZoom.Clear();
-        }
 
         switch (interactionObject.GetObjectType())
         {
@@ -201,6 +200,21 @@ public class Chapter_1Controller : CommonController
 
                     GameObject goEcran_Bouton = (GameObject)interactionObject.transform.Find("Ecran_Bouton").gameObject;
                     goEcran_Bouton.SetActive(false);
+
+                    if (goTutoDezoomEcran != null)
+                    {
+                        StopTuto(goTutoDezoomEcran);
+                        goTutoDezoomEcran = null;
+                    }
+                }
+                break;
+            case ObjectType.Calendrier:
+                {
+                    if (goTutoDezoomCalendrier != null)
+                    {
+                        StopTuto(goTutoDezoomCalendrier);
+                        goTutoDezoomCalendrier = null;
+                    }
                 }
                 break;
         }

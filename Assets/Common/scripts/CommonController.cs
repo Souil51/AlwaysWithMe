@@ -53,7 +53,8 @@ public enum ObjectType
     Menu, 
     Ecran,
     CarteMaxine,
-    AttenteBus
+    AttenteBus,
+    Calendrier
 }
 
 public enum Emote 
