@@ -71,7 +71,7 @@ public class TitreController : CommonController
 
         animatorAraigneePlafond.SetTrigger("Titre_2");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         animatorAraigneePlafond.ResetTrigger("Titre_2");
         animatorAraigneePlafond.SetTrigger("Titre_1");
@@ -80,7 +80,7 @@ public class TitreController : CommonController
 
         animatorAraigneePlafond.ResetTrigger("Titre_1");
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(5f);
 
         StopCinematiqueTitre();
     }

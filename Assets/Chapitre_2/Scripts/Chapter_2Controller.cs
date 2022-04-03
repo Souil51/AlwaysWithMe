@@ -267,7 +267,7 @@ public class Chapter_2Controller : CommonController
 
         //Discussion
         movingBody_2.SpeakRandom(4);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         movingBody.SpeakRandom(4);
 
         while (movingBody_2.IsSpeaking() || movingBody.IsSpeaking())
@@ -436,6 +436,7 @@ public class Chapter_2Controller : CommonController
 
                 GameObject goCroix = (GameObject)Instantiate(Resources.Load("croix calendrier"));
                 goCroix.transform.position = new Vector3(fXStart + 2f * i, fYStart - 1.5f * j, -8f);
+                goCroix.transform.parent = goBoucle.transform;
 
                 lstGoCroix.Add(goCroix);
 
@@ -448,20 +449,13 @@ public class Chapter_2Controller : CommonController
             yield return null;
         }
 
-        bFadeEnded = false;
-        animatorFadePanel.SetTrigger("FadeIn");
-
-        //On attend que l'animation termine
-        while (!bFadeEnded)
-            yield return null;
-
         StopCinematiqueBoucle();
     }
 
     private void StopCinematiqueBoucle()
     {
         currentState = ChapitreState.FinBoucle;
-        goBoucle.SetActive(false);
+        //goBoucle.SetActive(false);
 
         ResetFadeTriggers();
 

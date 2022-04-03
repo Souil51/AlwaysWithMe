@@ -379,7 +379,7 @@ public class Chapter_7Controller : CommonController
 
         moveingBodyMaxine.SpeakRandom(6);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
 
         movingBody.SpeakRandom(6);
 
@@ -575,6 +575,11 @@ public class Chapter_7Controller : CommonController
         movingBody.gameObject.transform.position = new Vector3(-3.72f, -8.98f, 1);
         moveingBodyMaxine.gameObject.transform.position = new Vector3(7f, -9.34f, 1f);
 
+        ImageGoal_1.gameObject.GetComponent<Animator>().SetTrigger("FadeOut");
+        ImageGoal_2.gameObject.GetComponent<Animator>().SetTrigger("FadeOut");
+        ImagePoint_1.gameObject.GetComponent<Animator>().SetTrigger("FadeOut");
+        ImagePoint_2.gameObject.GetComponent<Animator>().SetTrigger("FadeOut");
+
         //Fondu vers l'écran de fin
         animatorFadePanel.SetTrigger("FadeIn");
 
@@ -583,11 +588,6 @@ public class Chapter_7Controller : CommonController
 
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
-
-        ImageGoal_1.gameObject.SetActive(false);
-        ImageGoal_2.gameObject.SetActive(false);
-        ImagePoint_1.gameObject.SetActive(false);
-        ImagePoint_2.gameObject.SetActive(false);
 
         fete_groupe.gameObject.SetActive(true);
         jeu_groupe.gameObject.SetActive(false);
@@ -647,6 +647,7 @@ public class Chapter_7Controller : CommonController
         movingBody.UnextendedArms();
 
         moveingBodyMaxine.SpeakRandom(4);
+        yield return new WaitForSeconds(0.25f);
         movingBody.SpeakRandom(4);
 
         yield return new WaitForSeconds(2f);

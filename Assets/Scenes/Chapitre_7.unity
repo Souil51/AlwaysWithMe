@@ -1072,6 +1072,7 @@ GameObject:
   - component: {fileID: 498105746}
   - component: {fileID: 498105748}
   - component: {fileID: 498105747}
+  - component: {fileID: 498105749}
   m_Layer: 5
   m_Name: goal_2
   m_TagString: Untagged
@@ -1136,6 +1137,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498105745}
   m_CullTransparentMesh: 1
+--- !u!95 &498105749
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498105745}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02999ca77c52d264a8fb98df6d0ff5ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &502553792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,6 +2456,7 @@ GameObject:
   - component: {fileID: 822959894}
   - component: {fileID: 822959896}
   - component: {fileID: 822959895}
+  - component: {fileID: 822959897}
   m_Layer: 5
   m_Name: goal_1
   m_TagString: Untagged
@@ -2500,6 +2521,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822959893}
   m_CullTransparentMesh: 1
+--- !u!95 &822959897
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822959893}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02999ca77c52d264a8fb98df6d0ff5ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &839882780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,6 +2742,7 @@ GameObject:
   - component: {fileID: 892857449}
   - component: {fileID: 892857451}
   - component: {fileID: 892857450}
+  - component: {fileID: 892857452}
   m_Layer: 5
   m_Name: points_2
   m_TagString: Untagged
@@ -2766,6 +2807,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892857448}
   m_CullTransparentMesh: 1
+--- !u!95 &892857452
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892857448}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02999ca77c52d264a8fb98df6d0ff5ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &967027100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4437,7 +4497,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -9812,6 +9872,7 @@ GameObject:
   - component: {fileID: 1816580349}
   - component: {fileID: 1816580351}
   - component: {fileID: 1816580350}
+  - component: {fileID: 1816580352}
   m_Layer: 5
   m_Name: points_1
   m_TagString: Untagged
@@ -9876,6 +9937,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816580348}
   m_CullTransparentMesh: 1
+--- !u!95 &1816580352
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816580348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02999ca77c52d264a8fb98df6d0ff5ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1829580300
 GameObject:
   m_ObjectHideFlags: 0

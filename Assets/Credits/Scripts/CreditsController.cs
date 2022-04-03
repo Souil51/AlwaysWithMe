@@ -17,10 +17,6 @@ public class CreditsController : CommonController
     [SerializeField] private GameObject goCreditsSoftware;
     [SerializeField] private GameObject goCreditsThanks;
 
-    [SerializeField] private GameObject particle_1;
-    [SerializeField] private GameObject particle_2;
-    [SerializeField] private GameObject particle_3;
-
     protected override void ChildStart()
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Credits);
@@ -165,7 +161,7 @@ public class CreditsController : CommonController
         yield return new WaitForSeconds(2f);
 
         fElapsedTime = 0;
-        SpriteRenderer sprtThanks = goCreditsThanks.GetComponent<SpriteRenderer>();
+        SpriteRenderer sprtThanks = goCreditsThanks.transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
         while (fElapsedTime < fDuration)
         {

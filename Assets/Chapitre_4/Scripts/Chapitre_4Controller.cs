@@ -340,9 +340,9 @@ public class Chapitre_4Controller : CommonController
             yield return null;
 
         movingBody_Maxine.SpeakRandom(4);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         movingBody.SpeakRandom(4);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
 
         movingBody_Maxine.gameObject.SetActive(false);
         goPerso_Animation_Maxine.SetActive(true);

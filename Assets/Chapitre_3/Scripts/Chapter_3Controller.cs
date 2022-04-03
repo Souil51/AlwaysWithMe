@@ -93,6 +93,8 @@ public class Chapter_3Controller : CommonController
             movableObj.MovableObjectShakedEvent += MovableObj_MovableObjectShakedEvent;
             movableObj.MovableObjectReleasedEvent += MovableObj_MovableObjectReleasedEvent;
         }
+
+        movingBody.ChangeDirection(BodyDirection.Droite);
     }
 
     protected override void ChildUpdate()
