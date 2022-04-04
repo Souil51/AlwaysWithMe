@@ -119,6 +119,8 @@ public class Chapitre_5Controller : CommonController
         Vector3 vEntreeBusCurrentPos = goEntreeBus.transform.position;
         Vector3 vEntreeBusDestination = new Vector3(vEntreeBusCurrentPos.x - 35.86f, -0.75f, 0);
 
+        MusicController.GetInstance().PlaySoundLoop();
+
         while (fElapsedTime < fDuration)
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
@@ -151,6 +153,8 @@ public class Chapitre_5Controller : CommonController
 
         goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 2;
 
+        PlaySound(Sound.PorteBus);
+
         yield return new WaitForSeconds(0.5f);
 
         movingBody.GoToPosition(new Vector3(16.09f, -8.45f, 1));
@@ -159,6 +163,10 @@ public class Chapitre_5Controller : CommonController
             yield return null;
 
         movingBody.GoToPosition(new Vector3(movingBody.transform.position.x - 0.01f, -9.52f, 1));
+
+        yield return new WaitForSeconds(0.25f);
+
+        MusicController.GetInstance().PlaySoundLoop();
 
         while (movingBody.IsGoingToPosition())
             yield return null;
@@ -197,6 +205,9 @@ public class Chapitre_5Controller : CommonController
     private void StopCinematiqueBus()
     {
         SmoothChangeScene(Scenes.Chapitre6);
+
+        MusicController.GetInstance().StopSoundLoop();
+
         StopCinematique();
     }
 

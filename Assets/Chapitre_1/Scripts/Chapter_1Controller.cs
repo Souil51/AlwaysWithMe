@@ -83,6 +83,8 @@ public class Chapter_1Controller : CommonController
                         StopTuto(goTutoInterrupteur);
                         goTutoInterrupteur = null;
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
             case InteractionType.Door:
@@ -108,6 +110,9 @@ public class Chapter_1Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
                     MenuLeave.SetActive(false);
+
+                    PlaySound(Sound.Porte);
+
                     SmoothChangeScene(Scenes.Chapitre2);
                 }
                 break;
@@ -127,6 +132,8 @@ public class Chapter_1Controller : CommonController
                         interObj_Ecran.ChangeSprite_1(sprt_Ecran1On);
                         interObj_Ecran.ChangeSprite_2(sprt_Ecran2On);
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
         }

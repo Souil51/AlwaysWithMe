@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,12 @@ public class DynamicBodyController : MonoBehaviour
     [SerializeField] private bool CalculerDifferenceY;
     [SerializeField] private float GetUpVelocityPrecision = 0f;
     [SerializeField] private float GetUpAngularVelocityPrecision = 0f;
+
+    public delegate void LaunchedEventHandler(object sender, EventArgs e);
+    public event LaunchedEventHandler LaunchedEvent;
+
+    public delegate void HitEventHandler(object sender, EventArgs e);
+    public event HitEventHandler HitEvent;
 
     public bool RagdollActive { get; private set; }
 
@@ -187,6 +194,8 @@ public class DynamicBodyController : MonoBehaviour
 
         rootRigidBody.AddForce(force, ForceMode2D.Force);
         IsUp = false;
+
+        LaunchedEvent?.Invoke(this, EventArgs.Empty);
     }
 
     //Le corps se relève tout seul : les pattes se remettent en place et le corps se lève
@@ -227,6 +236,8 @@ public class DynamicBodyController : MonoBehaviour
             dicPosInitialeIK.Add(leg, leg.transform.GetChild(0).position);
             dicPosNewIK.Add(leg, leg.transform.GetChild(0).position + new Vector3(xDifference, yDifference, 0));
         }
+
+        HitEvent?.Invoke(this, EventArgs.Empty);
 
         if (duration != 0)
         {

@@ -19,6 +19,9 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioClip Theme_Araignee;
     [SerializeField] private AudioClip Theme_Credits;
 
+    [SerializeField] private List<AudioClip> ClipFX;
+    [SerializeField] private AudioSource LoopFX;
+    
     private static MusicController _controller;
 
     public static MusicController GetInstance()
@@ -126,4 +129,75 @@ public class MusicController : MonoBehaviour
 
         Source.volume = fVolume;
     }
+
+    #region FX
+
+    public void PlaySound(Sound sound)
+    {
+        switch (sound)
+        {
+            case Sound.Interrupteur: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.SelectPeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.ShakePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.AraigneePlacard: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.AraigneeSac: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.AraigneeSaut: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.Bus: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.PorteBus: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.AraigneeLance: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.Tir: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.JeuGagne: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.MauvaisePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.BonnePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.Porte: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
+            case Sound.Ballon: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero, 0.3f); break;
+        }
+    }
+
+    public void PlaySoundLoop()
+    {
+        LoopFX.volume = 0;
+        LoopFX.Play();
+        StartCoroutine(coroutine_SmoothPlaySound());
+    }
+
+    public void StopSoundLoop()
+    {
+        StartCoroutine(coroutine_SmoothStopSound());
+    }
+
+    private IEnumerator coroutine_SmoothStopSound(float fDuration = 1f)
+    {
+        float fElapsedTime = 0;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(0.2f, 0, (fElapsedTime / fDuration));
+            LoopFX.volume = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        LoopFX.volume = 0;
+        LoopFX.Stop();
+    }
+
+    private IEnumerator coroutine_SmoothPlaySound(float fDuration = 1f)
+    {
+        float fElapsedTime = 0;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(0, 0.2f, (fElapsedTime / fDuration));
+            LoopFX.volume = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        LoopFX.volume = 0.2f;
+    }
+
+    #endregion
 }

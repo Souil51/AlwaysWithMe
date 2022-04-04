@@ -4782,8 +4782,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 6711121298382462725}
   m_Bounds:
-    m_Center: {x: 1.33, y: 0.65, z: 0}
-    m_Extent: {x: 0.03999996, y: 0.04000002, z: 0}
+    m_Center: {x: 0.063791275, y: -0.46804988, z: 0}
+    m_Extent: {x: 0.041230746, y: 0.04123074, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &596085513997898215
@@ -5811,8 +5811,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 5459986019003799364}
   m_Bounds:
-    m_Center: {x: 1.2394149, y: 0.615, z: 0}
-    m_Extent: {x: 0.32867497, y: 0.27500004, z: 0}
+    m_Center: {x: 0.061878204, y: -0.35387474, z: 0}
+    m_Extent: {x: 0.3292535, y: 0.27858275, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &2299452321184895795
@@ -5916,8 +5916,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 6208672560112044012}
   m_Bounds:
-    m_Center: {x: 1.1100001, y: 0.65207505, z: 0}
-    m_Extent: {x: 0.03999996, y: 0.047925025, z: 0}
+    m_Center: {x: 0.06271338, y: -0.45850563, z: 0}
+    m_Extent: {x: 0.040228166, y: 0.048428357, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &2366139434127477239
@@ -5957,8 +5957,8 @@ MonoBehaviour:
   - {fileID: 859373256769846890}
   - {fileID: 6256446820223011244}
   m_Bounds:
-    m_Center: {x: 1.79, y: 0.30867, z: 0}
-    m_Extent: {x: 0.27000004, y: 0.30866998, z: 0}
+    m_Center: {x: 0.0781571, y: -0.44384065, z: 0}
+    m_Extent: {x: 0.29065982, y: 0.2796286, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &2431320531088504777
@@ -8343,7 +8343,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.087860614, y: -0.13163845}
+  m_ConnectedAnchor: {x: -0.08786073, y: -0.13163857}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8525,7 +8525,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.29468653, y: -0.00000011920932}
+  m_ConnectedAnchor: {x: 0.28712082, y: -0.015023531}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8565,7 +8565,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.04518151, y: -0.25348288}
+  m_ConnectedAnchor: {x: -0.04518163, y: -0.25348288}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8647,7 +8647,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.42887905, y: -0.00000005960463}
+  m_ConnectedAnchor: {x: 0.42887914, y: -0.000000089406974}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8769,7 +8769,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.53029054, y: 0.008129119}
+  m_ConnectedAnchor: {x: 0.5302907, y: 0.008128597}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8809,7 +8809,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.10444848, y: -0.32954916}
+  m_ConnectedAnchor: {x: 0.10444884, y: -0.3295492}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8891,7 +8891,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.20972845, y: 0.00000020116556}
+  m_ConnectedAnchor: {x: 0.2097284, y: -0.000000007450577}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -8931,7 +8931,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.07226517, y: 0.13303952}
+  m_ConnectedAnchor: {x: -0.07226529, y: 0.13303952}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9013,7 +9013,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.29080895, y: 0.00000008940696}
+  m_ConnectedAnchor: {x: 0.29080874, y: 0.00000020861621}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9053,7 +9053,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.010992525, y: 0.22569627}
+  m_ConnectedAnchor: {x: -0.010992524, y: 0.22569638}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9135,7 +9135,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.42182127, y: -0.000000044703494}
+  m_ConnectedAnchor: {x: 0.4218213, y: 0.000000029802333}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9175,7 +9175,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.06307365, y: 0.26277846}
+  m_ConnectedAnchor: {x: 0.06307377, y: 0.26277858}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9257,7 +9257,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.5247964, y: 0.0000000745058}
+  m_ConnectedAnchor: {x: 0.5247966, y: -0.000000014901156}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9297,7 +9297,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.13174242, y: 0.29006523}
+  m_ConnectedAnchor: {x: 0.1317423, y: 0.2900651}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -12665,8 +12665,8 @@ MonoBehaviour:
   - {fileID: 1800053388987567185}
   - {fileID: 8126792477324175708}
   m_Bounds:
-    m_Center: {x: 0.000060141087, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.28993988, y: 0.31000018, z: 0}
+    m_Center: {x: 0.04702437, y: -0.43278274, z: 0}
+    m_Extent: {x: 0.30291703, y: 0.28935412, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &3538361802230242161
@@ -12896,8 +12896,8 @@ MonoBehaviour:
   - {fileID: 3794586939286950192}
   - {fileID: 4686047773755763998}
   m_Bounds:
-    m_Center: {x: 1.025, y: 0.19999994, z: 0}
-    m_Extent: {x: 0.07500005, y: 0.19999996, z: 0}
+    m_Center: {x: 0.016069457, y: -0.43148133, z: 0}
+    m_Extent: {x: 0.10971202, y: 0.18492922, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &3945274669433695178
@@ -12959,8 +12959,8 @@ MonoBehaviour:
   - {fileID: 6041005920164711595}
   - {fileID: 5645623116330387481}
   m_Bounds:
-    m_Center: {x: 1.545, y: 0.24000005, z: 0}
-    m_Extent: {x: 0.11500001, y: 0.23999995, z: 0}
+    m_Center: {x: 0.09108029, y: -0.42973876, z: 0}
+    m_Extent: {x: 0.16233319, y: 0.20930292, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &4019248426371933427
@@ -13055,8 +13055,8 @@ MonoBehaviour:
   - {fileID: 7931597849186472023}
   - {fileID: 2323605049485743299}
   m_Bounds:
-    m_Center: {x: 0.77787006, y: 0.27499995, z: 0}
-    m_Extent: {x: 0.18787, y: 0.27500004, z: 0}
+    m_Center: {x: 0.037540972, y: -0.42714953, z: 0}
+    m_Extent: {x: 0.20751548, y: 0.25368017, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &4658311148128216754
@@ -13709,8 +13709,8 @@ MonoBehaviour:
   - {fileID: 3893329668916438970}
   - {fileID: 3065391479375554860}
   m_Bounds:
-    m_Center: {x: 1.6798099, y: 0.275, z: 0}
-    m_Extent: {x: 0.19980991, y: 0.275, z: 0}
+    m_Center: {x: 0.07738003, y: -0.44105348, z: 0}
+    m_Extent: {x: 0.22577384, y: 0.24275866, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &5627657583777869743
@@ -14304,8 +14304,8 @@ MonoBehaviour:
   - {fileID: 3082650273209588895}
   - {fileID: 7026834855350479324}
   m_Bounds:
-    m_Center: {x: 1.42956, y: 0.205545, z: 0}
-    m_Extent: {x: 0.09955996, y: 0.202505, z: 0}
+    m_Center: {x: 0.08127849, y: -0.42846054, z: 0}
+    m_Extent: {x: 0.13198988, y: 0.18079372, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &6613703092500896993
@@ -15747,8 +15747,8 @@ MonoBehaviour:
   - {fileID: 2993743648790001894}
   - {fileID: 7393251604653646749}
   m_Bounds:
-    m_Center: {x: 0.898455, y: 0.23000014, z: 0}
-    m_Extent: {x: 0.10709497, y: 0.2299999, z: 0}
+    m_Center: {x: 0.0177539, y: -0.4296848, z: 0}
+    m_Extent: {x: 0.13867497, y: 0.2157608, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &9146475258887460155

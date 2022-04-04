@@ -155,6 +155,8 @@ public class Chapter_3Controller : CommonController
                         lightRoom.SetActive(true);
                         bLightOn = true;
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
             case InteractionType.Door:
@@ -177,6 +179,8 @@ public class Chapter_3Controller : CommonController
 
                     ResetFadeTriggers();
 
+                    PlaySound(Sound.Porte);
+
                     SmoothChangeScene(Scenes.Chapitre4);
                 }
                 break;
@@ -196,11 +200,14 @@ public class Chapter_3Controller : CommonController
                         interObj_Ecran.ChangeSprite_1(sprt_Ecran1On);
                         interObj_Ecran.ChangeSprite_2(sprt_Ecran2On);
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
             case InteractionType.Placard_Interaction:
                 {
                     StartCinematique(Cinematiques.Chapitre3_EntreePlacard);
+                    //StartCinematique(Cinematiques.Chapitre3_SortiePlacard);
                 }
                 break;
         }
@@ -277,6 +284,8 @@ public class Chapter_3Controller : CommonController
 
     private void MovableObj_MovableObjectSelectedEvent(object sender, MovableObjectEventArg e)
     {
+        PlaySound(Sound.SelectPeluche);
+
         timeWithoutSelectInteraction = 0;
 
         MovableObject objForeGround = lstMovableObject.Find(x => x.GetObjectIndex() == e.nIndex);
@@ -300,6 +309,8 @@ public class Chapter_3Controller : CommonController
 
     private void MovableObj_MovableObjectReleasedEvent(object sender, MovableObjectEventArg e)
     {
+        PlaySound(Sound.SelectPeluche);
+
         if (goShakeTuto != null)
         {
             StopTuto(goShakeTuto);
@@ -310,6 +321,8 @@ public class Chapter_3Controller : CommonController
 
     private void MovableObj_MovableObjectShakedEvent(object sender, MovableObjectEventArg e)
     {
+        PlaySound(Sound.ShakePeluche);
+
         timeWithoutShakeInteraction = 0;
 
         if (goShakeTuto != null)
@@ -349,13 +362,19 @@ public class Chapter_3Controller : CommonController
     {
         araignee.ShowHideSprite(false);
 
+        movingBody.GoToPosition(new Vector3(-13.71f, -3.06f, 256.98f));
+
+        while (movingBody.IsGoingToPosition())
+            yield return null;
+
+        movingBody.ChangeDirection(BodyDirection.Droite);
+
         animatorFadePanel.SetTrigger("FadeIn");
 
         //On attend que l'animation termine
         while (!bFadeEnded)
             yield return null;
 
-        movingBody.transform.position = new Vector3(14.89f, -3.06f, 0);
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
 
@@ -374,6 +393,8 @@ public class Chapter_3Controller : CommonController
     {
         currentState = ChapitreState.Placard;
         StopCinematique();
+
+        movingBody.SetActive(false);
     }
 
     #endregion
@@ -383,8 +404,6 @@ public class Chapter_3Controller : CommonController
     private void StartCinematiqueSortiePlacard()
     {
         currentState = ChapitreState.CinematiqueSortiePlacard;
-
-        bInteractionsActives = false;
 
         ResetFadeTriggers();
 
@@ -418,9 +437,9 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(0.5f);
 
-        movingBody.GoToPosition(new Vector3(5.3f, -3.06f, movingBody.transform.position.z), 0.5f);
+        movingBody.GoToPosition(new Vector3(5.3f, -3.06f, movingBody.transform.position.z));
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
 
         MoveCamera(new Vector3(0.85f, 8.67f, -10), 3.4f);
 
@@ -504,6 +523,8 @@ public class Chapter_3Controller : CommonController
 
         while (!araigneeDynamicBody.IsBodyGettingUp())
             yield return null;
+
+        PlaySound(Sound.AraigneePlacard);
 
         foreach (MovableObject obj in lstMovableObject)
         {

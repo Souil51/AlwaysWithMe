@@ -77,6 +77,8 @@ public class Chapter_7Controller : CommonController
         {
             if (Input.GetMouseButtonDown(0))
             {
+                PlaySound(Sound.Tir);
+
                 BallonController ballonDisabled = null;
 
                 foreach (BallonController ballon in lstBallons)
@@ -85,6 +87,8 @@ public class Chapter_7Controller : CommonController
                     {
                         ballonDisabled = ballon;
                         ballon.SetEnabled(false);
+
+                        PlaySound(Sound.Ballon);
                     }
                 }
 
@@ -95,6 +99,8 @@ public class Chapter_7Controller : CommonController
 
                     if (nPoints == nObjectif)
                     {
+                        PlaySound(Sound.JeuGagne);
+
                         StartCinematique(Cinematiques.Chapitre7_VictoireJeu);
                     }
                     else
@@ -124,6 +130,8 @@ public class Chapter_7Controller : CommonController
         {
             case InteractionType.Sortie:
                 {
+                    PlaySound(Sound.Porte);
+
                     StartCinematique(Cinematiques.Chapitre7_EntreeFete);
                 }
                 break;
@@ -134,16 +142,22 @@ public class Chapter_7Controller : CommonController
                 break;
             case InteractionType.PrixFlamme:
                 {
+                    PlaySound(Sound.MauvaisePeluche);
+
                     coroutineDescenteAraignee = StartCoroutine(coroutine_DescenteAraigneeFaux());
                 }
                 break;
             case InteractionType.PrixMasque:
                 {
+                    PlaySound(Sound.MauvaisePeluche);
+
                     coroutineDescenteAraignee = StartCoroutine(coroutine_DescenteAraigneeFaux());
                 }
                 break;
             case InteractionType.PrixTotoro:
                 {
+                    PlaySound(Sound.BonnePeluche);
+
                     StartCinematique(Cinematiques.Chapitre7_FinJeu);
                 }
                 break;
@@ -238,6 +252,8 @@ public class Chapter_7Controller : CommonController
         Vector3 movingBodyCurrentPos = movingBody.transform.position;
         Vector3 movingBodyDestination = new Vector3(movingBodyCurrentPos.x - 33f, -10.8f, 0);
 
+        MusicController.GetInstance().PlaySoundLoop();
+
         while (fElapsedTime < fDuration)
         {
             Vector3 vNewPos = Vector3.Lerp(vBusCurrentPos, vBusDestination, (fElapsedTime / fDuration));
@@ -269,6 +285,7 @@ public class Chapter_7Controller : CommonController
             yield return null;
 
         goEntreeBus.GetComponent<SpriteRenderer>().sortingOrder = 5;
+        PlaySound(Sound.PorteBus);
 
         yield return new WaitForSeconds(1f);
 
@@ -292,6 +309,8 @@ public class Chapter_7Controller : CommonController
 
             yield return null;
         }
+
+        MusicController.GetInstance().StopSoundLoop();
 
         StopCinematiqueArrivee();
     }

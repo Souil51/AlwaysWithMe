@@ -36,6 +36,11 @@ public class AraigneeController : MonoBehaviour
         
     }
 
+    public DynamicBodyController GetDynamicController()
+    {
+        return dynamicBodyController;
+    }
+
     private void LoadAnimations()
     {
         if (dicAnimationsFinished.Count > 0) return;
@@ -191,6 +196,15 @@ public class AraigneeController : MonoBehaviour
             fElapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    #endregion
+
+    #region Son
+
+    public void PlaySound(Sound sound)
+    {
+        MusicController.GetInstance().PlaySound(sound);
     }
 
     #endregion

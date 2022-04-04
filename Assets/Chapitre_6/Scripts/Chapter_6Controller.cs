@@ -38,7 +38,20 @@ public class Chapter_6Controller : CommonController
     {
         araignee.ShowHideSprite(false);
 
+        araignee.GetDynamicController().LaunchedEvent += Chapter_6Controller_LaunchedEvent;
+        araignee.GetDynamicController().HitEvent += Chapter_6Controller_HitEvent;
+
         StartCinematique(Cinematiques.Chapitre6_Debut);
+    }
+
+    private void Chapter_6Controller_HitEvent(object sender, System.EventArgs e)
+    {
+        PlaySound(Sound.AraigneeLance);
+    }
+
+    private void Chapter_6Controller_LaunchedEvent(object sender, System.EventArgs e)
+    {
+        PlaySound(Sound.AraigneeSaut);
     }
 
     protected override void ChildUpdate()

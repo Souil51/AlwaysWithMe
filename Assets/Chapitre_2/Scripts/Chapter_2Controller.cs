@@ -108,6 +108,8 @@ public class Chapter_2Controller : CommonController
                     this.bMenuDisplayed = false;
                     MenuLeave.SetActive(false);
 
+                    PlaySound(Sound.Porte);
+
                     StartCinematique(Cinematiques.Chapitre2_Boucle);
                 }
                 break;
@@ -127,6 +129,8 @@ public class Chapter_2Controller : CommonController
                         ecranGauche.ChangeSprite_1(sprt_EcranGaucheOn);
                         ecranGauche.ChangeSprite_2(sprt_EcranGaucheOn_2);
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
             case InteractionType.Ecran_Toggle_2:
@@ -145,6 +149,8 @@ public class Chapter_2Controller : CommonController
                         ecranDroite.ChangeSprite_1(sprt_EcranDroitOn);
                         ecranDroite.ChangeSprite_2(sprt_EcranDroitOn_2);
                     }
+
+                    PlaySound(Sound.Interrupteur);
                 }
                 break;
             case InteractionType.Ecran_Interaction:

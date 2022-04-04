@@ -150,6 +150,8 @@ public class Chapitre_4Controller : CommonController
         {
             case InteractionType.Sortie:
                 {
+                    PlaySound(Sound.Porte);
+
                     StartCinematique(Cinematiques.Chapitre4_EntreeBanc);
                 }
                 break;
@@ -361,6 +363,8 @@ public class Chapitre_4Controller : CommonController
         while (movingBody.IsGoingToPosition())
             yield return null;
 
+        yield return new WaitForSeconds(0.25f);
+
         movingBody.gameObject.SetActive(false);
         goPerso_Animation_1.SetActive(true);
 
@@ -468,6 +472,8 @@ public class Chapitre_4Controller : CommonController
             yield return null;
         }
 
+        PlaySound(Sound.AraigneeSaut);
+
         while (!araignee.GetComponent<AraigneeController>().IsAnimationFinished(AraigneeController.AnimationsAraignee.SautFil))
             yield return null;
 
@@ -505,7 +511,11 @@ public class Chapitre_4Controller : CommonController
         //Fuite de l'araignee
         araignee.GetComponent<AraigneeController>().StartAnimation(AraigneeController.AnimationsAraignee.Chapitre3_SortieEcran);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
+        PlaySound(Sound.ShakePeluche);
+
+        yield return new WaitForSeconds(0.5f);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 

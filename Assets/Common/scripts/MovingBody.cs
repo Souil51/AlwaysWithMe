@@ -47,8 +47,13 @@ public class MovingBody : MonoBehaviour
 
     void Update()
     {
-        if (!IsActive) 
-            return;
+        if (!IsActive)
+        {
+            if (!bIsMoving)
+                return;
+            else
+                bIsMoving = false;
+        }
 
         //Si on est en mouvement
         if (bIsMoving) 

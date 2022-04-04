@@ -122,6 +122,25 @@ public enum Tutoriel
     Tuto_Too_Far
 }
 
+public enum Sound
+{
+    Interrupteur = 0,
+    SelectPeluche,
+    ShakePeluche,
+    AraigneePlacard,
+    AraigneeSac,
+    AraigneeSaut,
+    Bus,
+    PorteBus,
+    AraigneeLance,
+    Tir,
+    JeuGagne,
+    MauvaisePeluche,
+    BonnePeluche,
+    Porte,
+    Ballon
+}
+
 public class CommonController : MonoBehaviour
 {
     public readonly static float VOLUME_BASE = 0.15f;
@@ -179,7 +198,7 @@ public class CommonController : MonoBehaviour
     void Update()
     {
         //Pour empêcher de bouger quand on veut juste cliquer sur un object "interactable", il y a un délai avant de déclencher la marche du personnage
-        if (bStartMoveDelay)
+        if (bStartMoveDelay && bInteractionsActives)
         {
             fCurrentClickedDelay += Time.deltaTime;
 
@@ -189,6 +208,12 @@ public class CommonController : MonoBehaviour
                 bStartMoveDelay = false;
                 fCurrentClickedDelay = 0;
             }
+        }
+        else if(bInteractionsActives == false && movingBody.IsMoving())
+        {
+            if (movingBody != null) movingBody.SetMoving(false);
+            bStartMoveDelay = false;
+            fCurrentClickedDelay = 0;
         }
 
         if (Input.GetMouseButtonDown(0) && currentObject == null)
@@ -379,6 +404,11 @@ public class CommonController : MonoBehaviour
         SetInteractionsActives(true);
     }
 
+    protected void PlaySound(Sound sound)
+    {
+        MusicController.GetInstance().PlaySound(sound);
+    }
+
     #region Empty Virtual Methods
 
     protected virtual void ChapterInteraction(InteractionType type) { }
@@ -483,4 +513,5 @@ public class CommonController : MonoBehaviour
     }
 
     #endregion
+
 }
