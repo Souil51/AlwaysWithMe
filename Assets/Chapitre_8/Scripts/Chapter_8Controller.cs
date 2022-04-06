@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Chapter_8Controller : CommonController
 {
+    private enum State
+    {
+        Initial,
+        Jeu,
+        Fin
+    }
+
     [SerializeField] private MovingBody movingBodyMaxine;
     [SerializeField] private GameObject goPerso_Animation_Maxine;
     [SerializeField] private GameObject goPerso_Animation;
@@ -17,11 +24,39 @@ public class Chapter_8Controller : CommonController
 
     [SerializeField] private GameObject spriteBodyMaxine;
 
+    private State currentState = State.Initial;
+    private float fTimeWithoutInteraction = 0;
+    private float fTutoTimeElapsed = 0;
+    private GameObject goTuto;
+
     protected override void ChildStart()
     {
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
 
         StartCinematique(Cinematiques.Chapitre8_Initial);
+    }
+
+    protected override void ChildUpdate()
+    {
+        if (currentState == State.Jeu)
+        {
+            if (goTuto == null)
+                fTimeWithoutInteraction += Time.deltaTime;
+            else
+                fTutoTimeElapsed += Time.deltaTime;
+
+            if (goTuto == null && fTimeWithoutInteraction > 5)
+            {
+                fTimeWithoutInteraction = 0;
+                goTuto = PlayTuto(Tutoriel.Clic_Gauche, new Vector3(5.82f, -0.8f, 0));
+            }
+
+            if(goTuto != null && fTutoTimeElapsed > 5)
+            {
+                fTutoTimeElapsed = 0;
+                StopTuto(goTuto);
+            }
+        }
     }
 
     protected override void ChapterInteraction(InteractionType type)
@@ -91,6 +126,7 @@ public class Chapter_8Controller : CommonController
     private void StopCinematiqueInitial()
     {
         StopCinematique();
+        currentState = State.Jeu;
     }
 
     #endregion
@@ -99,6 +135,7 @@ public class Chapter_8Controller : CommonController
 
     private void StartCinematiqueFin()
     {
+        currentState = State.Fin;
         StartCoroutine(coroutine_CinematiqueFin());
     }
 

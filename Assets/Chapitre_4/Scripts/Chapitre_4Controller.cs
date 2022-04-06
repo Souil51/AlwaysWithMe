@@ -76,8 +76,6 @@ public class Chapitre_4Controller : CommonController
         }
         else if(currentState == ChapitreState.Banc_Araignee)
         {
-            bool bClick = false;
-
             if (Input.GetMouseButton(1))
             {
                 if (fil_groupe.transform.position.y < fMaxY)
@@ -85,7 +83,7 @@ public class Chapitre_4Controller : CommonController
                     fil_groupe.transform.position = new Vector3(fil_groupe.transform.position.x, fil_groupe.transform.position.y + (fSpeed * Time.deltaTime), fil_groupe.transform.position.z);
                 }
 
-                bClick = true;
+                StopTuto(TutoHoldArrowUp);
             }
             else if (Input.GetMouseButton(0))
             {
@@ -94,13 +92,7 @@ public class Chapitre_4Controller : CommonController
                     fil_groupe.transform.position = new Vector3(fil_groupe.transform.position.x, fil_groupe.transform.position.y - (fSpeed * Time.deltaTime), fil_groupe.transform.position.z);
                 }
 
-                bClick = true;
-            }
-
-            if (bClick && (TutoHoldArrowDown != null || TutoHoldArrowUp != null))
-            {
                 StopTuto(TutoHoldArrowDown);
-                StopTuto(TutoHoldArrowUp);
             }
 
             if (fil_groupe.transform.position.y < fMinY + 0.5f)
@@ -116,25 +108,19 @@ public class Chapitre_4Controller : CommonController
         }
         else if(currentState == ChapitreState.Banc_Fil)
         {
-            bool bHasMoved = false;
-
             banc_araigneeRoot.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
             if (Input.GetMouseButton(0))
             {
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 0), ForceMode2D.Force);
-                bHasMoved = true;
+
+                StopTuto(TutoHoldArrowRight);
             }
             else if (Input.GetMouseButton(1))
             {
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 0), ForceMode2D.Force);
-                bHasMoved = true;
-            }
 
-            if(bHasMoved && (TutoHoldArrowRight != null || TutoHoldArrowLeft != null))
-            {
                 StopTuto(TutoHoldArrowLeft);
-                StopTuto(TutoHoldArrowRight);
             }
 
             if(fil_araignee.transform.eulerAngles.z < 335f && fil_araignee.transform.eulerAngles.z > 300f && currentState == ChapitreState.Banc_Fil)
@@ -472,7 +458,11 @@ public class Chapitre_4Controller : CommonController
             yield return null;
         }
 
-        PlaySound(Sound.AraigneeSaut);
+        araignee.transform.eulerAngles = Vector3.zero;
+        banc_araigneeRoot.transform.eulerAngles = new Vector3(0, 0, 90);
+        araignee.transform.position = vDestination;
+
+        PlaySound(Sound.AraigneePlacard);
 
         while (!araignee.GetComponent<AraigneeController>().IsAnimationFinished(AraigneeController.AnimationsAraignee.SautFil))
             yield return null;
@@ -511,11 +501,11 @@ public class Chapitre_4Controller : CommonController
         //Fuite de l'araignee
         araignee.GetComponent<AraigneeController>().StartAnimation(AraigneeController.AnimationsAraignee.Chapitre3_SortieEcran);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         PlaySound(Sound.ShakePeluche);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Maxine);
 

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4209031442272398372}
   - component: {fileID: 4209031442272398378}
   - component: {fileID: 5694162515734306348}
+  - component: {fileID: 4048836918561714703}
+  - component: {fileID: 6078948509870682673}
   m_Layer: 0
   m_Name: ballon
   m_TagString: Untagged
@@ -242,3 +244,34 @@ PolygonCollider2D:
       - {x: 0.12, y: -1.935}
       - {x: 0.17, y: -1.875}
       - {x: 0.17999999, y: -1.8249999}
+--- !u!114 &4048836918561714703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209031442272398376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506db88ef3eba1c4abf74409dcee35c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &6078948509870682673
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209031442272398376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3b312a0a3e5af54aba2ec10ef4b2f06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

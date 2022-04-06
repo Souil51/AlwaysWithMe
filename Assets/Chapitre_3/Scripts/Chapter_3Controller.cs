@@ -169,6 +169,8 @@ public class Chapter_3Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
 
+                    PlaySound(Sound.MenuFermer);
+
                     MenuLeaveAnimator.Play("LeaveDisappearAnimation");
                 }
                 break;

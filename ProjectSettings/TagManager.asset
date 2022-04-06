@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TargetCollider
   - Floor
+  - ObjetSol
   layers:
   - Default
   - TransparentFX

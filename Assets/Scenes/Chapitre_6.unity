@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 34433640}
   m_Layer: 8
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,6 +385,7 @@ MonoBehaviour:
   lstInteractableObjects: []
   fadePanel: {fileID: 893118497}
   animatorFadePanel: {fileID: 893118495}
+  PlayTutoTooFar: 0
   araignee: {fileID: 192367860}
   goRootAraignee: {fileID: 6468790631482899409}
   lineRenderer: {fileID: 893592790}
@@ -487,7 +488,7 @@ GameObject:
   - component: {fileID: 238905490}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -944,7 +945,7 @@ GameObject:
   - component: {fileID: 587663414}
   m_Layer: 8
   m_Name: barre
-  m_TagString: Untagged
+  m_TagString: ObjetSol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1745,7 +1746,7 @@ GameObject:
   - component: {fileID: 1379326087}
   m_Layer: 8
   m_Name: socle_1
-  m_TagString: Untagged
+  m_TagString: ObjetSol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1919,7 +1920,7 @@ GameObject:
   - component: {fileID: 1854558886}
   m_Layer: 8
   m_Name: socle_2
-  m_TagString: Untagged
+  m_TagString: ObjetSol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,7 +2063,7 @@ GameObject:
   - component: {fileID: 2023436830}
   m_Layer: 8
   m_Name: sac
-  m_TagString: Untagged
+  m_TagString: ObjetSol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5499,6 +5500,7 @@ GameObject:
   - component: {fileID: 2854799609369620922}
   - component: {fileID: 2854799609369620923}
   - component: {fileID: 2854799609369620841}
+  - component: {fileID: 6468790631482899410}
   m_Layer: 9
   m_Name: root
   m_TagString: Untagged
@@ -5506,6 +5508,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6468790631482899410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468790631482899409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0135e65184cab2469a6fd644f02f7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6591670218349548106
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioSource LoopFX;
     
     private static MusicController _controller;
-
+    private Coroutine coroutine_pitch;
     public static MusicController GetInstance()
     {
         if(_controller == null)
@@ -68,7 +68,7 @@ public class MusicController : MonoBehaviour
     private IEnumerator coroutine_SmoothChangeAudioClip(Clips clip, float fDuration = 0.25f)
     {
         float fElapsedTime = 0;
-        float fCurrentVolume = Source.volume == 0 ? CommonController.VOLUME_BASE : Source.volume;
+        float fCurrentVolume = CommonController.VOLUME_BASE;
 
         while (fElapsedTime < fDuration && Source.volume > 0)
         {
@@ -132,26 +132,22 @@ public class MusicController : MonoBehaviour
 
     #region FX
 
-    public void PlaySound(Sound sound)
+    public void PlaySound(Sound sound, float volume = 1f)
     {
+        float fVolume = volume;
+
         switch (sound)
         {
-            case Sound.Interrupteur: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.SelectPeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.ShakePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.AraigneePlacard: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.AraigneeSac: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.AraigneeSaut: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.Bus: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.PorteBus: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.AraigneeLance: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.Tir: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.JeuGagne: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.MauvaisePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.BonnePeluche: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.Porte: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero); break;
-            case Sound.Ballon: AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero, 0.3f); break;
+            case Sound.Ballon: fVolume = volume * 0.1f; break;
+            case Sound.MenuFermer: fVolume = volume * 0.3f; break;
+            case Sound.Placard: fVolume = volume * 0.5f; break;
+            case Sound.Tir: fVolume = volume * 0.3f; break;
+            case Sound.JeuGagne: fVolume = volume * 0.7f; break;
+            case Sound.BonnePeluche: fVolume = volume * 0.7f; break;
+            case Sound.MauvaisePeluche: fVolume = volume * 0.7f; break;
         }
+
+        AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero, fVolume);
     }
 
     public void PlaySoundLoop()
@@ -166,13 +162,20 @@ public class MusicController : MonoBehaviour
         StartCoroutine(coroutine_SmoothStopSound());
     }
 
+    public void ChangePitch(float toPitch, float fDuration = 0.5f)
+    {
+        if (coroutine_pitch != null) StopCoroutine(coroutine_pitch);
+
+        coroutine_pitch = StartCoroutine(coroutine_SmoothChangePitch(toPitch, fDuration));
+    }
+
     private IEnumerator coroutine_SmoothStopSound(float fDuration = 1f)
     {
         float fElapsedTime = 0;
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(0.2f, 0, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(0.05f, 0, (fElapsedTime / fDuration));
             LoopFX.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;
@@ -189,14 +192,31 @@ public class MusicController : MonoBehaviour
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(0, 0.2f, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(0, 0.05f, (fElapsedTime / fDuration));
             LoopFX.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        LoopFX.volume = 0.2f;
+        LoopFX.volume = 0.05f;
+    }
+
+    private IEnumerator coroutine_SmoothChangePitch(float toPitch, float fDuration)
+    {
+        float fElapsedTime = 0;
+        float fCurrentPitch = Source.pitch;
+
+        while (fElapsedTime < fDuration)
+        {
+            float fNewVolume = Mathf.Lerp(fCurrentPitch, toPitch, (fElapsedTime / fDuration));
+            Source.pitch = fNewVolume;
+
+            fElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Source.pitch = toPitch;
     }
 
     #endregion

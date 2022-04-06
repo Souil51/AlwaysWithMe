@@ -100,6 +100,8 @@ public class Chapter_2Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
 
+                    PlaySound(Sound.MenuFermer);
+
                     MenuLeaveAnimator.Play("LeaveDisappearAnimation");
                 }
                 break;
@@ -333,12 +335,16 @@ public class Chapter_2Controller : CommonController
         MoveCamera(new Vector3(8.5f, 12f, 0), 6f, true);
         Horloge.SetSpeed(1000);
 
+        MusicController.GetInstance().ChangePitch(1.5f, 1f);
+
         yield return new WaitForSeconds(0.5f);
 
         goExitOff.SetActive(false);
         goExitOn.SetActive(true);
 
         yield return new WaitForSeconds(2f);
+
+        MusicController.GetInstance().ChangePitch(1f, 1f);
 
         Horloge.SetSpeed(fInitialHorlogeSpeed);
         MoveCamera(vInitialCameraPosition, fInitialCameraSize, true);
@@ -400,6 +406,8 @@ public class Chapter_2Controller : CommonController
 
         yield return new WaitForSeconds(1f);
 
+        MusicController.GetInstance().ChangePitch(1.25f, 10f);
+
         List<GameObject> lstGoCroix = new List<GameObject>();
 
         while(nIndexBoucle < 20 || currentState == ChapitreState.FinBoucle)
@@ -454,6 +462,8 @@ public class Chapter_2Controller : CommonController
 
             yield return null;
         }
+
+        MusicController.GetInstance().ChangePitch(1f, 0.1f);
 
         StopCinematiqueBoucle();
     }

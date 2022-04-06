@@ -10,9 +10,9 @@ public class Chapitre_5Controller : CommonController
 
     protected override void ChildStart()
     {
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
-
         StartCinematiqueInitial();
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
     }
 
     protected override void ChapterInteraction(InteractionType type)
@@ -60,6 +60,8 @@ public class Chapitre_5Controller : CommonController
 
     private void StartCinematiqueInitial()
     {
+        movingBody.SetActive(false);
+
         StartCoroutine(coroutine_CinematiqueInitial());
     }
 
@@ -165,8 +167,6 @@ public class Chapitre_5Controller : CommonController
         movingBody.GoToPosition(new Vector3(movingBody.transform.position.x - 0.01f, -9.52f, 1));
 
         yield return new WaitForSeconds(0.25f);
-
-        MusicController.GetInstance().PlaySoundLoop();
 
         while (movingBody.IsGoingToPosition())
             yield return null;

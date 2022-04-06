@@ -101,7 +101,8 @@ public enum Cinematiques
     Chapitre8_Initial,
     Chapitre8_Fin,
     Credits_Credits,
-    Titre_Titre
+    Titre_Titre,
+    NonDefinie
 }
 
 public enum Tutoriel
@@ -138,12 +139,14 @@ public enum Sound
     MauvaisePeluche,
     BonnePeluche,
     Porte,
-    Ballon
+    Ballon,
+    Placard,
+    MenuFermer
 }
 
 public class CommonController : MonoBehaviour
 {
-    public readonly static float VOLUME_BASE = 0.15f;
+    public readonly static float VOLUME_BASE = 0.02f;
     public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;
@@ -175,6 +178,8 @@ public class CommonController : MonoBehaviour
     protected bool bMenuDisplayed = false;
     private bool bClickHasBeenInteraction = false;
 
+    private Cinematiques currentCinematique = Cinematiques.NonDefinie;
+
     //Tuto
     protected List<GameObject> lstPlayingTuto = new List<GameObject>();
 
@@ -197,53 +202,58 @@ public class CommonController : MonoBehaviour
 
     void Update()
     {
-        //Pour empêcher de bouger quand on veut juste cliquer sur un object "interactable", il y a un délai avant de déclencher la marche du personnage
-        if (bStartMoveDelay && bInteractionsActives)
-        {
-            fCurrentClickedDelay += Time.deltaTime;
-
-            if(fCurrentClickedDelay > fDelayToMove && !bClickHasBeenInteraction)
+        if (currentCinematique != Cinematiques.Chapitre2_Initial
+            && currentCinematique != Cinematiques.Chapitre4_Initial
+            && currentCinematique != Cinematiques.Chapitre5_Initial
+            && currentCinematique != Cinematiques.Chapitre8_Initial)
+        { 
+            //Pour empêcher de bouger quand on veut juste cliquer sur un object "interactable", il y a un délai avant de déclencher la marche du personnage
+            if (bStartMoveDelay && bInteractionsActives)
             {
-                if(movingBody != null) movingBody.SetMoving(true);
+                fCurrentClickedDelay += Time.deltaTime;
+
+                if (fCurrentClickedDelay > fDelayToMove && !bClickHasBeenInteraction)
+                {
+                    if (movingBody != null) movingBody.SetMoving(true);
+                    bStartMoveDelay = false;
+                    fCurrentClickedDelay = 0;
+                }
+            }
+            else if (bInteractionsActives == false && movingBody.IsMoving())
+            {
+                if (movingBody != null) movingBody.SetMoving(false);
                 bStartMoveDelay = false;
                 fCurrentClickedDelay = 0;
             }
-        }
-        else if(bInteractionsActives == false && movingBody.IsMoving())
-        {
-            if (movingBody != null) movingBody.SetMoving(false);
-            bStartMoveDelay = false;
-            fCurrentClickedDelay = 0;
-        }
 
-        if (Input.GetMouseButtonDown(0) && currentObject == null)
-        {
-            bStartMoveDelay = true;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            bClickHasBeenInteraction = false;
-            bStartMoveDelay = false;
-            fCurrentClickedDelay = 0;
-            if (movingBody != null) movingBody.SetMoving(false);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (currentObject != null)
+            if (Input.GetMouseButtonDown(0) && currentObject == null)
             {
-                if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
-                {
-                    if (!bCameraIsMoving)
-                    {
-                        MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
+                bStartMoveDelay = true;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                bClickHasBeenInteraction = false;
+                bStartMoveDelay = false;
+                fCurrentClickedDelay = 0;
+                if (movingBody != null) movingBody.SetMoving(false);
+            }
 
-                        ChapterLeaveZoomOnObject(currentObject);
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (currentObject != null)
+                {
+                    if (currentObject.GetInteractionType() == InteractionType.MoveCamera || currentObject.GetInteractionType() == InteractionType.MoveCameraResetZoom)
+                    {
+                        if (!bCameraIsMoving)
+                        {
+                            MoveCamera(CameraDefaultPosition, CameraDefaultSize, true);
+
+                            ChapterLeaveZoomOnObject(currentObject);
+                        }
                     }
                 }
             }
         }
-
         //Méthode virtuelle appelée par la classe fille du controller du chapitre
         ChildUpdate();
 
@@ -386,6 +396,8 @@ public class CommonController : MonoBehaviour
 
     protected void StartCinematique(Cinematiques cinematique)
     {
+        currentCinematique = cinematique;
+
         if (movingBody != null)
         {
             movingBody.StopMoving();
@@ -402,6 +414,8 @@ public class CommonController : MonoBehaviour
             movingBody.SetActive(true);
 
         SetInteractionsActives(true);
+
+        currentCinematique = Cinematiques.NonDefinie;
     }
 
     protected void PlaySound(Sound sound)

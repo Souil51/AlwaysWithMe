@@ -25,5 +25,7 @@ public class PlacardController : MonoBehaviour
     private void SpawnSprite()
     {
         speakingCtrl.Speak(Emote.Crr, 0, 0, BodyDirection.Gauche);
+
+        MusicController.GetInstance().PlaySound(Sound.Placard, 0.5f);
     }
 }

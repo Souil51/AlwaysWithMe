@@ -59,9 +59,10 @@ public class Chapter_7Controller : CommonController
 
     protected override void ChildStart()
     {
-        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
-
         StartCinematique(Cinematiques.Chapitre7_Arrivee);
+
+        MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
+        //StartCinematique(Cinematiques.Chapitre7_EntreeFete);
     }
 
     protected override void ChildUpdate()
@@ -86,7 +87,8 @@ public class Chapter_7Controller : CommonController
                     if (ballon.IsTargeted())
                     {
                         ballonDisabled = ballon;
-                        ballon.SetEnabled(false);
+
+                        ballonDisabled.GetComponent<Animator>().Play("ballon_explosion");
 
                         PlaySound(Sound.Ballon);
                     }
@@ -105,10 +107,8 @@ public class Chapter_7Controller : CommonController
                     }
                     else
                     {
-
                         lstBallons.Remove(ballonDisabled);
-                        Destroy(ballonDisabled);
-
+                        
                         GameObject goNewBallon = (GameObject)Instantiate(Resources.Load("ballon"));
                         goNewBallon.transform.SetParent(goBallonsHolder.transform);
 

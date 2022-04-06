@@ -103,6 +103,8 @@ public class Chapter_1Controller : CommonController
                 {
                     this.bMenuDisplayed = false;
 
+                    PlaySound(Sound.MenuFermer);
+
                     MenuLeaveAnimator.Play("LeaveDisappearAnimation");
                 }
                 break;
