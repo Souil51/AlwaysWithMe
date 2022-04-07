@@ -93,6 +93,10 @@ public class Chapitre_5Controller : CommonController
 
     private IEnumerator coroutine_CinematiqueBus()
     {
+        movingBody.StopMoving();
+
+        yield return new WaitForSeconds(0.5f);
+
         movingBody.GoToPosition(new Vector3(7.17f, -3.40f, 1));
 
         while (movingBody.IsGoingToPosition())

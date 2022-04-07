@@ -115,16 +115,26 @@ public class Chapitre_4Controller : CommonController
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 0), ForceMode2D.Force);
 
                 StopTuto(TutoHoldArrowRight);
+
+                if (TutoHoldArrowDown != null) StopTuto(TutoHoldArrowDown);
+                if (TutoHoldArrowUp != null) StopTuto(TutoHoldArrowUp);
             }
             else if (Input.GetMouseButton(1))
             {
                 banc_araigneeRoot.GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 0), ForceMode2D.Force);
 
                 StopTuto(TutoHoldArrowLeft);
+
+                if (TutoHoldArrowDown != null) StopTuto(TutoHoldArrowDown);
+                if (TutoHoldArrowUp != null) StopTuto(TutoHoldArrowUp);
             }
 
             if(fil_araignee.transform.eulerAngles.z < 335f && fil_araignee.transform.eulerAngles.z > 300f && currentState == ChapitreState.Banc_Fil)
             {
+                if (TutoHoldArrowRight != null) StopTuto(TutoHoldArrowRight);
+                if (TutoHoldArrowLeft != null) StopTuto(TutoHoldArrowLeft);
+
+
                 StartCinematique(Cinematiques.Chapitre4_SautAraignee);
             }
         }

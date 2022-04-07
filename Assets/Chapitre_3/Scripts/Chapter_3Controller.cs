@@ -209,7 +209,6 @@ public class Chapter_3Controller : CommonController
             case InteractionType.Placard_Interaction:
                 {
                     StartCinematique(Cinematiques.Chapitre3_EntreePlacard);
-                    //StartCinematique(Cinematiques.Chapitre3_SortiePlacard);
                 }
                 break;
         }
@@ -362,14 +361,16 @@ public class Chapter_3Controller : CommonController
 
     private IEnumerator coroutine_CinematiquePlacard()
     {
+        movingBody.StopMoving();
+
+        yield return new WaitForSeconds(0.5f);
+
         araignee.ShowHideSprite(false);
 
         movingBody.GoToPosition(new Vector3(-13.71f, -3.06f, 256.98f));
 
         while (movingBody.IsGoingToPosition())
             yield return null;
-
-        movingBody.ChangeDirection(BodyDirection.Droite);
 
         animatorFadePanel.SetTrigger("FadeIn");
 
@@ -464,7 +465,7 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(0.5f);
 
-        movingBody.ChangeDirection(BodyDirection.Droite);
+        movingBody.ChangeDirection();
 
         yield return new WaitForSeconds(0.5f);
 

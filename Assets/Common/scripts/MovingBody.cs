@@ -138,6 +138,26 @@ public class MovingBody : MonoBehaviour
         }
     }
 
+    public void ChangeDirection()
+    {
+        if (currentDirection == BodyDirection.Gauche)
+        {
+            currentDirection = BodyDirection.Droite;
+
+            transform.localScale = new Vector3(-vStartingScale.x, vStartingScale.y, vStartingScale.z);
+            transform.position = new Vector3(transform.position.x - 3f, transform.position.y, transform.position.z);
+            fEmoteXSpawn -= 2f;
+        }
+        else
+        {
+            currentDirection = BodyDirection.Gauche;
+
+            transform.localScale = new Vector3(vStartingScale.x, vStartingScale.y, vStartingScale.z);
+            transform.position = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
+            fEmoteXSpawn += 2f;
+        }
+    }
+
     //Modifie la valeur de Blend de l'animation (0 = Idle, 1 = Run)
     private void SetBlendValue(float fValue)
     {
@@ -212,7 +232,7 @@ public class MovingBody : MonoBehaviour
         animator.SetFloat("Blend", 0.5f);
 
         Vector3 vCurrent = transform.position;
-        float fDirection = (vPos - vCurrent).x;
+        float fDirection = (vPos - vCurrent).x - (currentDirection == BodyDirection.Droite ? 3 : 0);
 
         if(fDirection < 0 && currentDirection == BodyDirection.Gauche)//Il faut regarder vers la droite
         {
