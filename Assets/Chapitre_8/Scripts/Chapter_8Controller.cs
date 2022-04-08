@@ -136,6 +136,8 @@ public class Chapter_8Controller : CommonController
     private void StartCinematiqueFin()
     {
         currentState = State.Fin;
+        if (goTuto != null) StopTuto(goTuto);
+
         StartCoroutine(coroutine_CinematiqueFin());
     }
 

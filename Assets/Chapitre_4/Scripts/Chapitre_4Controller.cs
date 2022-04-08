@@ -452,6 +452,8 @@ public class Chapitre_4Controller : CommonController
 
         araignee.GetComponent<AraigneeController>().StartAnimation(AraigneeController.AnimationsAraignee.SautFil);
 
+        bool bSound = false;
+
         while (fElapsedTime < fDuration)
         {
             Vector3 vNewPos = Vector3.Lerp(currentPosition, vDestination, (fElapsedTime / fDuration));
@@ -465,14 +467,18 @@ public class Chapitre_4Controller : CommonController
 
             fElapsedTime += Time.deltaTime;
 
+            if(fElapsedTime > fDuration / 2 && !bSound)
+            {
+                PlaySound(Sound.AraigneePlacard);
+                bSound = true;
+            }
+
             yield return null;
         }
 
         araignee.transform.eulerAngles = Vector3.zero;
         banc_araigneeRoot.transform.eulerAngles = new Vector3(0, 0, 90);
         araignee.transform.position = vDestination;
-
-        PlaySound(Sound.AraigneePlacard);
 
         while (!araignee.GetComponent<AraigneeController>().IsAnimationFinished(AraigneeController.AnimationsAraignee.SautFil))
             yield return null;

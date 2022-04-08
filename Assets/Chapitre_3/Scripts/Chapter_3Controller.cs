@@ -461,9 +461,10 @@ public class Chapter_3Controller : CommonController
 
         yield return new WaitForSeconds(0.5f);
 
-        movingBody.GoToPosition(new Vector3(8f, -3.06f, movingBody.transform.position.z), 0.5f);
+        movingBody.GoToPosition(new Vector3(8f, -3.06f, movingBody.transform.position.z), 0.3f);
 
-        yield return new WaitForSeconds(0.5f);
+        while (movingBody.IsGoingToPosition())
+            yield return null;
 
         movingBody.ChangeDirection();
 

@@ -146,7 +146,7 @@ public enum Sound
 
 public class CommonController : MonoBehaviour
 {
-    public readonly static float VOLUME_BASE = 0.02f;
+    public readonly static float VOLUME_BASE = 0.04f;
     public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;

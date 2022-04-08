@@ -138,10 +138,10 @@ public class MusicController : MonoBehaviour
 
         switch (sound)
         {
-            case Sound.Ballon: fVolume = volume * 0.1f; break;
-            case Sound.MenuFermer: fVolume = volume * 0.3f; break;
+            case Sound.Ballon: fVolume = volume * 0.2f; break;
+            case Sound.MenuFermer: fVolume = volume * 0.5f; break;
             case Sound.Placard: fVolume = volume * 0.5f; break;
-            case Sound.Tir: fVolume = volume * 0.3f; break;
+            case Sound.Tir: fVolume = volume * 0.5f; break;
             case Sound.JeuGagne: fVolume = volume * 0.7f; break;
             case Sound.BonnePeluche: fVolume = volume * 0.7f; break;
             case Sound.MauvaisePeluche: fVolume = volume * 0.7f; break;
