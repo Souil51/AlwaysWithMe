@@ -400,6 +400,8 @@ public class Chapter_2Controller : CommonController
         animatorFadePanel.SetTrigger("FadeOut");
         animatorFadePanel.ResetTrigger("FadeIn");
 
+        goExitOn.SetActive(false);
+
         goBoucle.SetActive(true);
         yield return new WaitForSeconds(0.25f);
         calendrierBoucle.SetActive(true);
@@ -410,7 +412,9 @@ public class Chapter_2Controller : CommonController
 
         List<GameObject> lstGoCroix = new List<GameObject>();
 
-        while(nIndexBoucle < 20 || currentState == ChapitreState.FinBoucle)
+        ResetFadeTriggers();
+
+        while (nIndexBoucle < 20 || currentState == ChapitreState.FinBoucle)
         {
             chap_1_1.transform.position = new Vector3(chap_1_1.transform.position.x - boucleSpeed * Time.deltaTime, chap_1_1.transform.position.y, chap_1_1.transform.position.z);
             chap_2_1.transform.position = new Vector3(chap_2_1.transform.position.x - boucleSpeed * Time.deltaTime, chap_2_1.transform.position.y, chap_2_1.transform.position.z);
@@ -460,6 +464,11 @@ public class Chapter_2Controller : CommonController
                     boucleSpeed += 10;
             }
 
+            if(nIndexBoucle == 18)
+            {
+                animatorFadePanel.SetTrigger("FadeIn");
+            }
+
             yield return null;
         }
 
@@ -471,9 +480,6 @@ public class Chapter_2Controller : CommonController
     private void StopCinematiqueBoucle()
     {
         currentState = ChapitreState.FinBoucle;
-        //goBoucle.SetActive(false);
-
-        ResetFadeTriggers();
 
         SmoothChangeScene(Scenes.Chapitre3);
         StopCinematique();

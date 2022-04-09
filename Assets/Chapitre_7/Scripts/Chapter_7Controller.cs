@@ -474,6 +474,8 @@ public class Chapter_7Controller : CommonController
 
     private void StopCinematiqueDebutJeu()
     {
+        Cursor.visible = false;
+
         currentState = ChapitreState.Jeu;
         StopCinematique();
     }
@@ -485,6 +487,8 @@ public class Chapter_7Controller : CommonController
     private void StartCinematiqueVictoireJeu()
     {
         currentState = ChapitreState.CinematiqueVictoireJeu;
+
+        Cursor.visible = true;
 
         goTarget.SetActive(false);
         goBallonsHolder.SetActive(false);

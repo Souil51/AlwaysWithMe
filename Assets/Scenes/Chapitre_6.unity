@@ -389,6 +389,7 @@ MonoBehaviour:
   araignee: {fileID: 192367860}
   goRootAraignee: {fileID: 6468790631482899409}
   lineRenderer: {fileID: 893592790}
+  rootDynamucBodyController: {fileID: 6468790631482899410}
   goHalo_1: {fileID: 1091481170}
   goHalo_2: {fileID: 395126130}
 --- !u!114 &192367860

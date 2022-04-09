@@ -68,6 +68,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5b324e936504767419103372849b617a, type: 3}
   - {fileID: 8300000, guid: b80a117006f7d89439553eea6d1dcedf, type: 3}
   - {fileID: 8300000, guid: 57ca655f3b5dc2249b98d54d2ccafa92, type: 3}
+  - {fileID: 8300000, guid: 58dadff54160fa4479b08bb13b7ca050, type: 3}
+  - {fileID: 8300000, guid: fad6d95a6002afe40a88f021c50f45e4, type: 3}
   LoopFX: {fileID: 3868856919425973802}
 --- !u!82 &754158537923955158
 AudioSource:
@@ -208,7 +210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47b08114d48cfcf47ac1b4c5375c94c3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.02
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0

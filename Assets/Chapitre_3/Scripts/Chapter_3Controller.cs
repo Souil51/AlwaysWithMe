@@ -528,12 +528,12 @@ public class Chapter_3Controller : CommonController
         while (!araigneeDynamicBody.IsBodyGettingUp())
             yield return null;
 
-        PlaySound(Sound.AraigneePlacard);
-
         foreach (MovableObject obj in lstMovableObject)
         {
             obj.ChangeOpacity(0.5f);
         }
+
+        CreateSound(Sound.AraigneePlacard);
 
         Vector3 vPos = new Vector3(araignee.transform.position.x, 2.14f, araignee.transform.position.z);
         MoveCamera(vPos, 6f);

@@ -21,9 +21,12 @@ public class MusicController : MonoBehaviour
 
     [SerializeField] private List<AudioClip> ClipFX;
     [SerializeField] private AudioSource LoopFX;
-    
+
+    private GameObject goReference;
     private static MusicController _controller;
     private Coroutine coroutine_pitch;
+    private static float LoopFX_Volume = 0.2f;
+
     public static MusicController GetInstance()
     {
         if(_controller == null)
@@ -43,6 +46,11 @@ public class MusicController : MonoBehaviour
 
         if (_controller == null)
             _controller = this;
+    }
+
+    public AudioClip GetAudioClip(Sound sound)
+    {
+        return ClipFX[(int)sound];
     }
 
     public void ChangeClip(Clips clip)
@@ -101,6 +109,9 @@ public class MusicController : MonoBehaviour
 
         fElapsedTime = 0;
 
+        if (clip == Clips.Perso || clip == Clips.Credits)
+            fCurrentVolume *= 1.5f;
+
         while (fElapsedTime < fDuration)
         {
             float fNewVolume = Mathf.Lerp(0, fCurrentVolume, (fElapsedTime / fDuration));
@@ -132,7 +143,22 @@ public class MusicController : MonoBehaviour
 
     #region FX
 
-    public void PlaySound(Sound sound, float volume = 1f)
+    public void SetGameObjectReference(GameObject go)
+    {
+        goReference = go;
+    }
+
+    public void PlaySound(Sound sound)
+    {
+        PlaySound(sound, 1f, Vector3.zero);
+    }
+
+    public void PlaySound(Sound sound, float volume)
+    {
+        PlaySound(sound, volume, Vector3.zero);
+    }
+
+    public void PlaySound(Sound sound, float volume, Vector3 position, bool forcePosition = false)
     {
         float fVolume = volume;
 
@@ -140,14 +166,21 @@ public class MusicController : MonoBehaviour
         {
             case Sound.Ballon: fVolume = volume * 0.2f; break;
             case Sound.MenuFermer: fVolume = volume * 0.5f; break;
-            case Sound.Placard: fVolume = volume * 0.5f; break;
-            case Sound.Tir: fVolume = volume * 0.5f; break;
-            case Sound.JeuGagne: fVolume = volume * 0.7f; break;
-            case Sound.BonnePeluche: fVolume = volume * 0.7f; break;
-            case Sound.MauvaisePeluche: fVolume = volume * 0.7f; break;
+            case Sound.Placard: fVolume = volume * 0.4f; break;
+            case Sound.Tir: fVolume = volume * 0.2f; break;
+            case Sound.JeuGagne: fVolume = volume * 0.3f; break;
+            case Sound.BonnePeluche: fVolume = volume * 0.3f; break;
+            case Sound.MauvaisePeluche: fVolume = volume * 0.3f; break;
+            case Sound.Discussion_1: fVolume = volume * 0.15f; break;
+            case Sound.Discussion_2: fVolume = volume * 0.15f; break;
         }
 
-        AudioSource.PlayClipAtPoint(ClipFX[(int)sound], Vector3.zero, fVolume);
+        Vector3 pos = position;
+
+        if (goReference != null && !forcePosition)
+            pos = goReference.transform.position;
+
+        AudioSource.PlayClipAtPoint(ClipFX[(int)sound], pos, fVolume);
     }
 
     public void PlaySoundLoop()
@@ -175,7 +208,7 @@ public class MusicController : MonoBehaviour
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(0.05f, 0, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(LoopFX_Volume, 0, (fElapsedTime / fDuration));
             LoopFX.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;
@@ -192,14 +225,14 @@ public class MusicController : MonoBehaviour
 
         while (fElapsedTime < fDuration)
         {
-            float fNewVolume = Mathf.Lerp(0, 0.05f, (fElapsedTime / fDuration));
+            float fNewVolume = Mathf.Lerp(0, LoopFX_Volume, (fElapsedTime / fDuration));
             LoopFX.volume = fNewVolume;
 
             fElapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        LoopFX.volume = 0.05f;
+        LoopFX.volume = LoopFX_Volume;
     }
 
     private IEnumerator coroutine_SmoothChangePitch(float toPitch, float fDuration)

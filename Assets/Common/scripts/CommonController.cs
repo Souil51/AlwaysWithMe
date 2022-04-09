@@ -141,12 +141,14 @@ public enum Sound
     Porte,
     Ballon,
     Placard,
-    MenuFermer
+    MenuFermer,
+    Discussion_1,
+    Discussion_2
 }
 
 public class CommonController : MonoBehaviour
 {
-    public readonly static float VOLUME_BASE = 0.04f;
+    public readonly static float VOLUME_BASE = 0.1f;
     public readonly static float LIMIT_X_ECRAN = 19.5f;
 
     [SerializeField] protected Camera cam;
@@ -188,6 +190,7 @@ public class CommonController : MonoBehaviour
 
     void Start()
     {
+        MusicController.GetInstance().SetGameObjectReference(cam.gameObject);
         CameraDefaultSize = cam.orthographicSize;
 
         foreach (InteractableObject obj in lstInteractableObjects)
@@ -195,7 +198,6 @@ public class CommonController : MonoBehaviour
             obj.startInteractionDelegate += InteractableObject_startInteractionDelegate;
             obj.startTooFarInteractionDelegate += InteractableObject_startTooFarInteractionDelegate;
         }
-
         //Méthode virtuelle appelée par la classe fille du controller du chapitre
         ChildStart();
     }
@@ -421,6 +423,16 @@ public class CommonController : MonoBehaviour
     protected void PlaySound(Sound sound)
     {
         MusicController.GetInstance().PlaySound(sound);
+    }
+
+    protected void CreateSound(Sound sound)
+    {
+        GameObject goTemp = new GameObject("One Shot Sound");
+        goTemp.AddComponent<AudioSource>();
+        goTemp.AddComponent<TemporaryAudioSource>();
+        AudioSource audioSourceTemp = goTemp.GetComponent<AudioSource>();
+        audioSourceTemp.clip = MusicController.GetInstance().GetAudioClip(sound);
+        audioSourceTemp.Play();
     }
 
     #region Empty Virtual Methods

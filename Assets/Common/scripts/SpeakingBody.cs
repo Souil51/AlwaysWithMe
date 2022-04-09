@@ -70,6 +70,16 @@ public class SpeakingBody : MonoBehaviour
         {
             animatorEmote.SetTrigger("Anim_1");
         }
+
+        if (!emotesExclusSpeakRandom.Contains(emote))
+        {
+            int sonIndex = Random.Range(0, 2);
+
+            if (sonIndex == 0)
+                MusicController.GetInstance().PlaySound(Sound.Discussion_1);
+            else
+                MusicController.GetInstance().PlaySound(Sound.Discussion_2);
+        }
     }
 
     public void Speak(List<Emote> emotes, float fXOffset, float fYOffset, BodyDirection bodyDirection = BodyDirection.Droite, float fDelay = 0.5f)

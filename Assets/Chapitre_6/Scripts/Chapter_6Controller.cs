@@ -16,6 +16,7 @@ public class Chapter_6Controller : CommonController
     [SerializeField] private AraigneeController araignee;
     [SerializeField] private GameObject goRootAraignee;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private RootDynamicBodyController rootDynamucBodyController;
     private Vector3 ClickStartingPosition = Vector3.zero;
     private bool IsClicked = false;
 
@@ -40,18 +41,24 @@ public class Chapter_6Controller : CommonController
 
         araignee.GetDynamicController().LaunchedEvent += Chapter_6Controller_LaunchedEvent;
         araignee.GetDynamicController().HitEvent += Chapter_6Controller_HitEvent;
+        rootDynamucBodyController.CollisionEvent += RootDynamucBodyController_CollisionEvent;
 
         StartCinematique(Cinematiques.Chapitre6_Debut);
     }
 
+    private void RootDynamucBodyController_CollisionEvent(object sender, System.EventArgs e)
+    {
+        CreateSound(Sound.Interrupteur);
+    }
+
     private void Chapter_6Controller_HitEvent(object sender, System.EventArgs e)
     {
-        PlaySound(Sound.AraigneeLance);
+        CreateSound(Sound.AraigneeLance);
     }
 
     private void Chapter_6Controller_LaunchedEvent(object sender, System.EventArgs e)
     {
-        PlaySound(Sound.AraigneeSaut);
+        CreateSound(Sound.AraigneeSaut);
     }
 
     protected override void ChildUpdate()
