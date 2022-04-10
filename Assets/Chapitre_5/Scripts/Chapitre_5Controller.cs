@@ -10,7 +10,7 @@ public class Chapitre_5Controller : CommonController
 
     protected override void ChildStart()
     {
-        StartCinematiqueInitial();
+        StartCinematique(Cinematiques.Chapitre5_Initial);
 
         MusicController.GetInstance().ChangeClip(MusicController.Clips.Perso);
     }
